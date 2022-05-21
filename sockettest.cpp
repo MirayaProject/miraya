@@ -1,23 +1,29 @@
 #include "sockettest.h"
 
-SocketTest::SocketTest(QObject *parent) : QObject(parent){
+SocketTest::SocketTest(
+	const QUrl &url,
+	QObject *parent
+) : QObject(parent) {
+	connect(&socket, &QWebSocket::connected, this, &SocketTest::onConnected);
+	connect(&socket, &QWebSocket::textMessageReceived, this, &SocketTest::onTextMessageReceived);
+	connect(&socket, &QWebSocket::disconnected, this, &SocketTest::onDisconnected);
+	socket.open(QUrl(url));
 }
 
-void SocketTest::connect() {
-	socket = new QTcpSocket(this);
-	socket->connectToHost("127.0.0.1", 24050); // TODO: add port and hostname as parameters
+void SocketTest::disconnect() {
+	socket.disconnect();
+}
 
-	if (socket->waitForConnected(1000)) {
-		qDebug() << "Connected!";
 
-		qDebug() << "Gathering data..." << socket->bytesAvailable();
-		qDebug() << socket->readAll();
+void SocketTest::onConnected() {
+	qDebug() << "Connected!";
+}
 
-		qDebug() << "Closing socket...";
 
-	} else {
-		qDebug() << "Not connected!";
-		return;
-	}
-	socket->close();
+void SocketTest::onTextMessageReceived(QString message){
+	qDebug() << "Message received: " << message;
+}
+
+void SocketTest::onDisconnected(){
+	qDebug() << "Disconnected!";
 }

@@ -1,6 +1,8 @@
+#include <QApplication>
 #include "sockettest.h"
 
 int main( int argc, char **argv ){
-	SocketTest w;
-	w.connect();
+	QApplication app(argc, argv);
+	SocketTest client(QUrl(QStringLiteral("ws://localhost:24050/ws")));
+	return app.exec();
 }

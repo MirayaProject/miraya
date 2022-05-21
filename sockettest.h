@@ -2,25 +2,28 @@
 #define SOCKETTEST_H
 
 #include <QObject>
-#include <QTcpSocket>
+#include <QWebSocket>
 #include <QDebug>
+#include <QUrl>
 
 class SocketTest : public QObject {
 	Q_OBJECT
 
 	public:
-		explicit SocketTest(QObject *parent = nullptr);
+		explicit SocketTest(const QUrl &url, QObject *parent = nullptr);
 
-		void connect();
 		void disconnect();
 
+
 	private:
-		QTcpSocket *socket;
+		QWebSocket socket;
 
 	signals:
 
-	public slots:
-
+	private Q_SLOTS:
+		void onConnected();
+		void onTextMessageReceived(QString message);
+		void onDisconnected();
 };
 
 #endif
