@@ -1,8 +1,12 @@
 #include <QApplication>
+#include <QSettings>
 #include "sockettest.h"
+#include "mainwindow.h"
 
-int main( int argc, char **argv ){
+int main(int argc, char **argv) {
 	QApplication app(argc, argv);
-	SocketTest client(QUrl(QStringLiteral("ws://localhost:24050/ws")));
+	MainWindow mw;
+	QSettings settings("miraya", "bot");
+	mw.show();
 	return app.exec();
 }
