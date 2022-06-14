@@ -12,7 +12,10 @@ qt_standard_project_setup()
 
 add_executable(miraya
 	main.cpp
-	sockettest.cpp
+        sockettest.cpp sockettest.h
+        twitchClient.cpp twitchClient.h
+        mainwindow.h mainwindow.cpp mainwindow.ui
+        setupwizard.h setupwizard.cpp setupwizard.ui
 )
 
 target_link_libraries(miraya PRIVATE Qt6::Core)
