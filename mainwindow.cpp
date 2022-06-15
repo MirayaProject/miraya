@@ -3,13 +3,13 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "setupwizard.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
+  setupWizard = new SetupWizard(this);
 }
 
 MainWindow::~MainWindow()
@@ -19,10 +19,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionStart_Setup_triggered()
 {
-  // TODO: setupwizard should be a private member of mainwindow instead
-  SetupWizard *sw = new SetupWizard(this);
-  connect(sw, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
-  sw->show();
+  connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
+  setupWizard->show();
 }
 
 

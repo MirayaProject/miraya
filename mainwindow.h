@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QJsonObject>
 
+#include "setupwizard.h"
+
 namespace Ui {
   class MainWindow;
 }
@@ -15,6 +17,8 @@ class MainWindow : public QMainWindow
 public:
   explicit MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
+
+  SetupWizard *setupWizard;
 
 private slots:
   void on_actionStart_Setup_triggered();
