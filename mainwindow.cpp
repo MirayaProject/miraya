@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-
 }
 
 MainWindow::~MainWindow()
@@ -20,7 +19,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionStart_Setup_triggered()
 {
+  // TODO: setupwizard should be a private member of mainwindow instead
   SetupWizard *sw = new SetupWizard(this);
+  connect(sw, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
   sw->show();
 }
 
@@ -36,3 +37,7 @@ void MainWindow::on_actionDiscord_triggered()
   QDesktopServices::openUrl(QUrl("https://www.discord.gg/anHrS7p5Sf"));
 }
 
+void MainWindow::on_setupFinished(QJsonObject data)
+{
+  qDebug() << "MainWindow: Setup finished with data:" << data;
+}
