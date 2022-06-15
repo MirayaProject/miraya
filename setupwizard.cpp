@@ -6,11 +6,19 @@ SetupWizard::SetupWizard(QWidget *parent) :
 	ui(new Ui::SetupWizard)
 {
 	ui->setupUi(this);
+	setupUi();
 }
 
 SetupWizard::~SetupWizard()
 {
 	delete ui;
+}
+
+// TODO: add validator for IP address
+void SetupWizard::setupUi()
+{
+	ui->gosumemoryPortLineEdit->setValidator(new QIntValidator(0, 65535, this));
+	ui->osuircPortLineEdit->setValidator(new QIntValidator(0, 65535, this));
 }
 
 void SetupWizard::on_SetupWizard_finished(int result)

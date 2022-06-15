@@ -3,6 +3,7 @@
 
 #include <QWizard>
 #include <QJsonObject>
+#include <QIntValidator>
 
 namespace Ui {
   class SetupWizard;
@@ -23,6 +24,7 @@ private slots:
   void on_SetupWizard_finished(int result);
 
 private:
+  void setupUi();
 
   QJsonObject gatherData();
   QJsonObject getGosumemoryData();
