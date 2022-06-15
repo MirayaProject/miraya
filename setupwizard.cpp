@@ -22,42 +22,58 @@ void SetupWizard::on_SetupWizard_finished(int result)
 	qDebug() << "done" << result;
 }
 
-// TODO: refactor this
 QJsonObject SetupWizard::gatherData()
 {
 	QJsonObject data;
+
+	data["gosumemory"] = getGosumemoryData();
+	data["twitch"] = getTwitchData();
+	data["osuirc"] = getOsuircData();
+
+	return data;
+}
+
+QJsonObject SetupWizard::getGosumemoryData()
+{
 	QString gosuIp = ui->gosumemoryIpLineEdit->text();
 	int gosuPort = ui->gosumemoryPortLineEdit->text().toInt();
 
-	QString twitchChannel = ui->twitchChannelLineEdit->text();
-	QString twitchBotNick = ui->twitchBotNickLineEdit->text();
-	QString twitchOauth = ui->twitchOauthLineEdit->text();
-
-	QString osuircServer = ui->osuircServerLineEdit->text();
-	int osuircPort = ui->osuircPortLineEdit->text().toInt();
-	QString osuircNick = ui->osuircNickLineEdit->text();
-	QString osuircPassword = ui->osuircPasswordLineEdit->text();
-
-	data["gosumemory"] = QJsonObject{
+	QJsonObject gosumemoryData = QJsonObject{
 		{"ip", gosuIp},
 		{"port", gosuPort}
 	};
 
-	data["twitch"] = QJsonObject{
-		{"channel", twitchChannel},
+	return gosumemoryData;
+}
+
+QJsonObject SetupWizard::getTwitchData()
+{
+	QString twitchBotNick = ui->twitchBotNickLineEdit->text();
+	QString twitchOauth = ui->twitchOauthLineEdit->text();
+	QString twitchChannel = ui->twitchChannelLineEdit->text();
+
+	QJsonObject twitchData = QJsonObject{
 		{"botNick", twitchBotNick},
-		{"oauth", twitchOauth}
+		{"oauth", twitchOauth},
+		{"channel", twitchChannel}
 	};
 
-	data["osuirc"] = QJsonObject{
-		{"server", osuircServer},
-		{"port", osuircPort},
+	return twitchData;
+}
+
+QJsonObject SetupWizard::getOsuircData()
+{
+	QString osuircNick = ui->osuircNickLineEdit->text();
+	QString osuircPassword = ui->osuircPasswordLineEdit->text();
+	QString osuircServer = ui->osuircServerLineEdit->text();
+	int osuircPort = ui->osuircPortLineEdit->text().toInt();
+
+	QJsonObject osuircData = QJsonObject{
 		{"nick", osuircNick},
-		{"password", osuircPassword}
+		{"password", osuircPassword},
+		{"server", osuircServer},
+		{"port", osuircPort}
 	};
 
-	qDebug() << "gosu" << gosuIp << gosuPort;
-	qDebug() << "twitch" << twitchBotNick << twitchChannel << twitchOauth;
-	qDebug() << "osuirc" << osuircNick << osuircServer << osuircPort << osuircPassword;
-	return data;
+	return osuircData;
 }

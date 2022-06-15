@@ -23,7 +23,12 @@ private slots:
   void on_SetupWizard_finished(int result);
 
 private:
+
   QJsonObject gatherData();
+  QJsonObject getGosumemoryData();
+  QJsonObject getTwitchData();
+  QJsonObject getOsuircData();
+
   Ui::SetupWizard *ui;
 };
 
