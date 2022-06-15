@@ -20,6 +20,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionStart_Setup_triggered()
 {
   connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
+  setupWizard->restart();
   setupWizard->show();
 }
 
