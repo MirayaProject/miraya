@@ -4,6 +4,7 @@
 #include <QWizard>
 #include <QJsonObject>
 #include <QIntValidator>
+#include <QSettings>
 
 namespace Ui {
   class SetupWizard;
@@ -30,7 +31,7 @@ private:
   QJsonObject getGosumemoryData();
   QJsonObject getTwitchData();
   QJsonObject getOsuircData();
-
+  void saveData(QJsonObject data);
   Ui::SetupWizard *ui;
 };
 

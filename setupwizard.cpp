@@ -25,6 +25,7 @@ void SetupWizard::on_SetupWizard_finished(int result)
 {
 	if (result == 1) {
 		QJsonObject data = gatherData();
+		saveData(data);
 		emit wizardFinished(data);
 	}
 	qDebug() << "done" << result;
@@ -84,4 +85,25 @@ QJsonObject SetupWizard::getOsuircData()
 	};
 
 	return osuircData;
+}
+
+
+void SetupWizard::saveData(QJsonObject data)
+{
+  QSettings settings;
+	QJsonObject gosumemoryData = data["gosumemory"].toObject();
+	QJsonObject twitchData = data["twitch"].toObject();
+	QJsonObject osuircData = data["osuirc"].toObject();
+
+	settings.setValue("gosumemory/ip", gosumemoryData["ip"].toString());
+	settings.setValue("gosumemory/port", gosumemoryData["port"].toInt());
+
+	settings.setValue("twitch/botNick", twitchData["botNick"].toString());
+	settings.setValue("twitch/oauth", twitchData["oauth"].toString());
+	settings.setValue("twitch/channel", twitchData["channel"].toString());
+
+	settings.setValue("osuirc/nick", osuircData["nick"].toString());
+	settings.setValue("osuirc/password", osuircData["password"].toString());
+	settings.setValue("osuirc/server", osuircData["server"].toString());
+	settings.setValue("osuirc/port", osuircData["port"].toInt());
 }
