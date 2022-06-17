@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QJsonObject>
+#include <QSettings>
 
 #include "setupwizard.h"
 
@@ -18,19 +19,17 @@ public:
   explicit MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-  SetupWizard *setupWizard;
 
 private slots:
-  void on_actionStart_Setup_triggered();
+	void on_actionStart_Setup_triggered();
+	void on_actionGithub_triggered();
+	void on_actionDiscord_triggered();
 
-  void on_actionGithub_triggered();
-
-  void on_actionDiscord_triggered();
-
-  void on_setupFinished(QJsonObject json);
+	void on_setupFinished(QJsonObject json);
 
 private:
-  Ui::MainWindow *ui;
+	Ui::MainWindow *ui;
+	SetupWizard *setupWizard;
 };
 
 #endif // MAINWINDOW_H
