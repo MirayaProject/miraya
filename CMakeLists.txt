@@ -12,7 +12,7 @@ qt_standard_project_setup()
 
 add_executable(miraya
 	main.cpp
-        sockettest.cpp sockettest.h
+        gosumemoryClient.cpp gosumemoryClient.h
         twitchClient.cpp twitchClient.h
         mainwindow.h mainwindow.cpp mainwindow.ui
         setupwizard.h setupwizard.cpp setupwizard.ui
