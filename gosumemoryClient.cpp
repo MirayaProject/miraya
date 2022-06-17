@@ -6,7 +6,7 @@ GosumemoryClient::GosumemoryClient(
 ) : QObject(parent), url(url)
 {
 	connect(&socket, &QWebSocket::connected, this, &GosumemoryClient::onConnected);
-	connect(&socket, &QWebSocket::textMessageReceived, this, &GosumemoryClient::onMessageReceived);
+	connect(&socket, &QWebSocket::textMessageReceived, this, &GosumemoryClient::onTextMessageReceived);
 	connect(&socket, &QWebSocket::disconnected, this, &GosumemoryClient::onDisconnected);
 }
 
@@ -30,7 +30,7 @@ void GosumemoryClient::onConnected()
 }
 
 
-void GosumemoryClient::onMessageReceived(QString message)
+void GosumemoryClient::onTextMessageReceived(QString message)
 {
 	//TODO: to prevent flood, add flag to prevent the emission of the signal
 	qDebug() << "GosumemoryClient: message received";
