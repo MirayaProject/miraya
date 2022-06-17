@@ -10,6 +10,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
   setupWizard = new SetupWizard(this);
+	QSettings settings;
+	gosumemoryClient = new GosumemoryClient(
+		QUrl(
+			"ws://"
+			+ settings.value("gosumemory/ip").toString()
+			+ ":"
+			+ settings.value("gosumemory/port").toString()
+			+ "/ws"
+		),
+		this
+	);
+	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 }
 
 MainWindow::~MainWindow()
@@ -39,4 +51,22 @@ void MainWindow::on_actionDiscord_triggered()
 void MainWindow::on_setupFinished(QJsonObject data)
 {
   qDebug() << "MainWindow: Setup finished with data:" << data;
+void MainWindow::on_actionAbout_triggered()
+{
+	// TODO: DEBUG: move this
+	qDebug() << "about";
+	twitchClient->init();
+	gosumemoryClient->init();
+}
+
+
+void MainWindow::on_gosumemoryClient_messageReceived(QString message)
+{
+	// TODO: remove this
+	QJsonObject json = QJsonDocument::fromJson(message.toUtf8()).object();
+
+	QString title = json["menu"].toObject()["bm"].toObject()["metadata"].toObject()["title"].toString();
+	QString artist = json["menu"].toObject()["bm"].toObject()["metadata"].toObject()["artist"].toString();
+
+	ui->nowPlayingLabel->setText(artist + " - " + title);
 }
