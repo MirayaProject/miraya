@@ -6,14 +6,16 @@ TwitchClient::TwitchClient(
 	const QString &oauth,
 	const QString &channel,
 	QObject *parent
-) : QObject(parent), url(url), oauth(oauth), botNick(botNick), channel(channel) {
+) : QObject(parent), url(url), oauth(oauth), botNick(botNick), channel(channel)
+{
 	connect(&socket, &QWebSocket::connected, this, &TwitchClient::onConnected);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &TwitchClient::onTextMessageReceived);
 	connect(&socket, &QWebSocket::disconnected, this, &TwitchClient::onDisconnected);
 }
 
 
-void TwitchClient::init(){
+void TwitchClient::init()
+{
 	qDebug() << "Connecting to: " << url.toString();
 	socket.open(QUrl(url));
 }
@@ -33,7 +35,8 @@ void TwitchClient::sendMessage(QString message)
 }
 
 
-void TwitchClient::onConnected() {
+void TwitchClient::onConnected()
+{
 	qDebug() << "Connected to: " << url.toString();
 	emit connected();
 	sendMessage("PASS " + oauth);
@@ -42,28 +45,36 @@ void TwitchClient::onConnected() {
 }
 
 
-void TwitchClient::onTextMessageReceived(QString message){
+void TwitchClient::onTextMessageReceived(QString message)
+{
 	qDebug() << "Message received from: " << url.toString() << message;
+	if (message.startsWith("PING")) {
+		sendMessage("PONG :tmi.twitch.tv");
+	}
 	emit textMessageReceived(message);
 }
 
 
-void TwitchClient::onDisconnected(){
+void TwitchClient::onDisconnected()
+{
 	qDebug() << "Disconnected from:" << url.toString();
 	emit disconnected();
 }
 
 
-void TwitchClient::setChannel(QString channel) {
+void TwitchClient::setChannel(QString channel)
+{
 	this->channel = channel;
 }
 
 
-void TwitchClient::setBotNick(QString botNick) {
+void TwitchClient::setBotNick(QString botNick)
+{
 	this->botNick = botNick;
 }
 
 
-void TwitchClient::setOauth(QString oauth) {
+void TwitchClient::setOauth(QString oauth)
+{
 	this->oauth = oauth;
 }
