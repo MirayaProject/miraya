@@ -12,10 +12,11 @@ qt_standard_project_setup()
 
 add_executable(miraya
 	main.cpp
-        gosumemoryClient.cpp gosumemoryClient.h
-        twitchClient.cpp twitchClient.h
-        mainwindow.h mainwindow.cpp mainwindow.ui
-        setupwizard.h setupwizard.cpp setupwizard.ui
+	gosumemoryClient.cpp gosumemoryClient.h
+	twitchClient.cpp twitchClient.h
+	twitchdatawrapper.h twitchdatawrapper.cpp
+	mainwindow.h mainwindow.cpp mainwindow.ui
+	setupwizard.h setupwizard.cpp setupwizard.ui
 )
 
 target_link_libraries(miraya PRIVATE Qt6::Core)
