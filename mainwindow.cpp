@@ -11,6 +11,14 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
   setupWizard = new SetupWizard(this);
 	QSettings settings;
+	twitchClient = new TwitchClient(
+		QUrl("ws://irc-ws.chat.twitch.tv:80"),
+		settings.value("twitch/botNick").toString(),
+		settings.value("twitch/oauth").toString(),
+		settings.value("twitch/channel").toString(),
+		this
+	);
+
 	gosumemoryClient = new GosumemoryClient(
 		QUrl(
 			"ws://"
@@ -21,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 		),
 		this
 	);
+	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 }
 
@@ -50,7 +59,22 @@ void MainWindow::on_actionDiscord_triggered()
 
 void MainWindow::on_setupFinished(QJsonObject data)
 {
-  qDebug() << "MainWindow: Setup finished with data:" << data;
+	qDebug() << "MainWindow: Setup finished with data:" << data;
+	QSettings settings;
+	twitchClient->setChannel(settings.value("twitch/channel").toString());
+	twitchClient->setBotNick(settings.value("twitch/botNick").toString());
+	twitchClient->setOauth(settings.value("twitch/oauth").toString());
+
+	gosumemoryClient->setUrl(
+		QUrl("ws://"
+			+settings.value("gosumemory/ip").toString()
+			+":"
+			+settings.value("gosumemory/port").toString()
+		)
+	);
+}
+
+
 void MainWindow::on_actionAbout_triggered()
 {
 	// TODO: DEBUG: move this
@@ -69,4 +93,10 @@ void MainWindow::on_gosumemoryClient_messageReceived(QString message)
 	QString artist = json["menu"].toObject()["bm"].toObject()["metadata"].toObject()["artist"].toString();
 
 	ui->nowPlayingLabel->setText(artist + " - " + title);
+}
+
+void MainWindow::on_twitchClient_messageReceived(QString message)
+{
+	auto msg = TwitchDataWrapper(message);
+	ui->twitchChat->addItem(msg.getUsername() + ": " + msg.getMessage());
 }
