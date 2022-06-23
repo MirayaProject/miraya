@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QSettings>
-#include "sockettest.h"
 #include "mainwindow.h"
 
 int main(int argc, char **argv) {
