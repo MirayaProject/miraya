@@ -7,7 +7,9 @@
 #include <QSettings>
 
 #include "setupwizard.h"
+#include "twitchClient.h"
 #include "gosumemoryClient.h"
+#include "twitchdatawrapper.h"
 
 namespace Ui {
   class MainWindow;
@@ -31,10 +33,12 @@ private slots:
 	void on_setupFinished(QJsonObject json);
 
 	void on_gosumemoryClient_messageReceived(QString message);
+	void on_twitchClient_messageReceived(QString message);
 
 private:
 	Ui::MainWindow *ui;
 	SetupWizard *setupWizard;
+	TwitchClient *twitchClient;
 	GosumemoryClient *gosumemoryClient;
 };
 
