@@ -49,20 +49,37 @@ void TwitchClient::onTextMessageReceived(QString message)
 {
 	qDebug() << "Message received from: " << url.toString() << message;
 
-	//TODO: all this should be put in a different method
-	if (message.startsWith("PING")) {
-		sendMessage("PONG :tmi.twitch.tv");
+	if (shouldBeFiltered(message))
+	{
+		qDebug() << "Message filtered";
 		return;
+	}
+
+	emit textMessageReceived(message);
+}
+
+
+void TwitchClient::handlePing()
+{
+	sendMessage("PONG :tmi.twitch.tv");
+}
+
+
+bool TwitchClient::shouldBeFiltered(QString message)
+{
+	if (message.startsWith("PING")) {
+		handlePing();
+		return true;
 	}
 
 	if (message.startsWith(":tmi.twitch.tv")) {
-		return;
+		return true;
 	}
 
-	if (message.startsWith(":"+botNick)){
-		return;
+	if (message.startsWith(":" + botNick)){
+		return true;
 	}
-	emit textMessageReceived(message);
+	return false;
 }
 
 

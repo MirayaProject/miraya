@@ -27,6 +27,8 @@ class TwitchClient : public QObject {
 
 	private:
 		void sendMessage(QString message);
+		void handlePing();
+		bool shouldBeFiltered(QString message);
 		QWebSocket socket;
 		QUrl url;
 		QString oauth;
