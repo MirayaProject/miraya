@@ -48,8 +48,19 @@ void TwitchClient::onConnected()
 void TwitchClient::onTextMessageReceived(QString message)
 {
 	qDebug() << "Message received from: " << url.toString() << message;
+
+	//TODO: all this should be put in a different method
 	if (message.startsWith("PING")) {
 		sendMessage("PONG :tmi.twitch.tv");
+		return;
+	}
+
+	if (message.startsWith(":tmi.twitch.tv")) {
+		return;
+	}
+
+	if (message.startsWith(":"+botNick)){
+		return;
 	}
 	emit textMessageReceived(message);
 }
