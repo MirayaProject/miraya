@@ -99,4 +99,5 @@ void MainWindow::on_twitchClient_messageReceived(QString message)
 {
 	auto msg = TwitchDataWrapper(message);
 	ui->twitchChat->addItem(msg.getUsername() + ": " + msg.getMessage());
+	ui->twitchChat->scrollToBottom();
 }
