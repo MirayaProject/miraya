@@ -8,6 +8,7 @@ GosumemoryClient::GosumemoryClient(
 	connect(&socket, &QWebSocket::connected, this, &GosumemoryClient::onConnected);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &GosumemoryClient::onTextMessageReceived);
 	connect(&socket, &QWebSocket::disconnected, this, &GosumemoryClient::onDisconnected);
+	enableRead(true);
 }
 
 
@@ -32,10 +33,10 @@ void GosumemoryClient::onConnected()
 
 void GosumemoryClient::onTextMessageReceived(QString message)
 {
-	//TODO: to prevent flood, add flag to prevent the emission of the signal
-	qDebug() << "GosumemoryClient: message received";
-	// qDebug() << "Message received from: " << url.toString() << message;
-	emit messageReceived(message);
+	if (readEnabled){
+		qDebug() << "GosumemoryClient: message received from: " << url.toString() << message;
+		emit messageReceived(GosuMemoryDataWrapper(message));
+	}
 }
 
 
@@ -45,8 +46,14 @@ void GosumemoryClient::onDisconnected()
 	emit disconnected();
 }
 
+
 void GosumemoryClient::setUrl(const QUrl &url)
 {
 	this->url = url;
 	restart();
+}
+
+void GosumemoryClient::enableRead(bool enable)
+{
+	readEnabled = enable;
 }

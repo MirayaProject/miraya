@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QUrl>
 
+#include "gosumemorydatawrapper.h"
+
 class GosumemoryClient : public QObject {
 	Q_OBJECT
 
@@ -13,15 +15,17 @@ class GosumemoryClient : public QObject {
 		explicit GosumemoryClient(const QUrl &url, QObject *parent = nullptr);
 		void init();
 		void setUrl(const QUrl &url);
+		void enableRead(bool enable);
 
 	private:
 		void restart();
 		QWebSocket socket;
 		QUrl url;
+		bool readEnabled;
 
 	signals:
 		void connected();
-		void messageReceived(QString message);
+		void messageReceived(GosuMemoryDataWrapper message);
 		void disconnected();
 
 	private slots:

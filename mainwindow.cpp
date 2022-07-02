@@ -88,16 +88,13 @@ void MainWindow::on_actionAbout_triggered()
 }
 
 
-void MainWindow::on_gosumemoryClient_messageReceived(QString message)
+void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
-	// TODO: remove this
-	QJsonObject json = QJsonDocument::fromJson(message.toUtf8()).object();
-
-	QString title = json["menu"].toObject()["bm"].toObject()["metadata"].toObject()["title"].toString();
-	QString artist = json["menu"].toObject()["bm"].toObject()["metadata"].toObject()["artist"].toString();
-
+	QString title = message.getMapName();
+	QString artist = message.getMapArtist();
 	ui->nowPlayingLabel->setText(artist + " - " + title);
 }
+
 
 void MainWindow::on_twitchClient_messageReceived(TwitchDataWrapper message)
 {

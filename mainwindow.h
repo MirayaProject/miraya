@@ -11,6 +11,7 @@
 #include "twitchClient.h"
 #include "gosumemoryClient.h"
 #include "twitchdatawrapper.h"
+#include "gosumemorydatawrapper.h"
 
 namespace Ui {
 	class MainWindow;
@@ -33,7 +34,7 @@ private slots:
 
 	void on_setupFinished(QJsonObject json);
 
-	void on_gosumemoryClient_messageReceived(QString message);
+	void on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message);
 	void on_twitchClient_messageReceived(TwitchDataWrapper message);
 
 private:
