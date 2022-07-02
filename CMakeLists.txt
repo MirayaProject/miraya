@@ -13,6 +13,7 @@ qt_standard_project_setup()
 add_executable(miraya
 	main.cpp
 	gosumemoryClient.cpp gosumemoryClient.h
+	gosumemorydatawrapper.h gosumemorydatawrapper.cpp
 	twitchClient.cpp twitchClient.h
 	twitchdatawrapper.h twitchdatawrapper.cpp
 	mainwindow.h mainwindow.cpp mainwindow.ui
