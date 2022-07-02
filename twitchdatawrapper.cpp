@@ -1,9 +1,7 @@
 #include "twitchdatawrapper.h"
 
-TwitchDataWrapper::TwitchDataWrapper(
-	const QString &data,
-	QObject *parent
-) : data(data), QObject(parent)
+TwitchDataWrapper::TwitchDataWrapper(QString &data)
+	: data(data)
 {
 	parseData();
 }
@@ -20,6 +18,7 @@ QString TwitchDataWrapper::getMessage()
 {
 	return message;
 }
+
 
 QString TwitchDataWrapper::getUsername()
 {

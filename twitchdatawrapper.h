@@ -1,27 +1,20 @@
 #ifndef TWITCHDATAWRAPPER_H
 #define TWITCHDATAWRAPPER_H
 
-#include <QObject>
-#include <QDebug>
+#include <QString>
 
-class TwitchDataWrapper : public QObject
+class TwitchDataWrapper
 {
-	Q_OBJECT
+public:
+	TwitchDataWrapper(QString &data);
+	QString getMessage();
+	QString getUsername();
 
-	public:
-		explicit TwitchDataWrapper(
-			const QString &data,
-			QObject *parent = nullptr
-		);
-		QString getMessage();
-		QString getUsername();
-
-	private:
-		void parseData();
-		QString data;
-		QString message;
-		QString username;
-
+private:
+	void parseData();
+	QString data;
+	QString message;
+	QString username;
 };
 
 #endif // TWITCHDATAWRAPPER_H
