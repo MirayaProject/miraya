@@ -55,7 +55,7 @@ void TwitchClient::onTextMessageReceived(QString message)
 		return;
 	}
 
-	emit textMessageReceived(message);
+	emit textMessageReceived(TwitchDataWrapper(message));
 }
 
 

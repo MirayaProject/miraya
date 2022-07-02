@@ -5,8 +5,9 @@
 #include <QString>
 #include <QUrl>
 #include <QDebug>
-
 #include <QWebSocket>
+
+#include "twitchdatawrapper.h"
 
 class TwitchClient : public QObject {
 	Q_OBJECT
@@ -37,7 +38,7 @@ class TwitchClient : public QObject {
 
 	signals:
 		void connected();
-		void textMessageReceived(QString message);
+		void textMessageReceived(TwitchDataWrapper message);
 		void disconnected();
 
 	private slots:
