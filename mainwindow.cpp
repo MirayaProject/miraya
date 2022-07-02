@@ -5,11 +5,12 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-  QMainWindow(parent),
-  ui(new Ui::MainWindow)
+	QMainWindow(parent),
+	ui(new Ui::MainWindow)
 {
-  ui->setupUi(this);
-  setupWizard = new SetupWizard(this);
+	ui->setupUi(this);
+	setupWizard = new SetupWizard(this);
+
 	QSettings settings;
 	twitchClient = new TwitchClient(
 		QUrl("ws://irc-ws.chat.twitch.tv:80"),
@@ -33,29 +34,32 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 }
 
+
 MainWindow::~MainWindow()
 {
-  delete ui;
+	delete ui;
 }
+
 
 void MainWindow::on_actionStart_Setup_triggered()
 {
-  connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
-  setupWizard->restart();
-  setupWizard->show();
+	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
+	setupWizard->restart();
+	setupWizard->show();
 }
 
 
 void MainWindow::on_actionGithub_triggered()
 {
-  QDesktopServices::openUrl(QUrl("https://www.github.com/MirayaProject/miraya"));
+	QDesktopServices::openUrl(QUrl("https://www.github.com/MirayaProject/miraya"));
 }
 
 
 void MainWindow::on_actionDiscord_triggered()
 {
-  QDesktopServices::openUrl(QUrl("https://www.discord.gg/anHrS7p5Sf"));
+	QDesktopServices::openUrl(QUrl("https://www.discord.gg/anHrS7p5Sf"));
 }
+
 
 void MainWindow::on_setupFinished(QJsonObject data)
 {
@@ -95,9 +99,16 @@ void MainWindow::on_gosumemoryClient_messageReceived(QString message)
 	ui->nowPlayingLabel->setText(artist + " - " + title);
 }
 
-void MainWindow::on_twitchClient_messageReceived(QString message)
+void MainWindow::on_twitchClient_messageReceived(TwitchDataWrapper message)
 {
-	auto msg = TwitchDataWrapper(message);
-	ui->twitchChat->addItem(msg.getUsername() + ": " + msg.getMessage());
+	ui->twitchChat->addItem(getTwitchChatMessage(message.getUsername(), message.getMessage()));
 	ui->twitchChat->scrollToBottom();
+}
+
+
+QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString message)
+{
+	QListWidgetItem *item = new QListWidgetItem(username + ": " + message);
+	item->setFlags(item->flags() & Qt::ItemIsEnabled);
+	return item;
 }
