@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SetupWizard</class>
+ <widget class="QWizard" name="SetupWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Setup</string>
+  </property>
+  <property name="wizardStyle">
+   <enum>QWizard::ModernStyle</enum>
+  </property>
+  <widget class="QWizardPage" name="gosumemory">
+   <property name="title">
+    <string>Gosumemory setup</string>
+   </property>
+   <property name="subTitle">
+    <string>Welcome to miraya setup wizard</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="topMargin">
+     <number>9</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>20</number>
+    </property>
+    <item row="1" column="0">
+     <layout class="QFormLayout" name="gosumemoryFormLayout">
+      <property name="horizontalSpacing">
+       <number>20</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>20</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="gosumemoryIpLabel">
+        <property name="text">
+         <string>IP Address</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="gosumemoryPortLabel">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="gosumemoryIpLineEdit"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="gosumemoryPortLineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="gosumemoryExplanationLabel">
+      <property name="contextMenuPolicy">
+       <enum>Qt::NoContextMenu</enum>
+      </property>
+      <property name="text">
+       <string>First off, let's set up the connection between osu and miraya. To do that, download gosumemory.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="twitch">
+   <property name="title">
+    <string>Twitch Setup</string>
+   </property>
+   <property name="subTitle">
+    <string>This is used to read the messages from your chat and, eventually, to respond to them</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <property name="verticalSpacing">
+     <number>20</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="twitchExplanationLabel">
+      <property name="text">
+       <string>TODO explanation</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <layout class="QFormLayout" name="twitchFormLayout">
+      <property name="horizontalSpacing">
+       <number>20</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>20</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="twitchBotNickLabel">
+        <property name="text">
+         <string>Bot Nickname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="twitchBotNickLineEdit"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="twitchOauthLineEdit"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="twitchChannelLineEdit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="twitchOauthLabel">
+        <property name="text">
+         <string>OAuth</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="twitchChannelLabel">
+        <property name="text">
+         <string>Channel Name</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="osuirc">
+   <property name="title">
+    <string>osu IRC setup</string>
+   </property>
+   <property name="subTitle">
+    <string>Osu IRC is the in-game osu chat. This will be used to send you the maps in game directly from twitch chat.</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_5">
+    <property name="verticalSpacing">
+     <number>20</number>
+    </property>
+    <item row="1" column="0">
+     <layout class="QFormLayout" name="osuircFormLayout">
+      <property name="horizontalSpacing">
+       <number>20</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>20</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="osuircNickLabel">
+        <property name="text">
+         <string>Nickname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="osuircPasswordLabel">
+        <property name="text">
+         <string>Password</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="osuircServerLabel">
+        <property name="text">
+         <string>Server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="osuircPortLabel">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="osuircNickLineEdit"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="osuircPasswordLineEdit"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="osuircServerLineEdit">
+        <property name="text">
+         <string>irc.ppy.sh</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="osuircPortLineEdit">
+        <property name="text">
+         <string>6667</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="osuircExplanationLabel">
+      <property name="text">
+       <string>TODO: explanation</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="filesharing">
+   <property name="title">
+    <string>Filesharing setup</string>
+   </property>
+   <property name="subTitle">
+    <string>This is used to automatically upload your skins and beatmaps</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QLabel" name="filesharingExplanationLabel">
+      <property name="text">
+       <string>TBD</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
