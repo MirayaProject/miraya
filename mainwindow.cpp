@@ -30,8 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
 		),
 		this
 	);
+	twitchCommandHandler = new TwitchCommandHandler();
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
+	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
 }
 
 
@@ -90,6 +92,8 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
+	// TODO: is this the best way to handle it? shouldn't it be &message?
+	twitchCommandHandler->setGosumemoryData(new GosuMemoryDataWrapper(message));
 	QString title = message.getMapName();
 	QString artist = message.getMapArtist();
 	ui->nowPlayingLabel->setText(artist + " - " + title);
@@ -108,4 +112,14 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 	QListWidgetItem *item = new QListWidgetItem(username + ": " + message);
 	item->setFlags(item->flags() & Qt::ItemIsEnabled);
 	return item;
+}
+
+
+void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
+{
+	twitchCommandHandler->setTwitchDataWrapper(&command);
+	QString response = twitchCommandHandler->getResponse();
+	qDebug() << "MainWindow: Command received:" << command.getMessage();
+	qDebug() << "Response: " << response;
+	twitchClient->sendChatMessage(response);
 }

@@ -9,8 +9,9 @@
 
 #include "setupwizard.h"
 #include "twitchClient.h"
-#include "gosumemoryClient.h"
 #include "twitchdatawrapper.h"
+#include "twitchcommandhandler.h"
+#include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
 
 namespace Ui {
@@ -36,12 +37,14 @@ private slots:
 
 	void on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message);
 	void on_twitchClient_messageReceived(TwitchDataWrapper message);
+	void on_twitchClient_commandReceived(TwitchDataWrapper command);
 
 private:
-	QListWidgetItem* getTwitchChatMessage(QString username, QString message);
+	QListWidgetItem *getTwitchChatMessage(QString username, QString message);
 	Ui::MainWindow *ui;
 	SetupWizard *setupWizard;
 	TwitchClient *twitchClient;
+	TwitchCommandHandler *twitchCommandHandler;
 	GosumemoryClient *gosumemoryClient;
 };
 
