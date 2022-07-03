@@ -16,6 +16,7 @@ add_executable(miraya
 	gosumemorydatawrapper.h gosumemorydatawrapper.cpp
 	twitchClient.cpp twitchClient.h
 	twitchdatawrapper.h twitchdatawrapper.cpp
+	twitchcommandhandler.h twitchcommandhandler.cpp
 	mainwindow.h mainwindow.cpp mainwindow.ui
 	setupwizard.h setupwizard.cpp setupwizard.ui
 )
