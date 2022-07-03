@@ -8,11 +8,13 @@
 class GosuMemoryDataWrapper
 {
 	public:
+		GosuMemoryDataWrapper();
 		GosuMemoryDataWrapper(QString &data);
 		QString getMapName();
 		QString getMapArtist();
 		QString getMapMapper();
 		QString getMapDifficulty();
+		QString getMapUrl();
 
 	private:
 		QString data;
