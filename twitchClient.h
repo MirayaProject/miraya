@@ -30,6 +30,7 @@ class TwitchClient : public QObject {
 		void sendMessage(QString message);
 		void handlePing();
 		bool shouldBeFiltered(QString message);
+		bool isCommand(QString message);
 		QWebSocket socket;
 		QUrl url;
 		QString oauth;
@@ -39,6 +40,7 @@ class TwitchClient : public QObject {
 	signals:
 		void connected();
 		void textMessageReceived(TwitchDataWrapper message);
+		void commandReceived(TwitchDataWrapper command);
 		void disconnected();
 
 	private slots:

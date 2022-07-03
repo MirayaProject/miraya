@@ -47,15 +47,20 @@ void TwitchClient::onConnected()
 
 void TwitchClient::onTextMessageReceived(QString message)
 {
-	qDebug() << "Message received from: " << url.toString() << message;
+	auto wrappedMessage = TwitchDataWrapper(message);
+	qDebug() << "Message received from: " << url.toString();
 
-	if (shouldBeFiltered(message))
-	{
+	if (shouldBeFiltered(message)) {
 		qDebug() << "Message filtered";
 		return;
 	}
 
-	emit textMessageReceived(TwitchDataWrapper(message));
+	if (isCommand(wrappedMessage.getMessage())) {
+		qDebug() << "Command received";
+		emit commandReceived(wrappedMessage);
+	}
+
+	emit textMessageReceived(wrappedMessage);
 }
 
 
@@ -67,6 +72,7 @@ void TwitchClient::handlePing()
 
 bool TwitchClient::shouldBeFiltered(QString message)
 {
+	// TODO: this can be done better, i think.
 	if (message.startsWith("PING")) {
 		handlePing();
 		return true;
@@ -76,7 +82,16 @@ bool TwitchClient::shouldBeFiltered(QString message)
 		return true;
 	}
 
-	if (message.startsWith(":" + botNick)){
+	if (message.startsWith(":" + botNick)) {
+		return true;
+	}
+	return false;
+}
+
+
+bool TwitchClient::isCommand(QString message)
+{
+	if (message.startsWith("!")) {
 		return true;
 	}
 	return false;
