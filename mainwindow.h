@@ -13,6 +13,7 @@
 #include "twitchcommandhandler.h"
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
+#include "osuircclient.h"
 
 namespace Ui {
 	class MainWindow;
@@ -46,6 +47,7 @@ private:
 	TwitchClient *twitchClient;
 	TwitchCommandHandler *twitchCommandHandler;
 	GosumemoryClient *gosumemoryClient;
+    OsuIrcClient *osuIrcClient;
 };
 
 #endif // MAINWINDOW_H

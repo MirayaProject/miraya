@@ -17,6 +17,7 @@ add_executable(miraya
 	twitchClient.cpp twitchClient.h
 	twitchdatawrapper.h twitchdatawrapper.cpp
 	twitchcommandhandler.h twitchcommandhandler.cpp
+	osuircclient.h osuircclient.cpp
 	mainwindow.h mainwindow.cpp mainwindow.ui
 	setupwizard.h setupwizard.cpp setupwizard.ui
 )
