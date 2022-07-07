@@ -34,7 +34,7 @@ void GosumemoryClient::onConnected()
 void GosumemoryClient::onTextMessageReceived(QString message)
 {
 	if (readEnabled){
-		qDebug() << "GosumemoryClient: message received from: " << url.toString() << message;
+		// qDebug() << "GosumemoryClient: message received from: " << url.toString() << message;
 		emit messageReceived(GosuMemoryDataWrapper(message));
 	}
 }
