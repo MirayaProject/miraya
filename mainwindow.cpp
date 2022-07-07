@@ -31,15 +31,15 @@ MainWindow::MainWindow(QWidget *parent) :
 		this
 	);
 
-    osuIrcClient = new OsuIrcClient(
-        settings.value("osuirc/nick").toString(),
-        settings.value("osuirc/password").toString(),
-        settings.value("osuirc/server").toString(),
-        settings.value("osuirc/port").toInt(),
-        this
-    );
+	osuIrcClient = new OsuIrcClient(
+		settings.value("osuirc/nick").toString(),
+		settings.value("osuirc/password").toString(),
+		settings.value("osuirc/server").toString(),
+		settings.value("osuirc/port").toInt(),
+		this
+	);
 
-    twitchCommandHandler = new TwitchCommandHandler();
+	twitchCommandHandler = new TwitchCommandHandler();
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
@@ -96,7 +96,7 @@ void MainWindow::on_actionAbout_triggered()
 	qDebug() << "about";
 	twitchClient->init();
 	gosumemoryClient->init();
-    osuIrcClient->init();
+	osuIrcClient->init();
 }
 
 

@@ -7,32 +7,32 @@
 #include <QSettings>
 
 namespace Ui {
-  class SetupWizard;
+	class SetupWizard;
 }
 
 class SetupWizard : public QWizard
 {
-  Q_OBJECT
+	Q_OBJECT
 
 public:
-  explicit SetupWizard(QWidget *parent = nullptr);
-  ~SetupWizard();
+	explicit SetupWizard(QWidget *parent = nullptr);
+	~SetupWizard();
 
 signals:
-  void wizardFinished(QJsonObject json);
+	void wizardFinished(QJsonObject json);
 
 private slots:
-  void on_SetupWizard_finished(int result);
+	void on_SetupWizard_finished(int result);
 
 private:
-  void setupUi();
+	void setupUi();
 
-  QJsonObject gatherData();
-  QJsonObject getGosumemoryData();
-  QJsonObject getTwitchData();
-  QJsonObject getOsuircData();
-  void saveData(QJsonObject data);
-  Ui::SetupWizard *ui;
+	QJsonObject gatherData();
+	QJsonObject getGosumemoryData();
+	QJsonObject getTwitchData();
+	QJsonObject getOsuircData();
+	void saveData(QJsonObject data);
+	Ui::SetupWizard *ui;
 };
 
 #endif // SETUPWIZARD_H

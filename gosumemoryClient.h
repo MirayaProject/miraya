@@ -28,7 +28,7 @@ class GosumemoryClient : public QObject {
 		void messageReceived(GosuMemoryDataWrapper message);
 		void disconnected();
 
-    public slots:
+	public slots:
 		void onConnected();
 		void onTextMessageReceived(QString message);
 		void onDisconnected();
