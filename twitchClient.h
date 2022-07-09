@@ -43,7 +43,7 @@ class TwitchClient : public QObject {
 		void commandReceived(TwitchDataWrapper command);
 		void disconnected();
 
-	private slots:
+	public slots:
 		void onConnected();
 		void onTextMessageReceived(QString message);
 		void onDisconnected();
