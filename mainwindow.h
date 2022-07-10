@@ -14,6 +14,7 @@
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
 #include "osuircclient.h"
+#include "utils.h"
 
 namespace Ui {
 	class MainWindow;
