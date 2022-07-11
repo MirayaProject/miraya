@@ -36,6 +36,30 @@ void OsuIrcClient::onDisconnected()
 }
 
 
+void OsuIrcClient::setNick(const QString &nickname)
+{
+	this->nickname = nickname;
+}
+
+
+void OsuIrcClient::setPassword(const QString &password)
+{
+	this->password = password;
+}
+
+
+void OsuIrcClient::setServer(const QString &server)
+{
+	this->server = server;
+}
+
+
+void OsuIrcClient::setPort(const int &port)
+{
+	this->port = port;
+}
+
+
 void OsuIrcClient::sendMsg(QString message)
 {
 	socket.write("PRIVMSG " + nickname.toLocal8Bit() + " " + message.toLocal8Bit() + " \r\n");
