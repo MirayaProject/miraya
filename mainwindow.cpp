@@ -87,6 +87,10 @@ void MainWindow::on_setupFinished(QJsonObject data)
 			+settings.value("gosumemory/port").toString()
 		)
 	);
+	osuIrcClient->setNick(settings.value("osuirc/nick").toString());
+	osuIrcClient->setPassword(settings.value("osuirc/password").toString());
+	osuIrcClient->setServer(settings.value("osuirc/server").toString());
+	osuIrcClient->setPort(settings.value("osuirc/port").toInt());
 }
 
 
