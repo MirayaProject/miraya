@@ -22,6 +22,13 @@ void OsuIrcClient::init(){
 }
 
 
+void OsuIrcClient::restart()
+{
+	socket.close();
+	init();
+}
+
+
 void OsuIrcClient::onConnected()
 {
 	qDebug() << "Connected to: " << socket.peerAddress().toString();
