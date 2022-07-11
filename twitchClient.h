@@ -21,6 +21,7 @@ class TwitchClient : public QObject {
 			QObject *parent = nullptr
 		);
 		void init();
+		void restart();
 		void setChannel(QString channel);
 		void setBotNick(QString botNick);
 		void setOauth(QString oauth);
