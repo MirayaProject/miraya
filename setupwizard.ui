@@ -80,7 +80,7 @@
        <enum>Qt::NoContextMenu</enum>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;First off, let's set up the connection between osu and miraya. To do that, download &lt;a href=&quot;https://github.com/l3lackShark/gosumemory/releases/latest&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;gosumemory&lt;/span&gt;&lt;/a&gt; and start it. &lt;/p&gt;&lt;p&gt;If you are planning to use miraya on the pc that is running gosumemory and osu, press next to continue the setup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;First off, let's set up the connection between osu and miraya. &lt;/p&gt;&lt;p&gt;To do that, download &lt;a href=&quot;https://github.com/l3lackShark/gosumemory/releases/latest&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;gosumemory&lt;/span&gt;&lt;/a&gt; and start it. &lt;/p&gt;&lt;p&gt;If you are planning to use miraya on the pc that is running gosumemory and osu, press next to continue the setup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -143,14 +143,7 @@
     <item row="0" column="0">
      <widget class="QLabel" name="twitchExplanationLabel">
       <property name="text">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Usually, a Twitch chatbot uses a different account from the streamer.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1. Create a twitch account for your bot.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2. Log into it and go to &lt;a href=&quot;https://twitchapps.com/tmi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://twitchapps.com/tmi/&lt;/span&gt;&lt;/a&gt; to request a oauth code. This will be needed to connect Miraya to Twitch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Usually, a Twitch chatbot uses a different account from the streamer.&lt;/p&gt;&lt;p&gt;1. Create a twitch account for your bot.&lt;/p&gt;&lt;p&gt;2. Log into it and go to &lt;a href=&quot;https://twitchapps.com/tmi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://twitchapps.com/tmi/&lt;/span&gt;&lt;/a&gt; to request a oauth code. This will be needed to connect Miraya to Twitch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
