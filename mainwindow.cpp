@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	);
 
 	twitchCommandHandler = new TwitchCommandHandler();
+	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
@@ -54,7 +55,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionStart_Setup_triggered()
 {
-	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	setupWizard->restart();
 	setupWizard->show();
 }
@@ -112,6 +112,12 @@ void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper messa
 
 void MainWindow::on_twitchClient_messageReceived(TwitchDataWrapper message)
 {
+	// TODO: this should not be here
+	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())){
+		qDebug() << "MainWindow: Osu beatmap url:" << val;
+		osuIrcClient->sendMap(QUrl(val), message);
+	}
+
 	ui->twitchChat->addItem(getTwitchChatMessage(message.getUsername(), message.getMessage()));
 	ui->twitchChat->scrollToBottom();
 }

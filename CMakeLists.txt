@@ -19,8 +19,13 @@ add_executable(miraya
 	twitchcommandhandler.h twitchcommandhandler.cpp
 	osuircclient.h osuircclient.cpp
 	mainwindow.h mainwindow.cpp mainwindow.ui
+	utils.h utils.cpp
 	setupwizard.h setupwizard.cpp setupwizard.ui
 )
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+	set_property(TARGET miraya PROPERTY WIN32_EXECUTABLE true)
+endif()
 
 target_link_libraries(miraya PRIVATE Qt6::Core)
 target_link_libraries(miraya PRIVATE Qt6::Widgets)

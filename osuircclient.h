@@ -2,7 +2,9 @@
 #define OSUIRCCLIENT_H
 
 #include <QObject>
+#include <QUrl>
 #include <QTcpSocket>
+#include "twitchdatawrapper.h"
 
 class OsuIrcClient : public QObject {
 	Q_OBJECT
@@ -21,6 +23,7 @@ class OsuIrcClient : public QObject {
 		void setServer(const QString &server);
 		void setPort(const int &port);
 		void sendMsg(QString message);
+		void sendMap(QUrl url, TwitchDataWrapper message);
 
 	private:
 		QString nickname;
