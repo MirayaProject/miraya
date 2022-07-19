@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
-	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_actionInit_triggered);
+	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
 
@@ -100,7 +100,7 @@ void MainWindow::on_actionAbout_triggered()
 	// osuIrcClient->init();
 }
 
-void MainWindow::on_actionInit_triggered()
+void MainWindow::on_init()
 {
 	// TODO: DEBUG: move this
 	qDebug() << "init";

@@ -31,11 +31,11 @@ class MainWindow : public QMainWindow
 
 
 	private slots:
+		void on_init();
 		void on_actionStart_Setup_triggered();
 		void on_actionGithub_triggered();
 		void on_actionDiscord_triggered();
 		void on_actionAbout_triggered();
-		void on_actionInit_triggered();
 
 		void on_setupFinished(QJsonObject json);
 
