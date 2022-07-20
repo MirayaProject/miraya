@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
+	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
 
@@ -94,11 +95,19 @@ void MainWindow::on_actionAbout_triggered()
 {
 	// TODO: DEBUG: move this
 	qDebug() << "about";
+	// twitchClient->init();
+	// gosumemoryClient->init();
+	// osuIrcClient->init();
+}
+
+void MainWindow::on_init()
+{
+	// TODO: DEBUG: move this
+	qDebug() << "init";
 	twitchClient->init();
 	gosumemoryClient->init();
 	osuIrcClient->init();
 }
-
 
 void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
@@ -129,7 +138,6 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 	item->setFlags(item->flags() & Qt::ItemIsEnabled);
 	return item;
 }
-
 
 void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
 {
