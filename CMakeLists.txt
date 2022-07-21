@@ -60,8 +60,13 @@ endif()
 
 
 target_include_directories(miraya PRIVATE ${FORMS_DIR})
-target_include_directories(miraya PRIVATE ${INCLUDE_DIR})
 target_include_directories(miraya PRIVATE ${SOURCE_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_TWITCH_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_GOSU_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_OSUIRC_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_UTILS_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_SETUPWIZARD_DIR})
+
 # =========================== linking libraries ===========================
 target_link_libraries(miraya PRIVATE Qt6::Core)
 target_link_libraries(miraya PRIVATE Qt6::Widgets)
