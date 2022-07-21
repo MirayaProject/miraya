@@ -18,8 +18,9 @@ class OsuIrcClient : public QObject {
 			QObject *parent = nullptr
 		);
 		void init();
+		void restart();
 		void setNick(const QString &nickname);
-		void setPass(const QString &password);
+		void setPassword(const QString &password);
 		void setServer(const QString &server);
 		void setPort(const int &port);
 		void sendMsg(QString message);

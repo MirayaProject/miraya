@@ -21,6 +21,13 @@ void TwitchClient::init()
 }
 
 
+void TwitchClient::restart()
+{
+	socket.close();
+	init();
+}
+
+
 void TwitchClient::sendChatMessage(QString message)
 {
 	qDebug() << "Sending channel message: " << message;

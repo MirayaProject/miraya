@@ -19,3 +19,16 @@ QStringList Utils::getOsuBeatmapUrls(QString message)
 	}
 	return list;
 }
+
+
+QStringList Utils::getUrls(QString message)
+{
+	QRegularExpression rx("(https?:\\/\\/)?(www)?.*\\.(.){2,}");
+	QStringList list;
+	QRegularExpressionMatchIterator i = rx.globalMatch(message);
+	while (i.hasNext()) {
+		QRegularExpressionMatch match = i.next();
+		list.append(match.captured(0));
+	}
+	return list;
+}

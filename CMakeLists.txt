@@ -10,23 +10,64 @@ set(IDENTIFIER "com.github.mirayaosu")
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets WebSockets Network)
 qt_standard_project_setup()
 
-add_executable(miraya
-	main.cpp
-	gosumemoryClient.cpp gosumemoryClient.h
-	gosumemorydatawrapper.h gosumemorydatawrapper.cpp
-	twitchClient.cpp twitchClient.h
-	twitchdatawrapper.h twitchdatawrapper.cpp
-	twitchcommandhandler.h twitchcommandhandler.cpp
-	osuircclient.h osuircclient.cpp
-	mainwindow.h mainwindow.cpp mainwindow.ui
-	utils.h utils.cpp
-	setupwizard.h setupwizard.cpp setupwizard.ui
+# ===========================Including Project Files===========================
+set(FORMS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/forms")
+set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
+set(SOURCE_TWITCH_DIR "${CMAKE_SOURCE_DIR}/src/twitch")
+set(SOURCE_GOSU_DIR "${CMAKE_SOURCE_DIR}/src/gosu")
+set(SOURCE_OSUIRC_DIR "${CMAKE_SOURCE_DIR}/src/osuirc")
+set(SOURCE_UTILS_DIR "${CMAKE_SOURCE_DIR}/src/utils")
+set(SOURCE_SETUPWIZARD_DIR "${CMAKE_SOURCE_DIR}/src/setupwizard")
+
+include_directories(${FORMS_DIR})
+include_directories(${SOURCE_DIR})
+include_directories(${SOURCE_TWITCH_DIR})
+include_directories(${SOURCE_GOSU_DIR})
+include_directories(${SOURCE_OSUIRC_DIR})
+include_directories(${SOURCE_UTILS_DIR})
+include_directories(${SOURCE_SETUPWIZARD_DIR})
+
+file(GLOB_RECURSE SOURCES
+	${FORMS_DIR}/*.cpp
+	${SOURCE_TWITCH_DIR}/*.h
+	${SOURCE_TWITCH_DIR}/*.cpp
+	${SOURCE_GOSU_DIR}/*.h
+	${SOURCE_GOSU_DIR}/*.cpp
+	${SOURCE_OSUIRC_DIR}/*.h
+	${SOURCE_OSUIRC_DIR}/*.cpp
+	${SOURCE_UTILS_DIR}/*.h
+	${SOURCE_UTILS_DIR}/*.cpp
+	${SOURCE_SETUPWIZARD_DIR}/*.h
+	${SOURCE_SETUPWIZARD_DIR}/*.cpp
+	${SOURCE_DIR}/*.h
+	${SOURCE_DIR}/*.cpp
 )
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
+
+# =========================== Executable ===========================
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})
+
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
 	set_property(TARGET miraya PROPERTY WIN32_EXECUTABLE true)
 endif()
 
+# Add the executable
+if (WIN32)
+	add_executable(miraya WIN32 ${SOURCES})
+elseif(UNIX)
+	add_executable(miraya ${SOURCES})
+endif()
+
+
+target_include_directories(miraya PRIVATE ${FORMS_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_TWITCH_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_GOSU_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_OSUIRC_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_UTILS_DIR})
+target_include_directories(miraya PRIVATE ${SOURCE_SETUPWIZARD_DIR})
+
+# =========================== linking libraries ===========================
 target_link_libraries(miraya PRIVATE Qt6::Core)
 target_link_libraries(miraya PRIVATE Qt6::Widgets)
 target_link_libraries(miraya PRIVATE Qt6::WebSockets)

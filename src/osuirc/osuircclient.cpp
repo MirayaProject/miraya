@@ -22,6 +22,13 @@ void OsuIrcClient::init(){
 }
 
 
+void OsuIrcClient::restart()
+{
+	socket.close();
+	init();
+}
+
+
 void OsuIrcClient::onConnected()
 {
 	qDebug() << "Connected to: " << socket.peerAddress().toString();
@@ -33,6 +40,30 @@ void OsuIrcClient::onDisconnected()
 {
 	qDebug() << "Disconnected from: " << socket.peerAddress().toString();
 	emit disconnected();
+}
+
+
+void OsuIrcClient::setNick(const QString &nickname)
+{
+	this->nickname = nickname;
+}
+
+
+void OsuIrcClient::setPassword(const QString &password)
+{
+	this->password = password;
+}
+
+
+void OsuIrcClient::setServer(const QString &server)
+{
+	this->server = server;
+}
+
+
+void OsuIrcClient::setPort(const int &port)
+{
+	this->port = port;
 }
 
 

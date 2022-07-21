@@ -16,9 +16,9 @@ class GosumemoryClient : public QObject {
 		void init();
 		void setUrl(const QUrl &url);
 		void enableRead(bool enable);
+		void restart();
 
 	private:
-		void restart();
 		QWebSocket socket;
 		QUrl url;
 		bool readEnabled;
