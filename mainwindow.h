@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QSettings>
 #include <QListWidgetItem>
+#include <QPushButton>
 
 #include "setupwizard.h"
 #include "twitchClient.h"
@@ -30,6 +31,7 @@ class MainWindow : public QMainWindow
 
 
 	private slots:
+		void on_init();
 		void on_actionStart_Setup_triggered();
 		void on_actionGithub_triggered();
 		void on_actionDiscord_triggered();
@@ -43,6 +45,7 @@ class MainWindow : public QMainWindow
 
 	private:
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
+		QPushButton *btnStart;
 		Ui::MainWindow *ui;
 		SetupWizard *setupWizard;
 		TwitchClient *twitchClient;
