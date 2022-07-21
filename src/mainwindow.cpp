@@ -30,10 +30,21 @@ MainWindow::MainWindow(QWidget *parent) :
 		),
 		this
 	);
+
+	osuIrcClient = new OsuIrcClient(
+		settings.value("osuirc/nick").toString(),
+		settings.value("osuirc/password").toString(),
+		settings.value("osuirc/server").toString(),
+		settings.value("osuirc/port").toInt(),
+		this
+	);
+
 	twitchCommandHandler = new TwitchCommandHandler();
+	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
+	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
 
@@ -45,7 +56,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionStart_Setup_triggered()
 {
-	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	setupWizard->restart();
 	setupWizard->show();
 }
@@ -78,6 +88,10 @@ void MainWindow::on_setupFinished(QJsonObject data)
 			+settings.value("gosumemory/port").toString()
 		)
 	);
+	osuIrcClient->setNick(settings.value("osuirc/nick").toString());
+	osuIrcClient->setPassword(settings.value("osuirc/password").toString());
+	osuIrcClient->setServer(settings.value("osuirc/server").toString());
+	osuIrcClient->setPort(settings.value("osuirc/port").toInt());
 }
 
 
@@ -85,10 +99,19 @@ void MainWindow::on_actionAbout_triggered()
 {
 	// TODO: DEBUG: move this
 	qDebug() << "about";
-	twitchClient->init();
-	gosumemoryClient->init();
+	// twitchClient->init();
+	// gosumemoryClient->init();
+	// osuIrcClient->init();
 }
 
+void MainWindow::on_init()
+{
+	// TODO: DEBUG: move this
+	qDebug() << "init";
+	twitchClient->init();
+	gosumemoryClient->init();
+	osuIrcClient->init();
+}
 
 void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
@@ -102,6 +125,12 @@ void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper messa
 
 void MainWindow::on_twitchClient_messageReceived(TwitchDataWrapper message)
 {
+	// TODO: this should not be here
+	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())){
+		qDebug() << "MainWindow: Osu beatmap url:" << val;
+		osuIrcClient->sendMap(QUrl(val), message);
+	}
+
 	ui->twitchChat->addItem(getTwitchChatMessage(message.getUsername(), message.getMessage()));
 	ui->twitchChat->scrollToBottom();
 }
@@ -113,7 +142,6 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 	item->setFlags(item->flags() & Qt::ItemIsEnabled);
 	return item;
 }
-
 
 void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
 {

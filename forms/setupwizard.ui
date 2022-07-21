@@ -59,10 +59,18 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="gosumemoryIpLineEdit"/>
+       <widget class="QLineEdit" name="gosumemoryIpLineEdit">
+        <property name="text">
+         <string>127.0.0.1</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="gosumemoryPortLineEdit"/>
+       <widget class="QLineEdit" name="gosumemoryPortLineEdit">
+        <property name="text">
+         <string>24050</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -72,7 +80,7 @@
        <enum>Qt::NoContextMenu</enum>
       </property>
       <property name="text">
-       <string>First off, let's set up the connection between osu and miraya. To do that, download gosumemory.</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;First off, let's set up the connection between osu and miraya. &lt;/p&gt;&lt;p&gt;To do that, download &lt;a href=&quot;https://github.com/l3lackShark/gosumemory/releases/latest&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;gosumemory&lt;/span&gt;&lt;/a&gt; and start it. &lt;/p&gt;&lt;p&gt;If you are planning to use miraya on the pc that is running gosumemory and osu, press next to continue the setup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -92,16 +100,6 @@
     <property name="verticalSpacing">
      <number>20</number>
     </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="twitchExplanationLabel">
-      <property name="text">
-       <string>TODO explanation</string>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="0">
      <layout class="QFormLayout" name="twitchFormLayout">
       <property name="horizontalSpacing">
@@ -141,6 +139,16 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="twitchExplanationLabel">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Usually, a Twitch chatbot uses a different account from the streamer.&lt;/p&gt;&lt;p&gt;1. Create a twitch account for your bot.&lt;/p&gt;&lt;p&gt;2. Log into it and go to &lt;a href=&quot;https://twitchapps.com/tmi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://twitchapps.com/tmi/&lt;/span&gt;&lt;/a&gt; to request a oauth code. This will be needed to connect Miraya to Twitch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -219,7 +227,7 @@
     <item row="0" column="0">
      <widget class="QLabel" name="osuircExplanationLabel">
       <property name="text">
-       <string>TODO: explanation</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Osu! uses a communication system called IRC to supply the in-game chat. &lt;/p&gt;&lt;p&gt;Miraya can connect to it and send map requests from you Twitch chat effortlessly!&lt;/p&gt;&lt;p&gt;To do that, go to &lt;a href=&quot;osu.ppy.sh/p/irc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;osu.ppy.sh/p/irc&lt;/span&gt;&lt;/a&gt;, login and copy the nickname and password.&lt;/p&gt;&lt;p&gt;If you'd like to use Miraya in custom servers, you can change the IRC server address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>

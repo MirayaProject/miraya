@@ -6,11 +6,12 @@ Spiritual successor of [twitch-chatbot-for-gosumemory](https://github.com/Sclafu
 
 ## Commands
 
-- [ ] !np
-- [ ] !skin
+- [x] !np
+- [x] map requests in-game
+- [ ] !skin with auto upload
 
 # Dev stuff
-This application is currently being developed with Windows 10 (Qt Creator and MinGW) and Arch Linux (VS Code and GCC).
+This application is currently being developed with Windows 10 (Qt Creator/VS Code and MinGW) and Arch Linux (VS Code and Clang).
 
 The builds are tested with this two operating systems in mind,
 but they should work with any operating system that supports Qt6.

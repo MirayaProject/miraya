@@ -21,6 +21,7 @@ class TwitchClient : public QObject {
 			QObject *parent = nullptr
 		);
 		void init();
+		void restart();
 		void setChannel(QString channel);
 		void setBotNick(QString botNick);
 		void setOauth(QString oauth);
@@ -43,7 +44,7 @@ class TwitchClient : public QObject {
 		void commandReceived(TwitchDataWrapper command);
 		void disconnected();
 
-	private slots:
+	public slots:
 		void onConnected();
 		void onTextMessageReceived(QString message);
 		void onDisconnected();

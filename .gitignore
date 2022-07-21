@@ -53,3 +53,6 @@ compile_commands.json
 
 # Cmake builds
 build*
+
+#Visual Studio
+.vscode
