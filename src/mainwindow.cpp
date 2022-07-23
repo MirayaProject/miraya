@@ -97,11 +97,25 @@ void MainWindow::on_setupFinished(QJsonObject data)
 
 void MainWindow::on_actionAbout_triggered()
 {
-	// TODO: DEBUG: move this
-	qDebug() << "about";
-	// twitchClient->init();
-	// gosumemoryClient->init();
-	// osuIrcClient->init();
+	QMessageBox::about(this,
+		"About Miraya",
+
+		"<h1>Miraya</h1>"
+		"<p>A Twitch chatbot with GosuMemory and osu! IRC support.</p>"
+		"<p>Version: " + QApplication::applicationVersion() + "</p>"
+		"<p>Copyright © 2022 Miraya Project</p>"
+		"<p>This program is free software: you can redistribute it and/or modify "
+		"it under the terms of the GNU General Public License as published by "
+		"the Free Software Foundation, either version 3 of the License, or "
+		"(at your option) any later version.</p>"
+		"<p>This program is distributed in the hope that it will be useful, "
+		"but WITHOUT ANY WARRANTY; without even the implied warranty of "
+		"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+		"GNU General Public License for more details.</p>"
+		"<p>You should have received a copy of the GNU General Public License "
+		"along with this program.  If not, see <a href=\"https://www.gnu.org/licenses/\">"
+		"https://www.gnu.org/licenses/</a>.</p>"
+	);
 }
 
 void MainWindow::on_init()
