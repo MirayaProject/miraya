@@ -40,10 +40,27 @@ MainWindow::MainWindow(QWidget *parent) :
 	);
 
 	twitchCommandHandler = new TwitchCommandHandler();
+
+	twitchConnectionLabel = new QLabel(this);
+	gosumemoryConnectionLabel = new QLabel(this);
+	ircConnectionLabel = new QLabel(this);
+
+	ui->statusbar->addPermanentWidget(twitchConnectionLabel);
+	ui->statusbar->addPermanentWidget(gosumemoryConnectionLabel);
+	ui->statusbar->addPermanentWidget(ircConnectionLabel);
+
+	connect(twitchClient, &TwitchClient::connected, this, &MainWindow::on_twitchClient_connected);
+	connect(twitchClient, &TwitchClient::disconnected, this, &MainWindow::on_twitchClient_disconnected);
+	connect(gosumemoryClient, &GosumemoryClient::connected, this, &MainWindow::on_gosumemoryClient_connected);
+	connect(gosumemoryClient, &GosumemoryClient::disconnected, this, &MainWindow::on_gosumemoryClient_disconnected);
+	connect(osuIrcClient, &OsuIrcClient::connected, this, &MainWindow::on_osuIrcClient_connected);
+	connect(osuIrcClient, &OsuIrcClient::disconnected, this, &MainWindow::on_osuIrcClient_disconnected);
+
 	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
-	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
+	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
+
 	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
@@ -118,19 +135,19 @@ void MainWindow::on_actionAbout_triggered()
 	);
 }
 
+
 void MainWindow::on_init()
 {
-	// TODO: DEBUG: move this
 	qDebug() << "init";
 	twitchClient->init();
 	gosumemoryClient->init();
 	osuIrcClient->init();
 }
 
+
 void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
-	// TODO: is this the best way to handle it? shouldn't it be &message?
-	twitchCommandHandler->setGosumemoryData(new GosuMemoryDataWrapper(message));
+	twitchCommandHandler->setGosumemoryData(&message);
 	QString title = message.getMapName();
 	QString artist = message.getMapArtist();
 	ui->nowPlayingLabel->setText(artist + " - " + title);
@@ -157,11 +174,47 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 	return item;
 }
 
+
 void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
 {
 	twitchCommandHandler->setTwitchDataWrapper(&command);
 	QString response = twitchCommandHandler->getResponse();
-	qDebug() << "MainWindow: Command received:" << command.getMessage();
-	qDebug() << "Response: " << response;
 	twitchClient->sendChatMessage(response);
+}
+
+
+void MainWindow::on_osuIrcClient_connected()
+{
+	ircConnectionLabel->setText("IRC ✔️");
+}
+
+
+void MainWindow::on_twitchClient_connected()
+{
+	twitchConnectionLabel->setText("Twitch ✔️");
+}
+
+
+void MainWindow::on_gosumemoryClient_connected()
+{
+	gosumemoryConnectionLabel->setText("Gosumemory ✔️");
+}
+
+
+
+void MainWindow::on_osuIrcClient_disconnected()
+{
+	ircConnectionLabel->setText("IRC ❌");
+}
+
+
+void MainWindow::on_twitchClient_disconnected()
+{
+	twitchConnectionLabel->setText("Twitch ❌");
+}
+
+
+void MainWindow::on_gosumemoryClient_disconnected()
+{
+	gosumemoryConnectionLabel->setText("Gosumemory ❌");
 }
