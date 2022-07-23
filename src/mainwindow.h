@@ -7,6 +7,8 @@
 #include <QSettings>
 #include <QListWidgetItem>
 #include <QPushButton>
+#include <QLabel>
+#include <QMessageBox>
 
 #include "setupwizard.h"
 #include "twitchClient.h"
@@ -39,19 +41,29 @@ class MainWindow : public QMainWindow
 
 		void on_setupFinished(QJsonObject json);
 
+		void on_twitchClient_connected();
+		void on_gosumemoryClient_connected();
+		void on_osuIrcClient_connected();
+		void on_twitchClient_disconnected();
+		void on_gosumemoryClient_disconnected();
+		void on_osuIrcClient_disconnected();
 		void on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message);
 		void on_twitchClient_messageReceived(TwitchDataWrapper message);
 		void on_twitchClient_commandReceived(TwitchDataWrapper command);
 
+
 	private:
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
-		QPushButton *btnStart;
 		Ui::MainWindow *ui;
 		SetupWizard *setupWizard;
 		TwitchClient *twitchClient;
 		TwitchCommandHandler *twitchCommandHandler;
 		GosumemoryClient *gosumemoryClient;
 		OsuIrcClient *osuIrcClient;
+
+		QLabel *ircConnectionLabel;
+		QLabel *twitchConnectionLabel;
+		QLabel *gosumemoryConnectionLabel;
 };
 
 #endif // MAINWINDOW_H

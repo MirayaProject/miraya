@@ -40,10 +40,27 @@ MainWindow::MainWindow(QWidget *parent) :
 	);
 
 	twitchCommandHandler = new TwitchCommandHandler();
+
+	twitchConnectionLabel = new QLabel(this);
+	gosumemoryConnectionLabel = new QLabel(this);
+	ircConnectionLabel = new QLabel(this);
+
+	ui->statusbar->addPermanentWidget(twitchConnectionLabel);
+	ui->statusbar->addPermanentWidget(gosumemoryConnectionLabel);
+	ui->statusbar->addPermanentWidget(ircConnectionLabel);
+
+	connect(twitchClient, &TwitchClient::connected, this, &MainWindow::on_twitchClient_connected);
+	connect(twitchClient, &TwitchClient::disconnected, this, &MainWindow::on_twitchClient_disconnected);
+	connect(gosumemoryClient, &GosumemoryClient::connected, this, &MainWindow::on_gosumemoryClient_connected);
+	connect(gosumemoryClient, &GosumemoryClient::disconnected, this, &MainWindow::on_gosumemoryClient_disconnected);
+	connect(osuIrcClient, &OsuIrcClient::connected, this, &MainWindow::on_osuIrcClient_connected);
+	connect(osuIrcClient, &OsuIrcClient::disconnected, this, &MainWindow::on_osuIrcClient_disconnected);
+
 	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
-	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
+	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
+
 	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
@@ -97,26 +114,40 @@ void MainWindow::on_setupFinished(QJsonObject data)
 
 void MainWindow::on_actionAbout_triggered()
 {
-	// TODO: DEBUG: move this
-	qDebug() << "about";
-	// twitchClient->init();
-	// gosumemoryClient->init();
-	// osuIrcClient->init();
+	QMessageBox::about(this,
+		"About Miraya",
+
+		"<h1>Miraya</h1>"
+		"<p>A Twitch chatbot with GosuMemory and osu! IRC support.</p>"
+		"<p>Version: " + QApplication::applicationVersion() + "</p>"
+		"<p>Copyright © 2022 Miraya Project</p>"
+		"<p>This program is free software: you can redistribute it and/or modify "
+		"it under the terms of the GNU General Public License as published by "
+		"the Free Software Foundation, either version 3 of the License, or "
+		"(at your option) any later version.</p>"
+		"<p>This program is distributed in the hope that it will be useful, "
+		"but WITHOUT ANY WARRANTY; without even the implied warranty of "
+		"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+		"GNU General Public License for more details.</p>"
+		"<p>You should have received a copy of the GNU General Public License "
+		"along with this program.  If not, see <a href=\"https://www.gnu.org/licenses/\">"
+		"https://www.gnu.org/licenses/</a>.</p>"
+	);
 }
+
 
 void MainWindow::on_init()
 {
-	// TODO: DEBUG: move this
 	qDebug() << "init";
 	twitchClient->init();
 	gosumemoryClient->init();
 	osuIrcClient->init();
 }
 
+
 void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
-	// TODO: is this the best way to handle it? shouldn't it be &message?
-	twitchCommandHandler->setGosumemoryData(new GosuMemoryDataWrapper(message));
+	twitchCommandHandler->setGosumemoryData(&message);
 	QString title = message.getMapName();
 	QString artist = message.getMapArtist();
 	ui->nowPlayingLabel->setText(artist + " - " + title);
@@ -143,11 +174,47 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 	return item;
 }
 
+
 void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
 {
 	twitchCommandHandler->setTwitchDataWrapper(&command);
 	QString response = twitchCommandHandler->getResponse();
-	qDebug() << "MainWindow: Command received:" << command.getMessage();
-	qDebug() << "Response: " << response;
 	twitchClient->sendChatMessage(response);
+}
+
+
+void MainWindow::on_osuIrcClient_connected()
+{
+	ircConnectionLabel->setText("IRC ✔️");
+}
+
+
+void MainWindow::on_twitchClient_connected()
+{
+	twitchConnectionLabel->setText("Twitch ✔️");
+}
+
+
+void MainWindow::on_gosumemoryClient_connected()
+{
+	gosumemoryConnectionLabel->setText("Gosumemory ✔️");
+}
+
+
+
+void MainWindow::on_osuIrcClient_disconnected()
+{
+	ircConnectionLabel->setText("IRC ❌");
+}
+
+
+void MainWindow::on_twitchClient_disconnected()
+{
+	twitchConnectionLabel->setText("Twitch ❌");
+}
+
+
+void MainWindow::on_gosumemoryClient_disconnected()
+{
+	gosumemoryConnectionLabel->setText("Gosumemory ❌");
 }
