@@ -2,7 +2,8 @@
 
 TwitchCommandHandler::TwitchCommandHandler()
 {
-
+	this->twitchData = nullptr;
+	this->gosumemoryData = nullptr;
 }
 
 
@@ -28,14 +29,17 @@ void TwitchCommandHandler::setTwitchDataWrapper(TwitchDataWrapper *twitchData)
 QString TwitchCommandHandler::getResponse()
 {
 	QString command = twitchData->getMessage();
-	if (command.startsWith("!np"))
-	{
+	if (this->gosumemoryData == nullptr) {
+		return QString("");
+	}
+	
+	if (command.startsWith("!np")) {
 		auto song = gosumemoryData->getMapName();
 		auto artist = gosumemoryData->getMapArtist();
 		auto diff = gosumemoryData->getMapDifficulty();
 		auto mapper = gosumemoryData->getMapMapper();
 		auto url = gosumemoryData->getMapUrl();
-		return "Now playing: " + artist + " - " + song + " [" + diff + "] by " + mapper + " - " + url;
+		return QString("Now playing: " + artist + " - " + song + " [" + diff + "] by " + mapper + " - " + url);
 	}
 	return QString("");
 }
