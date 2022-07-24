@@ -47,16 +47,17 @@ file(GLOB_RECURSE SOURCES
 # =========================== Executable ===========================
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})
 
-if (CMAKE_BUILD_TYPE STREQUAL "Release")
-	set_property(TARGET miraya PROPERTY WIN32_EXECUTABLE true)
-endif()
 
 # Add the executable
 if (WIN32)
 	add_executable(miraya WIN32 ${SOURCES})
+	if (CMAKE_BUILD_TYPE STREQUAL "Release")
+		set_property(TARGET miraya PROPERTY WIN32_EXECUTABLE true)
+	endif()
 elseif(UNIX)
 	add_executable(miraya ${SOURCES})
 endif()
+
 
 
 target_include_directories(miraya PRIVATE ${FORMS_DIR})
