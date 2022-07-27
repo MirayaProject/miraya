@@ -139,15 +139,17 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_init()
 {
 	qDebug() << "init";
-	twitchClient->init();
-	gosumemoryClient->init();
-	osuIrcClient->init();
+	twitchClient->restart();
+	gosumemoryClient->restart();
+	osuIrcClient->restart();
 }
 
 
 void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
 {
-	twitchCommandHandler->setGosumemoryData(&message);
+	// TODO: is this the best way to handle it? shouldn't it be &message?
+	delete twitchCommandHandler->getGosumemoryData();
+	twitchCommandHandler->setGosumemoryData(new GosuMemoryDataWrapper(message));
 	QString title = message.getMapName();
 	QString artist = message.getMapArtist();
 	ui->nowPlayingLabel->setText(artist + " - " + title);
@@ -177,7 +179,7 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 
 void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
 {
-	twitchCommandHandler->setTwitchDataWrapper(&command);
+	twitchCommandHandler->setTwitchData(&command);
 	QString response = twitchCommandHandler->getResponse();
 	twitchClient->sendChatMessage(response);
 }

@@ -13,8 +13,9 @@ public:
 	TwitchCommandHandler();
 	TwitchCommandHandler(TwitchDataWrapper *twitchData, GosuMemoryDataWrapper *gosumemoryData);
 	void setGosumemoryData(GosuMemoryDataWrapper *gosumemoryData);
+	void setTwitchData(TwitchDataWrapper *twitchData);
 	GosuMemoryDataWrapper* getGosumemoryData();
-	void setTwitchDataWrapper(TwitchDataWrapper *twitchData);
+	TwitchDataWrapper* getTwitchData();
 	QString getResponse();
 
 private:
