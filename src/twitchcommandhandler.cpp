@@ -25,7 +25,13 @@ GosuMemoryDataWrapper* TwitchCommandHandler::getGosumemoryData()
 }
 
 
-void TwitchCommandHandler::setTwitchDataWrapper(TwitchDataWrapper *twitchData)
+TwitchDataWrapper* TwitchCommandHandler::getTwitchData()
+{
+	return this->twitchData;
+}
+
+
+void TwitchCommandHandler::setTwitchData(TwitchDataWrapper *twitchData)
 {
 	this->twitchData = twitchData;
 }
@@ -37,7 +43,7 @@ QString TwitchCommandHandler::getResponse()
 	if (this->gosumemoryData == nullptr) {
 		return QString("");
 	}
-	
+
 	if (command.startsWith("!np")) {
 		auto song = gosumemoryData->getMapName();
 		auto artist = gosumemoryData->getMapArtist();
