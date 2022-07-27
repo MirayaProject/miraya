@@ -19,6 +19,11 @@ void TwitchCommandHandler::setGosumemoryData(GosuMemoryDataWrapper *gosumemoryDa
 	this->gosumemoryData = gosumemoryData;
 }
 
+GosuMemoryDataWrapper* TwitchCommandHandler::getGosumemoryData()
+{
+	return this->gosumemoryData;
+}
+
 
 void TwitchCommandHandler::setTwitchDataWrapper(TwitchDataWrapper *twitchData)
 {

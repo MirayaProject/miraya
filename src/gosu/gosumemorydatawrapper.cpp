@@ -12,7 +12,6 @@ GosuMemoryDataWrapper::GosuMemoryDataWrapper(QString &data)
 	parseData();
 }
 
-
 void GosuMemoryDataWrapper::parseData()
 {
 	json = QJsonDocument::fromJson(data.toUtf8()).object();

@@ -13,6 +13,7 @@ public:
 	TwitchCommandHandler();
 	TwitchCommandHandler(TwitchDataWrapper *twitchData, GosuMemoryDataWrapper *gosumemoryData);
 	void setGosumemoryData(GosuMemoryDataWrapper *gosumemoryData);
+	GosuMemoryDataWrapper* getGosumemoryData();
 	void setTwitchDataWrapper(TwitchDataWrapper *twitchData);
 	QString getResponse();
 

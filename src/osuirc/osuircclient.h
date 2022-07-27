@@ -19,11 +19,12 @@ class OsuIrcClient : public QObject {
 		);
 		void init();
 		void restart();
+		void handlePing(QString response);
 		void setNick(const QString &nickname);
 		void setPassword(const QString &password);
 		void setServer(const QString &server);
 		void setPort(const int &port);
-		void sendMsg(QString message);
+		void sendPrivmsg(QString message);
 		void sendMap(QUrl url, TwitchDataWrapper message);
 
 	private:
@@ -35,10 +36,12 @@ class OsuIrcClient : public QObject {
 
 	signals:
 		void connected();
+		void readyRead();
 		void disconnected();
 
 	public slots:
 		void onConnected();
+		void onReadyRead();
 		void onDisconnected();
 };
 
