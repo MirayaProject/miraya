@@ -87,19 +87,16 @@ void OsuIrcClient::sendMap(QUrl url, TwitchDataWrapper message)
 
 void OsuIrcClient::handlePing(QString response)
 {
-	socket.write("PONG :" + response.toLocal8Bit() + "\r\n");
+	socket.write("PONG :\r\n");
 	qDebug() << "[osu!IRC] PING request handled";
 }
 
 void OsuIrcClient::onReadyRead()
 {
-	auto data = QString(socket.readAll()).split("\n");
+	auto data = QString(socket.readAll());
 
-	foreach (QString str, data){
-		if(str.contains("PING")){
-			auto ping_msg = str.split(" ");
-			handlePing(ping_msg[1]);
-		}
+	if(data.contains("PING")){
+		handlePing(data.split(" ").last().toLocal8Bit());
 	}
 	emit readyRead();
 }
