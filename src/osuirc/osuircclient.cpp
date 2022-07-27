@@ -9,16 +9,17 @@ OsuIrcClient::OsuIrcClient(
 ) : QObject(parent), nickname(nickname), password(password), server(server), port(port)
 {
 	connect(&socket, &QTcpSocket::connected, this, &OsuIrcClient::onConnected);
+	connect(&socket, &QTcpSocket::readyRead, this, &OsuIrcClient::onReadyRead);
 	connect(&socket, &QTcpSocket::disconnected, this, &OsuIrcClient::onDisconnected);
 }
 
 
 void OsuIrcClient::init(){
 	socket.connectToHost(server, port);
-	socket.write("PASS " + password.toLocal8Bit() + " \r\n");
-	socket.write("USER " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " :" + nickname.toLocal8Bit() + " \r\n");
-	socket.write("NICK " + nickname.toLocal8Bit() + " \r\n");
-	sendMsg("Ready to process requests");
+	socket.write("PASS " + password.toLocal8Bit() + "\r\n");
+	socket.write("USER " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " :" + nickname.toLocal8Bit() + "\r\n");
+	socket.write("NICK " + nickname.toLocal8Bit() + "\r\n");
+	sendPrivmsg("Ready to process requests!");
 }
 
 
@@ -31,14 +32,14 @@ void OsuIrcClient::restart()
 
 void OsuIrcClient::onConnected()
 {
-	qDebug() << "Connected to: " << socket.peerAddress().toString();
+	qDebug() << "[osu!IRC] Connected to: " << socket.peerAddress().toString();
 	emit connected();
 }
 
 
 void OsuIrcClient::onDisconnected()
 {
-	qDebug() << "Disconnected from: " << socket.peerAddress().toString();
+	qDebug() << "[osu!IRC] Disconnected from: " << socket.peerAddress().toString();
 	emit disconnected();
 }
 
@@ -67,9 +68,9 @@ void OsuIrcClient::setPort(const int &port)
 }
 
 
-void OsuIrcClient::sendMsg(QString message)
+void OsuIrcClient::sendPrivmsg(QString message)
 {
-	socket.write("PRIVMSG " + nickname.toLocal8Bit() + " " + message.toLocal8Bit() + " \r\n");
+	socket.write("PRIVMSG " + nickname.toLocal8Bit() + " :" + message.toLocal8Bit() + "\r\n");
 }
 
 
@@ -78,13 +79,27 @@ void OsuIrcClient::sendMap(QUrl url, TwitchDataWrapper message)
 	// TODO: the map embed should have the map name.
 	// Scraping is needed.
 
-	qDebug() << "Sending map: " << url.toString() << " by " << message.getUsername();
+	qDebug() << "[osu!IRC] Sending map-request: " << url.toString() << " by " << message.getUsername();
 
-	socket.write(
-		"PRIVMSG "
-		+ nickname.toLocal8Bit()
-		+ " [" + url.toString().toLocal8Bit() + " Map request] "
-		+ "sent by " + message.getUsername().toLocal8Bit()
-		+ " \r\n"
-	);
+	QString msg = " [" + url.toString() + " Map request] " + "sent by " + message.getUsername() + "\r\n";
+	sendPrivmsg(msg);
+}
+
+void OsuIrcClient::handlePing(QString response)
+{
+	socket.write("PONG :" + response.toLocal8Bit() + "\r\n");
+	qDebug() << "[osu!IRC] PING request handled";
+}
+
+void OsuIrcClient::onReadyRead()
+{
+	auto data = QString(socket.readAll()).split("\n");
+
+	foreach (QString str, data){
+		if(str.contains("PING")){
+			auto ping_msg = str.split(" ");
+			handlePing(ping_msg[1]);
+		}
+	}
+	emit readyRead();
 }
