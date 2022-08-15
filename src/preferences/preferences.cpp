@@ -7,6 +7,7 @@ Preferences::Preferences(QWidget *parent) :
 {
   ui->setupUi(this);
   connect(ui->listWidget, &QListWidget::currentItemChanged, this, &Preferences::on_listWidget_currentItemChanged);
+  connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &Preferences::on_saveBtnClicked);
   ui->listWidget->setCurrentRow(0);
   loadSettings();
 }
@@ -45,6 +46,27 @@ void Preferences::loadOsuIrcSettings()
   ui->osuIrcPasswordLineEdit->setText(settings.value("osuirc/password").toString());
   ui->osuIrcServerLineEdit->setText(settings.value("osuirc/server").toString());
   ui->osuIrcPortLineEdit->setText(settings.value("osuirc/port").toString());
+}
+
+
+void Preferences::on_saveBtnClicked()
+{
+  saveSettings();
+  QMessageBox().information(this, "Saved", "Settings saved");
+}
+
+
+void Preferences::saveSettings()
+{
+  settings.setValue("twitch/botNick", ui->twitchBotNickLineEdit->text());
+  settings.setValue("twitch/oauth", ui->twitchBotOAuthLineEdit->text());
+  settings.setValue("twitch/channel", ui->twitchChannelLineEdit->text());
+  settings.setValue("gosumemory/ip", ui->gosumemoryIpLineEdit->text());
+  settings.setValue("gosumemory/port", ui->gosumemoryPortLineEdit->text());
+  settings.setValue("osuirc/nick", ui->osuIrcNicknameLineEdit->text());
+  settings.setValue("osuirc/password", ui->osuIrcPasswordLineEdit->text());
+  settings.setValue("osuirc/server", ui->osuIrcServerLineEdit->text());
+  settings.setValue("osuirc/port", ui->osuIrcPortLineEdit->text());
 }
 
 

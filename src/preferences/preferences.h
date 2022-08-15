@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSettings>
+#include <QMessageBox>
 #include <QListWidgetItem>
 
 namespace Ui {
@@ -24,6 +25,8 @@ private:
   void loadTwitchSettings();
   void loadGosuMemorySettings();
   void loadOsuIrcSettings();
+  void saveSettings();
+  void on_saveBtnClicked();
   void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 };
 
