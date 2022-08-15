@@ -2,6 +2,7 @@
 #define PREFERENCES_H
 
 #include <QDialog>
+#include <QSettings>
 #include <QListWidgetItem>
 
 namespace Ui {
@@ -18,6 +19,11 @@ public:
 
 private:
   Ui::Preferences *ui;
+  QSettings settings;
+  void loadSettings();
+  void loadTwitchSettings();
+  void loadGosuMemorySettings();
+  void loadOsuIrcSettings();
   void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 };
 
