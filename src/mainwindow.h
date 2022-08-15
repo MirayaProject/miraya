@@ -17,6 +17,7 @@
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
 #include "osuircclient.h"
+#include "preferences.h"
 #include "utils.h"
 
 namespace Ui {
@@ -38,6 +39,7 @@ class MainWindow : public QMainWindow
 		void on_actionGithub_triggered();
 		void on_actionDiscord_triggered();
 		void on_actionAbout_triggered();
+		void on_actionPreferences_triggered();
 
 		void on_setupFinished(QJsonObject json);
 

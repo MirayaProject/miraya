@@ -136,6 +136,13 @@ void MainWindow::on_actionAbout_triggered()
 }
 
 
+
+void MainWindow::on_actionPreferences_triggered()
+{
+	Preferences(this).exec();
+}
+
+
 void MainWindow::on_init()
 {
 	qDebug() << "init";
