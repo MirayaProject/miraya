@@ -1,24 +1,27 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QDesktopServices>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QSettings>
-#include <QListWidgetItem>
-#include <QPushButton>
 #include <QLabel>
+#include <QListWidgetItem>
+#include <QMainWindow>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QSettings>
+#include <QUrl>
 
-#include "setupwizard.h"
-#include "twitchClient.h"
-#include "twitchdatawrapper.h"
-#include "twitchcommandhandler.h"
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
 #include "osuircclient.h"
 #include "preferences.h"
+#include "setupwizard.h"
+#include "twitchClient.h"
+#include "twitchdatawrapper.h"
+#include "twitchcommandhandler.h"
 #include "utils.h"
+
 
 namespace Ui {
 	class MainWindow;
