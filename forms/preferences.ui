@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>935</width>
-    <height>529</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,6 +76,12 @@
       </item>
      </widget>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>4</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -87,6 +93,26 @@
       </property>
       <widget class="QWidget" name="gosuMemoryPage">
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="2" column="0">
+         <widget class="QLabel" name="gosumemoryPortLabel">
+          <property name="text">
+           <string>Port</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="1" column="1">
          <widget class="QLineEdit" name="gosumemoryIpLineEdit">
           <property name="inputMethodHints">
@@ -108,26 +134,6 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="gosumemoryPortLabel">
-          <property name="text">
-           <string>Port</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="3" column="0" colspan="2">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
@@ -145,6 +151,27 @@
       </widget>
       <widget class="QWidget" name="twitchPage">
        <layout class="QGridLayout" name="gridLayout_4">
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="twitchChannelLineEdit">
+          <property name="inputMethodHints">
+           <set>Qt::ImhNoAutoUppercase</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="twitchChannelLabel">
+          <property name="text">
+           <string>Channel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="twitchBotNickLabel">
+          <property name="text">
+           <string>Bot Nickname</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="1">
          <widget class="QLineEdit" name="twitchBotNickLineEdit">
           <property name="inputMethodHints">
@@ -159,20 +186,6 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="twitchChannelLineEdit">
-          <property name="inputMethodHints">
-           <set>Qt::ImhNoAutoUppercase</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="twitchBotNickLabel">
-          <property name="text">
-           <string>Bot Nickname</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QLabel" name="twitchBotOAuthLabel">
           <property name="text">
@@ -180,15 +193,8 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="twitchChannelLabel">
-          <property name="text">
-           <string>Channel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <spacer name="verticalSpacer_4">
+        <item row="4" column="0" colspan="2">
+         <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -200,8 +206,8 @@
           </property>
          </spacer>
         </item>
-        <item row="4" column="0" colspan="2">
-         <spacer name="verticalSpacer_3">
+        <item row="0" column="0" colspan="2">
+         <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -303,17 +309,7 @@
       </widget>
       <widget class="QWidget" name="themesPage">
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="1" column="1">
-         <widget class="QRadioButton" name="themesDarkRadio">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Dark</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="3">
+        <item row="0" column="0" colspan="4">
          <spacer name="verticalSpacer_8">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -326,7 +322,7 @@
           </property>
          </spacer>
         </item>
-        <item row="2" column="0" colspan="3">
+        <item row="3" column="0" colspan="4">
          <spacer name="verticalSpacer_7">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -339,21 +335,43 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="themesRadioLabel">
           <property name="text">
            <string>Theme</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QRadioButton" name="themesLightRadio">
-          <property name="enabled">
-           <bool>false</bool>
+        <item row="2" column="2">
+         <widget class="QFrame" name="themesRadioFrame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
-          <property name="text">
-           <string>Light</string>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QRadioButton" name="themesDarkRadio">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Dark</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="themesLightRadio">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Light</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
