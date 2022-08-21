@@ -14,15 +14,33 @@ GosumemoryClient::GosumemoryClient(
 
 void GosumemoryClient::init()
 {
+	refreshData();
 	qDebug() << "Connecting to: " << url.toString();
 	socket.open(QUrl(url));
 }
+
+
+void GosumemoryClient::refreshData()
+{
+	qDebug() << "[GosumemoryClient] Refreshing data...";
+	QSettings settings;
+
+	setUrl(
+		"ws://"
+		+ settings.value("gosumemory/ip").toString()
+		+ ":"
+		+ settings.value("gosumemory/port").toString()
+		+ "/ws"
+	);
+}
+
 
 void GosumemoryClient::restart()
 {
 	socket.close();
 	init();
 }
+
 
 void GosumemoryClient::onConnected()
 {
@@ -50,7 +68,6 @@ void GosumemoryClient::onDisconnected()
 void GosumemoryClient::setUrl(const QUrl &url)
 {
 	this->url = url;
-	restart();
 }
 
 void GosumemoryClient::enableRead(bool enable)
