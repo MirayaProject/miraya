@@ -6,37 +6,33 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+	this->setupUi();
 
 	QSettings settings;
-	twitchClient = new TwitchClient(
-		QUrl("ws://irc-ws.chat.twitch.tv:80"),
-		settings.value("twitch/botNick").toString(),
-		settings.value("twitch/oauth").toString(),
-		settings.value("twitch/channel").toString(),
-		this
-	);
-
-	gosumemoryClient = new GosumemoryClient(
-		QUrl(
-			"ws://"
-			+ settings.value("gosumemory/ip").toString()
-			+ ":"
-			+ settings.value("gosumemory/port").toString()
-			+ "/ws"
-		),
-		this
-	);
-
-	osuIrcClient = new OsuIrcClient(
-		settings.value("osuirc/nick").toString(),
-		settings.value("osuirc/password").toString(),
-		settings.value("osuirc/server").toString(),
-		settings.value("osuirc/port").toInt(),
-		this
-	);
+	twitchClient = new TwitchClient(this);
+	gosumemoryClient = new GosumemoryClient(this);
+	osuIrcClient = new OsuIrcClient(this);
 
 	twitchCommandHandler = new TwitchCommandHandler();
+	this->setupSignals();
+}
 
+
+MainWindow::~MainWindow()
+{
+	delete ui;
+}
+
+
+void MainWindow::setupUi()
+{
+	this->setupStatusbar();
+	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
+}
+
+
+void MainWindow::setupStatusbar()
+{
 	twitchConnectionLabel = new QLabel(this);
 	gosumemoryConnectionLabel = new QLabel(this);
 	ircConnectionLabel = new QLabel(this);
@@ -44,7 +40,11 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->statusbar->addPermanentWidget(twitchConnectionLabel);
 	ui->statusbar->addPermanentWidget(gosumemoryConnectionLabel);
 	ui->statusbar->addPermanentWidget(ircConnectionLabel);
+}
 
+
+void MainWindow::setupSignals()
+{
 	connect(twitchClient, &TwitchClient::connected, this, &MainWindow::on_twitchClient_connected);
 	connect(twitchClient, &TwitchClient::disconnected, this, &MainWindow::on_twitchClient_disconnected);
 	connect(gosumemoryClient, &GosumemoryClient::connected, this, &MainWindow::on_gosumemoryClient_connected);
@@ -55,14 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
-
-	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
-}
-
-
-MainWindow::~MainWindow()
-{
-	delete ui;
 }
 
 
@@ -138,7 +130,7 @@ void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper messa
 void MainWindow::on_twitchClient_messageReceived(TwitchDataWrapper message)
 {
 	// TODO: this should not be here
-	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())){
+	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())) {
 		qDebug() << "MainWindow: Osu beatmap url:" << val;
 		osuIrcClient->sendMap(QUrl(val), message);
 	}

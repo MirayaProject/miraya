@@ -56,6 +56,9 @@ class MainWindow : public QMainWindow
 
 
 	private:
+		void setupSignals();
+		void setupStatusbar();
+		void setupUi();
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
 		Ui::MainWindow *ui;
 		TwitchClient *twitchClient;
