@@ -8,18 +8,47 @@ OsuIrcClient::OsuIrcClient(
 	QObject *parent
 ) : QObject(parent), nickname(nickname), password(password), server(server), port(port)
 {
+	initSignals();
+}
+
+
+OsuIrcClient::OsuIrcClient(QObject *parent) : QObject(parent)
+{
+	initSignals();
+}
+
+
+void OsuIrcClient::initSignals()
+{
 	connect(&socket, &QTcpSocket::connected, this, &OsuIrcClient::onConnected);
 	connect(&socket, &QTcpSocket::readyRead, this, &OsuIrcClient::onReadyRead);
 	connect(&socket, &QTcpSocket::disconnected, this, &OsuIrcClient::onDisconnected);
 }
 
 
-void OsuIrcClient::init(){
+void OsuIrcClient::init()
+{
+	refreshData();
+	qDebug() << "[osu!IRC] Connecting to: " << server << ":" << port;
+
 	socket.connectToHost(server, port);
 	socket.write("PASS " + password.toLocal8Bit() + "\r\n");
 	socket.write("USER " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " :" + nickname.toLocal8Bit() + "\r\n");
 	socket.write("NICK " + nickname.toLocal8Bit() + "\r\n");
+
 	sendPrivmsg("Ready to process requests!");
+}
+
+
+void OsuIrcClient::refreshData()
+{
+	qDebug() << "[osu!IRC] Refreshing data...";
+	QSettings settings;
+
+	setNickname(settings.value("osuirc/nick").toString());
+	setPassword(settings.value("osuirc/password").toString());
+	setServer(settings.value("osuirc/server").toString());
+	setPort(settings.value("osuirc/port").toInt());
 }
 
 
@@ -44,7 +73,7 @@ void OsuIrcClient::onDisconnected()
 }
 
 
-void OsuIrcClient::setNick(const QString &nickname)
+void OsuIrcClient::setNickname(const QString &nickname)
 {
 	this->nickname = nickname;
 }
@@ -95,7 +124,7 @@ void OsuIrcClient::onReadyRead()
 {
 	auto data = QString(socket.readAll());
 
-	if(data.contains("PING")){
+	if(data.contains("PING")) {
 		handlePing(data.split(" ").last().toLocal8Bit());
 	}
 	emit readyRead();

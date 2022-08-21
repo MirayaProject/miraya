@@ -8,6 +8,18 @@ TwitchClient::TwitchClient(
 	QObject *parent
 ) : QObject(parent), url(url), oauth(oauth), botNick(botNick), channel(channel)
 {
+	initSignals();
+}
+
+
+TwitchClient::TwitchClient(QObject *parent) : QObject(parent)
+{
+	initSignals();
+}
+
+
+void TwitchClient::initSignals()
+{
 	connect(&socket, &QWebSocket::connected, this, &TwitchClient::onConnected);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &TwitchClient::onTextMessageReceived);
 	connect(&socket, &QWebSocket::disconnected, this, &TwitchClient::onDisconnected);
@@ -16,8 +28,21 @@ TwitchClient::TwitchClient(
 
 void TwitchClient::init()
 {
-	qDebug() << "Connecting to: " << url.toString();
+	refreshData();
+	qDebug() << "[TwitchClient] Connecting to: " << url.toString();
 	socket.open(QUrl(url));
+}
+
+
+void TwitchClient::refreshData()
+{
+	qDebug() << "[TwitchClient] Refreshing data...";
+	QSettings settings;
+
+	setChannel(settings.value("twitch/channel").toString());
+	setBotNick(settings.value("twitch/botNick").toString());
+	setOauth(settings.value("twitch/oauth").toString());
+	setUrl(QUrl("ws://irc-ws.chat.twitch.tv:80"));
 }
 
 
@@ -30,21 +55,21 @@ void TwitchClient::restart()
 
 void TwitchClient::sendChatMessage(QString message)
 {
-	qDebug() << "Sending channel message: " << message;
+	qDebug() << "[TwitchClient] Sending channel message: " << message;
 	socket.sendTextMessage("PRIVMSG #" + channel + " :" + message);
 }
 
 
 void TwitchClient::sendMessage(QString message)
 {
-	qDebug() << "Sending message: " << message;
+	qDebug() << "[TwitchClient] Sending message: " << message;
 	socket.sendTextMessage(message);
 }
 
 
 void TwitchClient::onConnected()
 {
-	qDebug() << "Connected to: " << url.toString();
+	qDebug() << "[TwitchClient] Connected to: " << url.toString();
 	emit connected();
 	sendMessage("PASS " + oauth);
 	sendMessage("NICK " + botNick);
@@ -55,15 +80,15 @@ void TwitchClient::onConnected()
 void TwitchClient::onTextMessageReceived(QString message)
 {
 	auto wrappedMessage = TwitchDataWrapper(message);
-	qDebug() << "Message received from: " << url.toString();
+	qDebug() << "[TwitchClient] Message received from: " << url.toString();
 
 	if (shouldBeFiltered(message)) {
-		qDebug() << "Message filtered";
+		qDebug() << "[TwitchClient] Message filtered";
 		return;
 	}
 
 	if (isCommand(wrappedMessage.getMessage())) {
-		qDebug() << "Command received";
+		qDebug() << "[TwitchClient] Command received";
 		emit commandReceived(wrappedMessage);
 	}
 
@@ -73,6 +98,7 @@ void TwitchClient::onTextMessageReceived(QString message)
 
 void TwitchClient::handlePing()
 {
+	qDebug() << "[TwitchClient] Handling ping";
 	sendMessage("PONG :tmi.twitch.tv");
 }
 
@@ -107,7 +133,7 @@ bool TwitchClient::isCommand(QString message)
 
 void TwitchClient::onDisconnected()
 {
-	qDebug() << "Disconnected from:" << url.toString();
+	qDebug() << "[TwitchClient] Disconnected from:" << url.toString();
 	emit disconnected();
 }
 
@@ -127,4 +153,10 @@ void TwitchClient::setBotNick(QString botNick)
 void TwitchClient::setOauth(QString oauth)
 {
 	this->oauth = oauth;
+}
+
+
+void TwitchClient::setUrl(QUrl url)
+{
+	this->url = QUrl(url);
 }

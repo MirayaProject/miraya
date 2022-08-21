@@ -1,10 +1,11 @@
 #ifndef TWITCHCLIENT_H
 #define TWITCHCLIENT_H
 
+#include <QDebug>
 #include <QObject>
+#include <QSettings>
 #include <QString>
 #include <QUrl>
-#include <QDebug>
 #include <QWebSocket>
 
 #include "twitchdatawrapper.h"
@@ -13,6 +14,7 @@ class TwitchClient : public QObject {
 	Q_OBJECT
 
 	public:
+		explicit TwitchClient(QObject *parent = nullptr);
 		explicit TwitchClient(
 			const QUrl &url,
 			const QString &botNick,
@@ -25,13 +27,17 @@ class TwitchClient : public QObject {
 		void setChannel(QString channel);
 		void setBotNick(QString botNick);
 		void setOauth(QString oauth);
+		void setUrl(QUrl url);
 		void sendChatMessage(QString message);
 
 	private:
-		void sendMessage(QString message);
 		void handlePing();
-		bool shouldBeFiltered(QString message);
 		bool isCommand(QString message);
+		void initSignals();
+		void refreshData();
+		void sendMessage(QString message);
+		bool shouldBeFiltered(QString message);
+
 		QWebSocket socket;
 		QUrl url;
 		QString oauth;
