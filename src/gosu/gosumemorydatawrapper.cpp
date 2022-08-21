@@ -54,3 +54,9 @@ QString GosuMemoryDataWrapper::getMapUrl()
 	qDebug() << val;
 	return QString("https://osu.ppy.sh/b/%1").arg(val);
 }
+
+
+QString GosuMemoryDataWrapper::getSkinName()
+{
+	return json["settings"].toObject()["folders"].toObject()["skin"].toString();
+}

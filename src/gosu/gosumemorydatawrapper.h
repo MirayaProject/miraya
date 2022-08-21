@@ -15,6 +15,7 @@ class GosuMemoryDataWrapper
 		QString getMapMapper();
 		QString getMapDifficulty();
 		QString getMapUrl();
+		QString getSkinName();
 
 	private:
 		QString data;
