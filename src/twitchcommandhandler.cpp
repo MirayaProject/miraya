@@ -52,5 +52,11 @@ QString TwitchCommandHandler::getResponse()
 		auto url = gosumemoryData->getMapUrl();
 		return QString("Now playing: " + artist + " - " + song + " [" + diff + "] by " + mapper + " - " + url);
 	}
+
+	else if (command.startsWith("!skin")) {
+		auto skin = gosumemoryData->getSkinName();
+		return QString("Current skin: " + skin);
+	}
+
 	return QString("");
 }
