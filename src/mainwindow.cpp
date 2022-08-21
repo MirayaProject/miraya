@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	setupWizard = new SetupWizard(this);
 
 	QSettings settings;
 	twitchClient = new TwitchClient(
@@ -53,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(osuIrcClient, &OsuIrcClient::connected, this, &MainWindow::on_osuIrcClient_connected);
 	connect(osuIrcClient, &OsuIrcClient::disconnected, this, &MainWindow::on_osuIrcClient_disconnected);
 
-	connect(setupWizard, &SetupWizard::wizardFinished, this, &MainWindow::on_setupFinished);
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
@@ -70,8 +68,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionStart_Setup_triggered()
 {
-	setupWizard->restart();
-	setupWizard->show();
+	SetupWizard(this).exec();
 }
 
 
@@ -84,28 +81,6 @@ void MainWindow::on_actionGithub_triggered()
 void MainWindow::on_actionDiscord_triggered()
 {
 	QDesktopServices::openUrl(QUrl("https://www.discord.gg/anHrS7p5Sf"));
-}
-
-
-void MainWindow::on_setupFinished(QJsonObject data)
-{
-	qDebug() << "MainWindow: Setup finished with data:" << data;
-	QSettings settings;
-	twitchClient->setChannel(settings.value("twitch/channel").toString());
-	twitchClient->setBotNick(settings.value("twitch/botNick").toString());
-	twitchClient->setOauth(settings.value("twitch/oauth").toString());
-
-	gosumemoryClient->setUrl(
-		QUrl("ws://"
-			+settings.value("gosumemory/ip").toString()
-			+":"
-			+settings.value("gosumemory/port").toString()
-		)
-	);
-	osuIrcClient->setNick(settings.value("osuirc/nick").toString());
-	osuIrcClient->setPassword(settings.value("osuirc/password").toString());
-	osuIrcClient->setServer(settings.value("osuirc/server").toString());
-	osuIrcClient->setPort(settings.value("osuirc/port").toInt());
 }
 
 
@@ -142,7 +117,7 @@ void MainWindow::on_actionPreferences_triggered()
 
 void MainWindow::on_init()
 {
-	qDebug() << "init";
+	qDebug() << "[MainWindow] init";
 	twitchClient->restart();
 	gosumemoryClient->restart();
 	osuIrcClient->restart();

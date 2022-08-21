@@ -44,8 +44,6 @@ class MainWindow : public QMainWindow
 		void on_actionAbout_triggered();
 		void on_actionPreferences_triggered();
 
-		void on_setupFinished(QJsonObject json);
-
 		void on_twitchClient_connected();
 		void on_gosumemoryClient_connected();
 		void on_osuIrcClient_connected();
@@ -60,7 +58,6 @@ class MainWindow : public QMainWindow
 	private:
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
 		Ui::MainWindow *ui;
-		SetupWizard *setupWizard;
 		TwitchClient *twitchClient;
 		TwitchCommandHandler *twitchCommandHandler;
 		GosumemoryClient *gosumemoryClient;
