@@ -60,6 +60,9 @@
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="gosumemoryIpLineEdit">
+        <property name="inputMethodHints">
+         <set>Qt::ImhUrlCharactersOnly</set>
+        </property>
         <property name="text">
          <string>127.0.0.1</string>
         </property>
@@ -67,6 +70,9 @@
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="gosumemoryPortLineEdit">
+        <property name="inputMethodHints">
+         <set>Qt::ImhDigitsOnly</set>
+        </property>
         <property name="text">
          <string>24050</string>
         </property>
@@ -119,7 +125,11 @@
        <widget class="QLineEdit" name="twitchBotNickLineEdit"/>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="twitchOauthLineEdit"/>
+       <widget class="QLineEdit" name="twitchOauthLineEdit">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
       </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="twitchChannelLineEdit"/>
@@ -206,10 +216,17 @@
        <widget class="QLineEdit" name="osuircNickLineEdit"/>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="osuircPasswordLineEdit"/>
+       <widget class="QLineEdit" name="osuircPasswordLineEdit">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
       </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="osuircServerLineEdit">
+        <property name="inputMethodHints">
+         <set>Qt::ImhUrlCharactersOnly</set>
+        </property>
         <property name="text">
          <string>irc.ppy.sh</string>
         </property>
@@ -217,6 +234,9 @@
       </item>
       <item row="3" column="1">
        <widget class="QLineEdit" name="osuircPortLineEdit">
+        <property name="inputMethodHints">
+         <set>Qt::ImhDigitsOnly</set>
+        </property>
         <property name="text">
          <string>6667</string>
         </property>
