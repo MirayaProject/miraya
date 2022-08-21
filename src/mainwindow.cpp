@@ -1,6 +1,3 @@
-#include <QDesktopServices>
-#include <QUrl>
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -133,6 +130,13 @@ void MainWindow::on_actionAbout_triggered()
 		"along with this program.  If not, see <a href=\"https://www.gnu.org/licenses/\">"
 		"https://www.gnu.org/licenses/</a>.</p>"
 	);
+}
+
+
+
+void MainWindow::on_actionPreferences_triggered()
+{
+	Preferences(this).exec();
 }
 
 

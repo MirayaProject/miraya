@@ -84,12 +84,6 @@
      <height>30</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSetup">
-    <property name="title">
-     <string>Setup</string>
-    </property>
-    <addaction name="actionStart_Setup"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
@@ -98,7 +92,14 @@
     <addaction name="actionGithub"/>
     <addaction name="actionAbout"/>
    </widget>
-   <addaction name="menuSetup"/>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionPreferences"/>
+    <addaction name="actionStart_Setup"/>
+   </widget>
+   <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -118,12 +119,17 @@
   </action>
   <action name="actionStart_Setup">
    <property name="text">
-    <string>Start Setup</string>
+    <string>Redo Initial Setup</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

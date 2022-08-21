@@ -18,6 +18,7 @@ set(SOURCE_GOSU_DIR "${CMAKE_SOURCE_DIR}/src/gosu")
 set(SOURCE_OSUIRC_DIR "${CMAKE_SOURCE_DIR}/src/osuirc")
 set(SOURCE_UTILS_DIR "${CMAKE_SOURCE_DIR}/src/utils")
 set(SOURCE_SETUPWIZARD_DIR "${CMAKE_SOURCE_DIR}/src/setupwizard")
+set(SOURCE_PREFERENCES_DIR "${CMAKE_SOURCE_DIR}/src/preferences")
 
 include_directories(${FORMS_DIR})
 include_directories(${SOURCE_DIR})
@@ -26,6 +27,7 @@ include_directories(${SOURCE_GOSU_DIR})
 include_directories(${SOURCE_OSUIRC_DIR})
 include_directories(${SOURCE_UTILS_DIR})
 include_directories(${SOURCE_SETUPWIZARD_DIR})
+include_directories(${SOURCE_PREFERENCES_DIR})
 
 file(GLOB_RECURSE SOURCES
 	${FORMS_DIR}/*.cpp
@@ -39,8 +41,11 @@ file(GLOB_RECURSE SOURCES
 	${SOURCE_UTILS_DIR}/*.cpp
 	${SOURCE_SETUPWIZARD_DIR}/*.h
 	${SOURCE_SETUPWIZARD_DIR}/*.cpp
+	${SOURCE_PREFERENCES_DIR}/*.h
+	${SOURCE_PREFERENCES_DIR}/*.cpp
 	${SOURCE_DIR}/*.h
 	${SOURCE_DIR}/*.cpp
+
 )
 
 

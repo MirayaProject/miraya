@@ -1,23 +1,27 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QDesktopServices>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QSettings>
-#include <QListWidgetItem>
-#include <QPushButton>
 #include <QLabel>
+#include <QListWidgetItem>
+#include <QMainWindow>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QSettings>
+#include <QUrl>
 
+#include "gosumemoryClient.h"
+#include "gosumemorydatawrapper.h"
+#include "osuircclient.h"
+#include "preferences.h"
 #include "setupwizard.h"
 #include "twitchClient.h"
 #include "twitchdatawrapper.h"
 #include "twitchcommandhandler.h"
-#include "gosumemoryClient.h"
-#include "gosumemorydatawrapper.h"
-#include "osuircclient.h"
 #include "utils.h"
+
 
 namespace Ui {
 	class MainWindow;
@@ -38,6 +42,7 @@ class MainWindow : public QMainWindow
 		void on_actionGithub_triggered();
 		void on_actionDiscord_triggered();
 		void on_actionAbout_triggered();
+		void on_actionPreferences_triggered();
 
 		void on_setupFinished(QJsonObject json);
 
