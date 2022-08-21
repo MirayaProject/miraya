@@ -13,6 +13,7 @@ class GosumemoryClient : public QObject {
 	Q_OBJECT
 
 	public:
+		explicit GosumemoryClient(QObject *parent = nullptr);
 		explicit GosumemoryClient(const QUrl &url, QObject *parent = nullptr);
 		void enableRead(bool enable);
 		void init();
@@ -20,6 +21,7 @@ class GosumemoryClient : public QObject {
 		void setUrl(const QUrl &url);
 
 	private:
+		void initSignals();
 		void refreshData();
 		bool readEnabled;
 		QWebSocket socket;
