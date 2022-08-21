@@ -14,12 +14,29 @@ OsuIrcClient::OsuIrcClient(
 }
 
 
-void OsuIrcClient::init(){
+void OsuIrcClient::init()
+{
+	refreshData();
+	qDebug() << "[OsuIrcClient] Connecting to: " << server << ":" << port;
+
 	socket.connectToHost(server, port);
 	socket.write("PASS " + password.toLocal8Bit() + "\r\n");
 	socket.write("USER " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " " + nickname.toLocal8Bit() + " :" + nickname.toLocal8Bit() + "\r\n");
 	socket.write("NICK " + nickname.toLocal8Bit() + "\r\n");
+
 	sendPrivmsg("Ready to process requests!");
+}
+
+
+void OsuIrcClient::refreshData()
+{
+	qDebug() << "[OsuIrcClient] Refreshing data...";
+	QSettings settings;
+
+	setNickname(settings.value("osuirc/nick").toString());
+	setPassword(settings.value("osuirc/password").toString());
+	setServer(settings.value("osuirc/server").toString());
+	setPort(settings.value("osuirc/port").toInt());
 }
 
 
@@ -44,7 +61,7 @@ void OsuIrcClient::onDisconnected()
 }
 
 
-void OsuIrcClient::setNick(const QString &nickname)
+void OsuIrcClient::setNickname(const QString &nickname)
 {
 	this->nickname = nickname;
 }
