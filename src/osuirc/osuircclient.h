@@ -12,6 +12,7 @@ class OsuIrcClient : public QObject {
 	Q_OBJECT
 
 	public:
+		explicit OsuIrcClient(QObject *parent = nullptr);
 		explicit OsuIrcClient(
 			const QString &nickname,
 			const QString &password,
@@ -20,8 +21,8 @@ class OsuIrcClient : public QObject {
 			QObject *parent = nullptr
 		);
 		void init();
+		void initSignals();
 		void restart();
-		void handlePing(QString response);
 		void setNickname(const QString &nickname);
 		void setPassword(const QString &password);
 		void setServer(const QString &server);
@@ -30,6 +31,7 @@ class OsuIrcClient : public QObject {
 		void sendMap(QUrl url, TwitchDataWrapper message);
 
 	private:
+		void handlePing(QString response);
 		void refreshData();
 		QString nickname;
 		QString password;
