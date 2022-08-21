@@ -16,8 +16,20 @@ TwitchClient::TwitchClient(
 
 void TwitchClient::init()
 {
-	qDebug() << "Connecting to: " << url.toString();
+	refreshData();
+	qDebug() << "[TwitchClient] Connecting to: " << url.toString();
 	socket.open(QUrl(url));
+}
+
+
+void TwitchClient::refreshData()
+{
+	qDebug() << "[TwitchClient] Refreshing data...";
+	QSettings settings;
+	setChannel(settings.value("twitch/channel").toString());
+	setBotNick(settings.value("twitch/botNick").toString());
+	setOauth(settings.value("twitch/oauth").toString());
+	setUrl(QUrl("ws://irc-ws.chat.twitch.tv:80"));
 }
 
 
@@ -107,7 +119,7 @@ bool TwitchClient::isCommand(QString message)
 
 void TwitchClient::onDisconnected()
 {
-	qDebug() << "Disconnected from:" << url.toString();
+	qDebug() << "[TwitchClient] Disconnected from:" << url.toString();
 	emit disconnected();
 }
 
@@ -127,4 +139,10 @@ void TwitchClient::setBotNick(QString botNick)
 void TwitchClient::setOauth(QString oauth)
 {
 	this->oauth = oauth;
+}
+
+
+void TwitchClient::setUrl(QUrl url)
+{
+	this->url = QUrl(url);
 }
