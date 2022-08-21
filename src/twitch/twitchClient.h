@@ -14,6 +14,7 @@ class TwitchClient : public QObject {
 	Q_OBJECT
 
 	public:
+		explicit TwitchClient(QObject *parent = nullptr);
 		explicit TwitchClient(
 			const QUrl &url,
 			const QString &botNick,
@@ -32,9 +33,11 @@ class TwitchClient : public QObject {
 	private:
 		void handlePing();
 		bool isCommand(QString message);
+		void initSignals();
 		void refreshData();
 		void sendMessage(QString message);
 		bool shouldBeFiltered(QString message);
+
 		QWebSocket socket;
 		QUrl url;
 		QString oauth;
