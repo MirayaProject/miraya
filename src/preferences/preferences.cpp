@@ -10,12 +10,36 @@ Preferences::Preferences(QWidget *parent) :
   connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &Preferences::on_saveBtnClicked);
   ui->listWidget->setCurrentRow(0);
   loadSettings();
+  setupUi();
 }
+
 
 Preferences::~Preferences()
 {
   delete ui;
 }
+
+
+void Preferences::setupUi()
+{
+	// TODO: this should be a standalone widget.
+	auto *portValidator = new QIntValidator(0, 65535, this);
+	ui->gosumemoryPortLineEdit->setValidator(portValidator);
+	ui->osuIrcPortLineEdit->setValidator(portValidator);
+
+
+	// TODO: this should be a standalone widget.
+	QString IpRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
+	QRegularExpression IpRegex("^" + IpRange + "\\." + IpRange + "\\." + IpRange + "\\." + IpRange + "$");
+	QRegularExpressionValidator *IpValidator = new QRegularExpressionValidator(IpRegex, this);
+	ui->gosumemoryIpLineEdit->setValidator(IpValidator);
+
+	// TODO: this should be a standalone widget.
+	QRegularExpression oauthRegex("^oauth:.{30}$");
+	QRegularExpressionValidator *oauthValidator = new QRegularExpressionValidator(oauthRegex, this);
+	ui->twitchBotOAuthLineEdit->setValidator(oauthValidator);
+}
+
 
 void Preferences::loadSettings()
 {

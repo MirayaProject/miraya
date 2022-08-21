@@ -25,6 +25,7 @@ private:
   void loadTwitchSettings();
   void loadGosuMemorySettings();
   void loadOsuIrcSettings();
+  void setupUi();
   void saveSettings();
   void on_saveBtnClicked();
   void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
