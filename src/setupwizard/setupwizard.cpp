@@ -14,12 +14,26 @@ SetupWizard::~SetupWizard()
 	delete ui;
 }
 
-// TODO: add validator for IP address
+
 void SetupWizard::setupUi()
 {
-	ui->gosumemoryPortLineEdit->setValidator(new QIntValidator(0, 65535, this));
-	ui->osuircPortLineEdit->setValidator(new QIntValidator(0, 65535, this));
+	// TODO: this should be a standalone widget.
+	auto *portValidator = new QIntValidator(0, 65535, this);
+	ui->gosumemoryPortLineEdit->setValidator(portValidator);
+	ui->osuircPortLineEdit->setValidator(portValidator);
+
+	// TODO: this should be a standalone widget.
+	QString IpRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
+	QRegularExpression IpRegex("^" + IpRange + "\\." + IpRange + "\\." + IpRange + "\\." + IpRange + "$");
+	QRegularExpressionValidator *IpValidator = new QRegularExpressionValidator(IpRegex, this);
+	ui->gosumemoryIpLineEdit->setValidator(IpValidator);
+
+	// TODO: this should be a standalone widget.
+	QRegularExpression oauthRegex("^oauth:.{30}$");
+	QRegularExpressionValidator *oauthValidator = new QRegularExpressionValidator(oauthRegex, this);
+	ui->twitchOauthLineEdit->setValidator(oauthValidator);
 }
+
 
 void SetupWizard::on_SetupWizard_finished(int result)
 {
@@ -28,8 +42,9 @@ void SetupWizard::on_SetupWizard_finished(int result)
 		saveData(data);
 		emit wizardFinished(data);
 	}
-	qDebug() << "done" << result;
+	qDebug() << "[SetupWizard] finished" << result;
 }
+
 
 QJsonObject SetupWizard::gatherData()
 {
@@ -41,6 +56,7 @@ QJsonObject SetupWizard::gatherData()
 
 	return data;
 }
+
 
 QJsonObject SetupWizard::getGosumemoryData()
 {
@@ -54,6 +70,7 @@ QJsonObject SetupWizard::getGosumemoryData()
 
 	return gosumemoryData;
 }
+
 
 QJsonObject SetupWizard::getTwitchData()
 {
@@ -69,6 +86,7 @@ QJsonObject SetupWizard::getTwitchData()
 
 	return twitchData;
 }
+
 
 QJsonObject SetupWizard::getOsuircData()
 {
