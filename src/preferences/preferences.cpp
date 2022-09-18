@@ -82,9 +82,9 @@ void Preferences::on_saveBtnClicked()
 
 void Preferences::saveSettings()
 {
-  settings.setValue("twitch/botNick", ui->twitchBotNickLineEdit->text());
+  settings.setValue("twitch/botNick", ui->twitchBotNickLineEdit->text().toLower());
   settings.setValue("twitch/oauth", ui->twitchBotOAuthLineEdit->text());
-  settings.setValue("twitch/channel", ui->twitchChannelLineEdit->text());
+  settings.setValue("twitch/channel", ui->twitchChannelLineEdit->text().toLower());
   settings.setValue("gosumemory/ip", ui->gosumemoryIpLineEdit->text());
   settings.setValue("gosumemory/port", ui->gosumemoryPortLineEdit->text());
   settings.setValue("osuirc/nick", ui->osuIrcNicknameLineEdit->text());
