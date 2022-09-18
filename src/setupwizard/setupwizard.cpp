@@ -79,9 +79,9 @@ QJsonObject SetupWizard::getTwitchData()
 	QString twitchChannel = ui->twitchChannelLineEdit->text();
 
 	QJsonObject twitchData = QJsonObject{
-		{"botNick", twitchBotNick},
+		{"botNick", twitchBotNick.toLower()},
 		{"oauth", twitchOauth},
-		{"channel", twitchChannel}
+		{"channel", twitchChannel.toLower()}
 	};
 
 	return twitchData;
