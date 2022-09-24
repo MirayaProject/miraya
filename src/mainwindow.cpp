@@ -95,7 +95,8 @@ void MainWindow::on_actionAbout_triggered()
 		"GNU General Public License for more details.</p>"
 		"<p>You should have received a copy of the GNU General Public License "
 		"along with this program.  If not, see <a href=\"https://www.gnu.org/licenses/\">"
-		"https://www.gnu.org/licenses/</a>.</p>"
+		"https://www.gnu.org/licenses/</a>.</p>" +
+		"<p>Icons provided by <a href=\"https://fonts.google.com/icons\">Google Fonts</a></p>"
 	);
 }
 
