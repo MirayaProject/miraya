@@ -17,20 +17,7 @@
    <bool>false</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
-     </property>
-     <property name="centerButtons">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="1" column="1">
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -58,20 +45,36 @@
        <property name="text">
         <string>Gosumemory</string>
        </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/images/resources/images/gosumemory.ico</normaloff>:/images/resources/images/gosumemory.ico</iconset>
+       </property>
       </item>
       <item>
        <property name="text">
         <string>Twitch</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/images/resources/images/twitch_logo.png</normaloff>:/images/resources/images/twitch_logo.png</iconset>
        </property>
       </item>
       <item>
        <property name="text">
         <string>Osu! IRC</string>
        </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/images/resources/images/osu_logo.png</normaloff>:/images/resources/images/osu_logo.png</iconset>
+       </property>
       </item>
       <item>
        <property name="text">
         <string>Themes</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/images/resources/images/format_paint.png</normaloff>:/images/resources/images/format_paint.png</iconset>
        </property>
       </item>
      </widget>
@@ -93,15 +96,15 @@
       </property>
       <widget class="QWidget" name="gosuMemoryPage">
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="2" column="0">
-         <widget class="QLabel" name="gosumemoryPortLabel">
-          <property name="text">
-           <string>Port</string>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="gosumemoryIpLineEdit">
+          <property name="inputMethodHints">
+           <set>Qt::ImhUrlCharactersOnly</set>
           </property>
          </widget>
         </item>
-        <item row="0" column="0" colspan="2">
-         <spacer name="verticalSpacer">
+        <item row="3" column="0" colspan="2">
+         <spacer name="verticalSpacer_2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -113,10 +116,10 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="gosumemoryIpLineEdit">
-          <property name="inputMethodHints">
-           <set>Qt::ImhUrlCharactersOnly</set>
+        <item row="1" column="0">
+         <widget class="QLabel" name="gosumemoryIpLabel">
+          <property name="text">
+           <string>IP</string>
           </property>
          </widget>
         </item>
@@ -127,15 +130,15 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="gosumemoryIpLabel">
+        <item row="2" column="0">
+         <widget class="QLabel" name="gosumemoryPortLabel">
           <property name="text">
-           <string>IP</string>
+           <string>Port</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0" colspan="2">
-         <spacer name="verticalSpacer_2">
+        <item row="0" column="0" colspan="2">
+         <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -379,9 +382,56 @@
      </widget>
     </widget>
    </item>
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>3</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <spacer name="verticalSpacer_9">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>1</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
