@@ -21,6 +21,7 @@
 #include "twitchdatawrapper.h"
 #include "twitchcommandhandler.h"
 #include "utils.h"
+#include "skinsurl.h"
 
 
 namespace Ui {
@@ -43,6 +44,7 @@ class MainWindow : public QMainWindow
 		void on_actionDiscord_triggered();
 		void on_actionAbout_triggered();
 		void on_actionPreferences_triggered();
+		void on_actionSkins_triggered();
 
 		void on_twitchClient_connected();
 		void on_gosumemoryClient_connected();
