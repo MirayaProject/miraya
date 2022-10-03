@@ -44,6 +44,8 @@ QString TwitchCommandHandler::getResponse()
 		return QString("");
 	}
 
+	QSettings settings;
+
 	if (command.startsWith("!np")) {
 		auto song = gosumemoryData->getMapName();
 		auto artist = gosumemoryData->getMapArtist();
@@ -55,7 +57,11 @@ QString TwitchCommandHandler::getResponse()
 
 	else if (command.startsWith("!skin")) {
 		auto skin = gosumemoryData->getSkinName();
-		return QString("Current skin: " + skin);
+		auto skinDownloadUrl = settings.value(QString("skin/%1").arg(skin)).toString();
+		if (skinDownloadUrl != QVariant()) {
+			return QString("Current skin: %1 || Download: %2").arg(skin, skinDownloadUrl);
+		}
+		return QString("Current skin: %1").arg(skin);
 	}
 
 	return QString("");
