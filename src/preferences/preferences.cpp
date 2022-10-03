@@ -77,6 +77,7 @@ void Preferences::on_saveBtnClicked()
 {
   saveSettings();
   QMessageBox().information(this, "Saved", "Settings saved");
+  accept();
 }
 
 
