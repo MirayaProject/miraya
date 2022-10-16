@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/images">
+    <file>resources/images/format_paint.png</file>
+    <file>resources/images/gosumemory.ico</file>
+    <file>resources/images/twitch_logo.png</file>
+    <file>resources/images/osu_logo.png</file>
+  </qresource>
+</RCC>
