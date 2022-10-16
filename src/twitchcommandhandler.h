@@ -2,6 +2,7 @@
 #define TWITCHCOMMANDHANDLER_H
 
 #include <QString>
+#include <QSettings>
 
 #include "twitchdatawrapper.h"
 #include "gosumemorydatawrapper.h"

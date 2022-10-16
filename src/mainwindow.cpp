@@ -107,6 +107,11 @@ void MainWindow::on_actionPreferences_triggered()
 	Preferences(this).exec();
 }
 
+void MainWindow::on_actionSkins_triggered()
+{
+	SkinsUrl(gosumemoryClient, this).exec();
+}
+
 
 void MainWindow::on_init()
 {
