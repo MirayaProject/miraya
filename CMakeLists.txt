@@ -49,13 +49,13 @@ file(GLOB_RECURSE SOURCES
 	${SOURCE_SKINSURL_DIR}/*.cpp
 	${SOURCE_DIR}/*.h
 	${SOURCE_DIR}/*.cpp
-
+	resources.qrc
 )
 
 
 # =========================== Executable ===========================
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})
-
+set(CMAKE_AUTORCC ON)
 
 # Add the executable
 if (WIN32)
