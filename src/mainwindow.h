@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
+#include <QStyleFactory>
 #include <QUrl>
 
 #include "gosumemoryClient.h"
@@ -61,6 +62,8 @@ class MainWindow : public QMainWindow
 		void setupSignals();
 		void setupStatusbar();
 		void setupUi();
+		void loadTheme();
+		void loadDarkMode();
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
 		Ui::MainWindow *ui;
 		TwitchClient *twitchClient;
