@@ -48,12 +48,16 @@ void MainWindow::setupStatusbar()
 void MainWindow::loadTheme()
 {
 	#ifdef Q_OS_WIN
-		// If explicit, prefer the local settings.
+		// If present, prefer the local settings.
 		QSettings settings;
 		bool isDarkMode;
-		isDarkMode = settings.value("theme/darkMode", false).toBool();
-		if (isDarkMode) {
-			loadDarkMode();
+		auto darkModeSetting = settings.value("theme/darkMode");
+
+		if (!darkModeSetting.isNull()) {
+			isDarkMode = darkModeSetting.toBool();
+			if (isDarkMode) {
+				loadDarkMode();
+			}
 			return;
 		}
 
