@@ -357,7 +357,7 @@
            <item>
             <widget class="QRadioButton" name="themesDarkRadio">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="text">
               <string>Dark</string>
@@ -367,7 +367,7 @@
            <item>
             <widget class="QRadioButton" name="themesLightRadio">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="text">
               <string>Light</string>

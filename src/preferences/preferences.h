@@ -25,6 +25,7 @@ private:
   void loadTwitchSettings();
   void loadGosuMemorySettings();
   void loadOsuIrcSettings();
+  void loadThemeSettings();
   void setupUi();
   void saveSettings();
   void on_saveBtnClicked();
