@@ -124,4 +124,6 @@ void SetupWizard::saveData(QJsonObject data)
 	settings.setValue("osuirc/password", osuircData["password"].toString());
 	settings.setValue("osuirc/server", osuircData["server"].toString());
 	settings.setValue("osuirc/port", osuircData["port"].toInt());
+
+	settings.setValue("setup/completed", true);
 }
