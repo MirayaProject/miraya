@@ -16,6 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	twitchCommandHandler = new TwitchCommandHandler();
 	this->setupSignals();
+
+	if(!settings.value("setup/completed").toBool()){
+		on_actionStart_Setup_triggered();
+	}
 }
 
 
