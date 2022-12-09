@@ -39,7 +39,7 @@ class MainWindow : public QMainWindow
 
 
 	private slots:
-		void on_init();
+		void on_btnStart_clicked();
 		void on_actionStart_Setup_triggered();
 		void on_actionGithub_triggered();
 		void on_actionDiscord_triggered();
@@ -47,15 +47,15 @@ class MainWindow : public QMainWindow
 		void on_actionPreferences_triggered();
 		void on_actionSkins_triggered();
 
-		void on_twitchClient_connected();
-		void on_gosumemoryClient_connected();
-		void on_osuIrcClient_connected();
-		void on_twitchClient_disconnected();
-		void on_gosumemoryClient_disconnected();
-		void on_osuIrcClient_disconnected();
-		void on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message);
-		void on_twitchClient_messageReceived(TwitchDataWrapper message);
-		void on_twitchClient_commandReceived(TwitchDataWrapper command);
+		void onTwitchClientConnected();
+		void onGosumemoryClientConnected();
+		void onOsuIrcClientConnected();
+		void onTwitchClientDisconnected();
+		void onGosumemoryClientDisconnected();
+		void onOsuIrcClientDisconnected();
+		void onGosumemoryClientMessageReceived(GosuMemoryDataWrapper message);
+		void onTwitchClientMessageReceived(TwitchDataWrapper message);
+		void onTwitchClientCommandReceived(TwitchDataWrapper command);
 
 
 	private:

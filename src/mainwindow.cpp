@@ -28,7 +28,6 @@ void MainWindow::setupUi()
 {
 	this->setupStatusbar();
 	this->loadTheme();
-	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
 
@@ -42,7 +41,6 @@ void MainWindow::setupStatusbar()
 	ui->statusbar->addPermanentWidget(gosumemoryConnectionLabel);
 	ui->statusbar->addPermanentWidget(ircConnectionLabel);
 }
-
 
 
 void MainWindow::loadTheme()
@@ -108,16 +106,16 @@ void MainWindow::loadDarkMode()
 
 void MainWindow::setupSignals()
 {
-	connect(twitchClient, &TwitchClient::connected, this, &MainWindow::on_twitchClient_connected);
-	connect(twitchClient, &TwitchClient::disconnected, this, &MainWindow::on_twitchClient_disconnected);
-	connect(gosumemoryClient, &GosumemoryClient::connected, this, &MainWindow::on_gosumemoryClient_connected);
-	connect(gosumemoryClient, &GosumemoryClient::disconnected, this, &MainWindow::on_gosumemoryClient_disconnected);
-	connect(osuIrcClient, &OsuIrcClient::connected, this, &MainWindow::on_osuIrcClient_connected);
-	connect(osuIrcClient, &OsuIrcClient::disconnected, this, &MainWindow::on_osuIrcClient_disconnected);
+	connect(twitchClient, &TwitchClient::connected, this, &MainWindow::onTwitchClientConnected);
+	connect(twitchClient, &TwitchClient::disconnected, this, &MainWindow::onTwitchClientDisconnected);
+	connect(gosumemoryClient, &GosumemoryClient::connected, this, &MainWindow::onGosumemoryClientConnected);
+	connect(gosumemoryClient, &GosumemoryClient::disconnected, this, &MainWindow::onGosumemoryClientDisconnected);
+	connect(osuIrcClient, &OsuIrcClient::connected, this, &MainWindow::onOsuIrcClientConnected);
+	connect(osuIrcClient, &OsuIrcClient::disconnected, this, &MainWindow::onOsuIrcClientDisconnected);
 
-	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::on_twitchClient_messageReceived);
-	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::on_twitchClient_commandReceived);
-	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::on_gosumemoryClient_messageReceived);
+	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::onTwitchClientMessageReceived);
+	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::onTwitchClientCommandReceived);
+	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::onGosumemoryClientMessageReceived);
 }
 
 
@@ -164,11 +162,11 @@ void MainWindow::on_actionAbout_triggered()
 }
 
 
-
 void MainWindow::on_actionPreferences_triggered()
 {
 	Preferences(this).exec();
 }
+
 
 void MainWindow::on_actionSkins_triggered()
 {
@@ -176,7 +174,7 @@ void MainWindow::on_actionSkins_triggered()
 }
 
 
-void MainWindow::on_init()
+void MainWindow::on_btnStart_clicked()
 {
 	qDebug() << "[MainWindow] init";
 	twitchClient->restart();
@@ -185,7 +183,7 @@ void MainWindow::on_init()
 }
 
 
-void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper message)
+void MainWindow::onGosumemoryClientMessageReceived(GosuMemoryDataWrapper message)
 {
 	// TODO: is this the best way to handle it? shouldn't it be &message?
 	delete twitchCommandHandler->getGosumemoryData();
@@ -196,7 +194,7 @@ void MainWindow::on_gosumemoryClient_messageReceived(GosuMemoryDataWrapper messa
 }
 
 
-void MainWindow::on_twitchClient_messageReceived(TwitchDataWrapper message)
+void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 {
 	// TODO: this should not be here
 	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())) {
@@ -217,7 +215,7 @@ QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString mess
 }
 
 
-void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
+void MainWindow::onTwitchClientCommandReceived(TwitchDataWrapper command)
 {
 	twitchCommandHandler->setTwitchData(&command);
 	QString response = twitchCommandHandler->getResponse();
@@ -225,38 +223,37 @@ void MainWindow::on_twitchClient_commandReceived(TwitchDataWrapper command)
 }
 
 
-void MainWindow::on_osuIrcClient_connected()
+void MainWindow::onOsuIrcClientConnected()
 {
 	ircConnectionLabel->setText("IRC ✔️");
 }
 
 
-void MainWindow::on_twitchClient_connected()
+void MainWindow::onTwitchClientConnected()
 {
 	twitchConnectionLabel->setText("Twitch ✔️");
 }
 
 
-void MainWindow::on_gosumemoryClient_connected()
+void MainWindow::onGosumemoryClientConnected()
 {
 	gosumemoryConnectionLabel->setText("Gosumemory ✔️");
 }
 
 
-
-void MainWindow::on_osuIrcClient_disconnected()
+void MainWindow::onOsuIrcClientDisconnected()
 {
 	ircConnectionLabel->setText("IRC ❌");
 }
 
 
-void MainWindow::on_twitchClient_disconnected()
+void MainWindow::onTwitchClientDisconnected()
 {
 	twitchConnectionLabel->setText("Twitch ❌");
 }
 
 
-void MainWindow::on_gosumemoryClient_disconnected()
+void MainWindow::onGosumemoryClientDisconnected()
 {
 	gosumemoryConnectionLabel->setText("Gosumemory ❌");
 }
