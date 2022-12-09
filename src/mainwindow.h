@@ -39,7 +39,7 @@ class MainWindow : public QMainWindow
 
 
 	private slots:
-		void on_init();
+		void on_btnStart_clicked();
 		void on_actionStart_Setup_triggered();
 		void on_actionGithub_triggered();
 		void on_actionDiscord_triggered();

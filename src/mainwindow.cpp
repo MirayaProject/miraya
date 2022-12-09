@@ -28,7 +28,6 @@ void MainWindow::setupUi()
 {
 	this->setupStatusbar();
 	this->loadTheme();
-	connect(ui->btnStart, &QPushButton::released, this, &MainWindow::on_init);
 }
 
 
@@ -42,7 +41,6 @@ void MainWindow::setupStatusbar()
 	ui->statusbar->addPermanentWidget(gosumemoryConnectionLabel);
 	ui->statusbar->addPermanentWidget(ircConnectionLabel);
 }
-
 
 
 void MainWindow::loadTheme()
@@ -176,7 +174,7 @@ void MainWindow::on_actionSkins_triggered()
 }
 
 
-void MainWindow::on_init()
+void MainWindow::on_btnStart_clicked()
 {
 	qDebug() << "[MainWindow] init";
 	twitchClient->restart();
