@@ -429,6 +429,20 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>listWidget</tabstop>
+  <tabstop>gosumemoryIpLineEdit</tabstop>
+  <tabstop>gosumemoryPortLineEdit</tabstop>
+  <tabstop>twitchBotNickLineEdit</tabstop>
+  <tabstop>twitchBotOAuthLineEdit</tabstop>
+  <tabstop>twitchChannelLineEdit</tabstop>
+  <tabstop>osuIrcNicknameLineEdit</tabstop>
+  <tabstop>osuIrcPasswordLineEdit</tabstop>
+  <tabstop>osuIrcServerLineEdit</tabstop>
+  <tabstop>osuIrcPortLineEdit</tabstop>
+  <tabstop>themesDarkRadio</tabstop>
+  <tabstop>themesLightRadio</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>
