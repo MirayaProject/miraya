@@ -107,12 +107,17 @@ void Preferences::saveSettings()
   settings.setValue("twitch/botNick", ui->twitchBotNickLineEdit->text().toLower());
   settings.setValue("twitch/oauth", ui->twitchBotOAuthLineEdit->text());
   settings.setValue("twitch/channel", ui->twitchChannelLineEdit->text().toLower());
+
   settings.setValue("gosumemory/ip", ui->gosumemoryIpLineEdit->text());
   settings.setValue("gosumemory/port", ui->gosumemoryPortLineEdit->text());
-  settings.setValue("osuirc/nick", ui->osuIrcNicknameLineEdit->text());
+
+	// Spaces need to be replaced by underscores.
+	// https://osu.ppy.sh/wiki/en/Community/Internet_Relay_Chat#connection
+  settings.setValue("osuirc/nick", ui->osuIrcNicknameLineEdit->text().replace(' ', '_'));
   settings.setValue("osuirc/password", ui->osuIrcPasswordLineEdit->text());
   settings.setValue("osuirc/server", ui->osuIrcServerLineEdit->text());
   settings.setValue("osuirc/port", ui->osuIrcPortLineEdit->text());
+
   settings.setValue("theme/darkMode", ui->themesDarkRadio->isChecked());
 }
 
