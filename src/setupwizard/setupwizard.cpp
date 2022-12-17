@@ -95,6 +95,10 @@ QJsonObject SetupWizard::getOsuircData()
 	QString osuircServer = ui->osuircServerLineEdit->text();
 	int osuircPort = ui->osuircPortLineEdit->text().toInt();
 
+	// Spaces need to be replaced by underscores.
+	// https://osu.ppy.sh/wiki/en/Community/Internet_Relay_Chat#connection
+	osuircNick.replace(' ', '_');
+
 	QJsonObject osuircData = QJsonObject{
 		{"nick", osuircNick},
 		{"password", osuircPassword},
