@@ -13,6 +13,7 @@
 #include <QStyleFactory>
 #include <QUrl>
 
+#include "htmldelegate.h"
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
 #include "osuircclient.h"

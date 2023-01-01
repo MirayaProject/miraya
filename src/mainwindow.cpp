@@ -37,6 +37,9 @@ void MainWindow::setupUi()
 {
 	this->setupStatusbar();
 	this->loadTheme();
+	// TODO: this should not be here
+	auto delegate = new HTMLDelegate();
+	ui->twitchChat->setItemDelegate(delegate);
 }
 
 
