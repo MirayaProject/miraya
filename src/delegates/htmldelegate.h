@@ -10,18 +10,12 @@
 #include <QStyleOptionViewItem>
 #include <QModelIndex>
 
-
-// Porting of https://stackoverflow.com/a/53572278/9950484
+// From https://stackoverflow.com/a/1956781
 class HTMLDelegate : public QStyledItemDelegate
 {
-  Q_OBJECT
-
-public:
-  HTMLDelegate();
-  void paint(QPainter *painter, QStyleOptionViewItem &option, QModelIndex &index);
-
-private:
-  QTextDocument doc;
+protected:
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 };
 
 #endif // HTMLDELEGATE_H

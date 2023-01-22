@@ -1,40 +1,32 @@
 #include "htmldelegate.h"
 
-HTMLDelegate::HTMLDelegate()
+void HTMLDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+	QStyleOptionViewItem options = option;
+	initStyleOption(&options, index);
 
+	painter->save();
+
+	QTextDocument doc;
+	doc.setHtml(options.text);
+
+	options.text = "";
+	options.widget->style()->drawControl(QStyle::CE_ItemViewItem, &options, painter);
+
+	painter->translate(options.rect.left(), options.rect.top());
+	QRect clip(0, 0, options.rect.width(), options.rect.height());
+	doc.drawContents(painter, clip);
+
+	painter->restore();
 }
 
-void HTMLDelegate::paint(QPainter *painter, QStyleOptionViewItem &option, QModelIndex &index)
+QSize HTMLDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-	painter->save();
-	auto options = QStyleOptionViewItem(option);
+	QStyleOptionViewItem options = option;
 	initStyleOption(&options, index);
+
+	QTextDocument doc;
 	doc.setHtml(options.text);
-	options.text = "";
-
-	QStyle *style = (options.widget == nullptr) ? QApplication::style() : options.widget->style();
-	style->drawControl(QStyle::CE_ItemViewItem, &options, painter);
-
-	auto ctx = QAbstractTextDocumentLayout::PaintContext();
-	if (option.state & QStyle::State_Selected)
-	{
-		ctx.palette.setColor(QPalette::Text, option.palette.color(QPalette::Active, QPalette::HighlightedText));
-	}
-	else {
-		ctx.palette.setColor(QPalette::Text, option.palette.color(QPalette::Active, QPalette::Text));
-	}
-	auto textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &options);
-	if (index.column() != 0) {
-		textRect.adjust(5, 0, 0, 0);
-	}
-	int constant = 4;
-	int margin = (option.rect.height() - options.fontMetrics.height()) / 2;
-	margin = margin - constant;
-	textRect.setTop(textRect.top() + margin);
-
-	painter->translate(textRect.topLeft());
-	painter->setClipRect(textRect.translated(- textRect.topLeft()));
-	doc.documentLayout()->draw(painter, ctx);
-	painter->restore();
+	doc.setTextWidth(options.rect.width());
+	return QSize(doc.idealWidth(), doc.size().height());
 }
