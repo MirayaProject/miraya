@@ -221,7 +221,7 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 
 QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString message)
 {
-	QListWidgetItem *item = new QListWidgetItem(username + ": " + message);
+	QListWidgetItem *item = new QListWidgetItem(QString("<b>%1</b>: %2").arg(username).arg(message));
 	item->setFlags(item->flags() & Qt::ItemIsEnabled);
 	return item;
 }
