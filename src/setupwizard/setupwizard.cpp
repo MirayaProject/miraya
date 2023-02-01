@@ -32,6 +32,10 @@ void SetupWizard::setupUi()
 	QRegularExpression oauthRegex("^oauth:.{30}$");
 	QRegularExpressionValidator *oauthValidator = new QRegularExpressionValidator(oauthRegex, this);
 	ui->twitchOauthLineEdit->setValidator(oauthValidator);
+
+	ui->gosumemoryExplanationLabel->setOpenExternalLinks(true);
+	ui->twitchExplanationLabel->setOpenExternalLinks(true);
+	ui->osuircExplanationLabel->setOpenExternalLinks(true);
 }
 
 
