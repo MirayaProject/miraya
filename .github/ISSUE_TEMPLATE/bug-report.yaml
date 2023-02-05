@@ -48,7 +48,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Platform
+      label: Other platform
       description: If you are using Linux or other platforms, tell us more to help you out
       placeholder: ex. Arch Linux on Sway, using linux-zen version x.y.z
     validations:
