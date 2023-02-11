@@ -47,6 +47,7 @@ class MainWindow : public QMainWindow
 		void on_actionPreferences_triggered();
 		void on_actionSkins_triggered();
 
+		void onThemeChanged();
 		void onTwitchClientConnected();
 		void onGosumemoryClientConnected();
 		void onOsuIrcClientConnected();

@@ -54,9 +54,9 @@ void MainWindow::setupStatusbar()
 
 void MainWindow::loadTheme()
 {
-		QSettings settings;
-		bool isDarkMode;
-		auto darkModeSetting = settings.value("theme/darkMode");
+	QSettings settings;
+	bool isDarkMode;
+	auto darkModeSetting = settings.value("theme/darkMode");
 	auto darkModeSettingExists = !darkModeSetting.isNull();
 
 	if (darkModeSettingExists) {
@@ -76,31 +76,31 @@ void MainWindow::loadThemeFromSetting(QVariant darkModeSetting)
 {
 	qDebug() << "[MainWindow] loading theme from settings";
 	bool isDarkMode = darkModeSetting.toBool();
-			if (isDarkMode) {
-				loadDarkMode();
-			}
+	if (isDarkMode) {
+		loadDarkMode();
+	}
 	else {
 		loadLightMode();
-		}
-		}
+	}
+}
 
 
 void MainWindow::loadDefaultThemeWindows()
 {
 	qDebug() << "[MainWindow](Windows) loading system theme";
 
-		// In windows>=10, you can set a default behaviour for app themes in the settings menu.
-		// TODO: Check for major and minor version of windows.
-		// Perhaps this can be used in linux and macos too?
-		QSettings windowsSettings(
-			"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-			QSettings::NativeFormat
-		);
-		auto isDarkMode = windowsSettings.value("AppsUseLightTheme") == 0;
+	// In windows>=10, you can set a default behaviour for app themes in the settings menu.
+	// TODO: Check for major and minor version of windows.
+	// Perhaps this can be used in linux and macos too?
+	QSettings windowsSettings(
+		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+		QSettings::NativeFormat
+	);
+	auto isDarkMode = windowsSettings.value("AppsUseLightTheme") == 0;
 
-		if (isDarkMode) {
-			loadDarkMode();
-		}
+	if (isDarkMode) {
+		loadDarkMode();
+	}
 }
 
 
@@ -204,7 +204,9 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_actionPreferences_triggered()
 {
-	Preferences(this).exec();
+	auto preferences = Preferences(this);
+	connect(&preferences, &Preferences::themeChanged, this, &MainWindow::onThemeChanged);
+	preferences.exec();
 }
 
 
@@ -220,6 +222,12 @@ void MainWindow::on_btnStart_clicked()
 	twitchClient->restart();
 	gosumemoryClient->restart();
 	osuIrcClient->restart();
+}
+
+
+void MainWindow::onThemeChanged()
+{
+	loadTheme();
 }
 
 
