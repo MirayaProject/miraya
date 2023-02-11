@@ -77,20 +77,15 @@ void Preferences::loadOsuIrcSettings()
 void Preferences::loadThemeSettings()
 {
   auto darkModeSetting = settings.value("theme/darkMode");
-  bool isDarkMode;
 
   if(darkModeSetting.isNull()){
-		QSettings windowsSettings(
-			"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-			QSettings::NativeFormat
-		);
-		isDarkMode = windowsSettings.value("AppsUseLightTheme") == 0;
+    ui->themesDefaultRadio->setChecked(true);
   }
   else {
-    isDarkMode = darkModeSetting.toBool();
-  }
+    bool isDarkMode = darkModeSetting.toBool();
   ui->themesLightRadio->setChecked(!isDarkMode);
   ui->themesDarkRadio->setChecked(isDarkMode);
+  }
 }
 
 
@@ -118,7 +113,12 @@ void Preferences::saveSettings()
   settings.setValue("osuirc/server", ui->osuIrcServerLineEdit->text());
   settings.setValue("osuirc/port", ui->osuIrcPortLineEdit->text());
 
+  if (ui->themesDefaultRadio->isChecked() && settings.contains("theme/darkMode")) {
+    settings.remove("theme/darkMode");
+  }
+  else {
   settings.setValue("theme/darkMode", ui->themesDarkRadio->isChecked());
+  }
 }
 
 
