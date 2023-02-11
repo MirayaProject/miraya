@@ -83,8 +83,8 @@ void Preferences::loadThemeSettings()
   }
   else {
     bool isDarkMode = darkModeSetting.toBool();
-  ui->themesLightRadio->setChecked(!isDarkMode);
-  ui->themesDarkRadio->setChecked(isDarkMode);
+    ui->themesLightRadio->setChecked(!isDarkMode);
+    ui->themesDarkRadio->setChecked(isDarkMode);
   }
 }
 
@@ -93,6 +93,7 @@ void Preferences::on_saveBtnClicked()
 {
   saveSettings();
   QMessageBox().information(this, "Saved", "Settings saved");
+  emit themeChanged();
   accept();
 }
 
@@ -117,7 +118,7 @@ void Preferences::saveSettings()
     settings.remove("theme/darkMode");
   }
   else {
-  settings.setValue("theme/darkMode", ui->themesDarkRadio->isChecked());
+    settings.setValue("theme/darkMode", ui->themesDarkRadio->isChecked());
   }
 }
 

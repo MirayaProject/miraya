@@ -30,6 +30,9 @@ private:
   void saveSettings();
   void on_saveBtnClicked();
   void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+signals:
+  void themeChanged();
 };
 
 #endif // PREFERENCES_H
