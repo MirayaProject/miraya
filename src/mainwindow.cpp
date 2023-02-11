@@ -54,19 +54,40 @@ void MainWindow::setupStatusbar()
 
 void MainWindow::loadTheme()
 {
-	#ifdef Q_OS_WIN
-		// If present, prefer the local settings.
 		QSettings settings;
 		bool isDarkMode;
 		auto darkModeSetting = settings.value("theme/darkMode");
+	auto darkModeSettingExists = !darkModeSetting.isNull();
 
-		if (!darkModeSetting.isNull()) {
-			isDarkMode = darkModeSetting.toBool();
+	if (darkModeSettingExists) {
+		// If present, prefer local settings.
+		loadThemeFromSetting(darkModeSetting);
+	}
+	else {
+		#ifdef Q_OS_WIN
+			loadDefaultThemeWindows();
+		#endif
+		loadLightMode();
+	}
+}
+
+
+void MainWindow::loadThemeFromSetting(QVariant darkModeSetting)
+{
+	qDebug() << "[MainWindow] loading theme from settings";
+	bool isDarkMode = darkModeSetting.toBool();
 			if (isDarkMode) {
 				loadDarkMode();
 			}
-			return;
+	else {
+		loadLightMode();
 		}
+		}
+
+
+void MainWindow::loadDefaultThemeWindows()
+{
+	qDebug() << "[MainWindow](Windows) loading system theme";
 
 		// In windows>=10, you can set a default behaviour for app themes in the settings menu.
 		// TODO: Check for major and minor version of windows.
@@ -75,17 +96,17 @@ void MainWindow::loadTheme()
 			"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
 			QSettings::NativeFormat
 		);
-		isDarkMode = windowsSettings.value("AppsUseLightTheme") == 0;
+		auto isDarkMode = windowsSettings.value("AppsUseLightTheme") == 0;
 
 		if (isDarkMode) {
 			loadDarkMode();
 		}
-	#endif
 }
 
 
 void MainWindow::loadDarkMode()
 {
+	qDebug() << "[MainWindow] loading dark theme";
 	qApp->setStyle(QStyleFactory::create("Fusion"));
 	QPalette darkPalette;
 	QColor darkColor = QColor(45,45,45);
@@ -110,6 +131,16 @@ void MainWindow::loadDarkMode()
 
 	qApp->setPalette(darkPalette);
 	qApp->setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+}
+
+
+void MainWindow::loadLightMode()
+{
+	QPalette lightPalette;
+	qApp->setPalette(lightPalette);
+	qApp->setStyleSheet("");
+	qDebug() << "[MainWindow] loading light theme";
+	// TODO: implement? Is it actually needed?
 }
 
 

@@ -62,8 +62,13 @@ class MainWindow : public QMainWindow
 		void setupSignals();
 		void setupStatusbar();
 		void setupUi();
+
 		void loadTheme();
 		void loadDarkMode();
+		void loadLightMode();
+		void loadThemeFromSetting(QVariant darkModeSettings);
+		void loadDefaultThemeWindows();
+
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
 		Ui::MainWindow *ui;
 		TwitchClient *twitchClient;
