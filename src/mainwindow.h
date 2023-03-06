@@ -48,6 +48,7 @@ class MainWindow : public QMainWindow
 		void on_actionPreferences_triggered();
 		void on_actionSkins_triggered();
 
+		void onThemeChanged();
 		void onTwitchClientConnected();
 		void onGosumemoryClientConnected();
 		void onOsuIrcClientConnected();
@@ -63,8 +64,13 @@ class MainWindow : public QMainWindow
 		void setupSignals();
 		void setupStatusbar();
 		void setupUi();
+
 		void loadTheme();
 		void loadDarkMode();
+		void loadLightMode();
+		void loadThemeFromSetting(QVariant darkModeSettings);
+		void loadDefaultThemeWindows();
+
 		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
 		Ui::MainWindow *ui;
 		TwitchClient *twitchClient;
