@@ -250,17 +250,48 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 		osuIrcClient->sendMap(QUrl(val), message);
 	}
 
-	ui->twitchChat->addItem(getTwitchChatMessage(message.getUsername(), message.getMessage()));
-	ui->twitchChat->scrollToBottom();
+	QLabel* label = getTwitchChatMessage(message.getUsername(), message.getMessage());
+	QListWidgetItem* item = new QListWidgetItem(ui->twitchChat);
+	item->setSizeHint(label->sizeHint()); // Set the size hint based on the label's size
+
+	ui->twitchChat->addItem(item);
+	ui->twitchChat->setItemWidget(item, label);
 }
 
 
-QListWidgetItem* MainWindow::getTwitchChatMessage(QString username, QString message)
+QLabel* MainWindow::getTwitchChatMessage(QString username, QString message)
 {
-	QListWidgetItem *item = new QListWidgetItem(username + ": " + message);
-	item->setFlags(item->flags() & Qt::ItemIsEnabled);
-	return item;
+	QString richTextMsg = substituteUrls(message);
+	QLabel* label = new QLabel(QString("<b>%1</b>: %2").arg(username).arg(richTextMsg));
+
+	QFont font = label->font();
+	font.setPointSize(12);
+	label->setFont(font);
+
+	label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+	label->setTextFormat(Qt::RichText);
+	label->setOpenExternalLinks(true);
+
+	label->setWordWrap(true);
+	return label;
 }
+
+
+QString MainWindow::substituteUrls(const QString& message)
+{
+	QString substitutedMessage = message;
+	QRegularExpression urlRegex("((?:https?|ftp)://\\S+)");
+	QRegularExpressionMatchIterator matchIterator = urlRegex.globalMatch(message);
+
+	while (matchIterator.hasNext()) {
+		QRegularExpressionMatch match = matchIterator.next();
+		QString url = match.captured(0);
+		QString substitutedUrl = "<a href=\"" + url + "\">" + url + "</a>";
+		substitutedMessage.replace(url, substitutedUrl);
+	}
+	return substitutedMessage;
+}
+
 
 
 void MainWindow::onTwitchClientCommandReceived(TwitchDataWrapper command)
