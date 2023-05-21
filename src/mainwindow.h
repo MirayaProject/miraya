@@ -71,7 +71,7 @@ class MainWindow : public QMainWindow
 		void loadDefaultThemeWindows();
 
 		QLabel *getTwitchChatMessage(QString username, QString message);
-		QString substituteUrls(const QString& message);
+		QString getRichTextMessage(const QString& message);
 		Ui::MainWindow *ui;
 		TwitchClient *twitchClient;
 		TwitchCommandHandler *twitchCommandHandler;

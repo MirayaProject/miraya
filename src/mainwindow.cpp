@@ -277,12 +277,12 @@ QLabel* MainWindow::getTwitchChatMessage(QString username, QString message)
 }
 
 
-QString MainWindow::substituteUrls(const QString& message)
+QString MainWindow::getRichTextMessage(const QString& message)
 {
 	auto urls = Utils::getUrls(message);
 	QString substitutedMessage = message;
 	for (auto url : urls){
-		substitutedMessage.replace(url, QString("<a href='https://%1'>%1</a>").arg(url));
+		substitutedMessage.replace(url, QString("<a href='%1'>%1</a>").arg(url));
 	}
 	return substitutedMessage;
 }
