@@ -70,7 +70,8 @@ class MainWindow : public QMainWindow
 		void loadThemeFromSetting(QVariant darkModeSettings);
 		void loadDefaultThemeWindows();
 
-		QListWidgetItem *getTwitchChatMessage(QString username, QString message);
+		QLabel *getTwitchChatMessage(QString username, QString message);
+		QString getRichTextMessage(const QString& message);
 		Ui::MainWindow *ui;
 		TwitchClient *twitchClient;
 		TwitchCommandHandler *twitchCommandHandler;
