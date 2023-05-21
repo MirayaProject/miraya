@@ -279,19 +279,13 @@ QLabel* MainWindow::getTwitchChatMessage(QString username, QString message)
 
 QString MainWindow::substituteUrls(const QString& message)
 {
+	auto urls = Utils::getUrls(message);
 	QString substitutedMessage = message;
-	QRegularExpression urlRegex("((?:https?|ftp)://\\S+)");
-	QRegularExpressionMatchIterator matchIterator = urlRegex.globalMatch(message);
-
-	while (matchIterator.hasNext()) {
-		QRegularExpressionMatch match = matchIterator.next();
-		QString url = match.captured(0);
-		QString substitutedUrl = "<a href=\"" + url + "\">" + url + "</a>";
-		substitutedMessage.replace(url, substitutedUrl);
+	for (auto url : urls){
+		substitutedMessage.replace(url, QString("<a href='https://%1'>%1</a>").arg(url));
 	}
 	return substitutedMessage;
 }
-
 
 
 void MainWindow::onTwitchClientCommandReceived(TwitchDataWrapper command)
