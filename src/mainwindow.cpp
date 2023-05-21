@@ -251,9 +251,9 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 	}
 
 	QLabel* label = getTwitchChatMessage(message.getUsername(), message.getMessage());
+	label->adjustSize();
 	QListWidgetItem* item = new QListWidgetItem(ui->twitchChat);
-	item->setSizeHint(label->sizeHint()); // Set the size hint based on the label's size
-
+	item->setSizeHint(label->size()); // Set the size hint based on the label's size
 	ui->twitchChat->addItem(item);
 	ui->twitchChat->setItemWidget(item, label);
 }
@@ -261,18 +261,21 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 
 QLabel* MainWindow::getTwitchChatMessage(QString username, QString message)
 {
-	QString richTextMsg = substituteUrls(message);
-	QLabel* label = new QLabel(QString("<b>%1</b>: %2").arg(username).arg(richTextMsg));
+	QString richTextMsg = getRichTextMessage(message);
+	QLabel* label = new QLabel();
 
 	QFont font = label->font();
 	font.setPointSize(12);
 	label->setFont(font);
 
-	label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+	label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
 	label->setTextFormat(Qt::RichText);
+	label->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	label->setOpenExternalLinks(true);
 
 	label->setWordWrap(true);
+	label->setText(QString("<b>%1</b>: %2").arg(username).arg(richTextMsg));
+	label->setMaximumHeight(qMax(label->sizeHint().height(), 44)); //noqa
 	return label;
 }
 
