@@ -56,9 +56,10 @@ QString TwitchCommandHandler::getResponse()
 	}
 
 	else if (command.startsWith("!skin")) {
-		auto skin = gosumemoryData->getSkinName();
-		auto skinDownloadUrl = settings.value(QString("skin/%1").arg(skin)).toString();
-		if (skinDownloadUrl != QVariant()) {
+		QString skin = gosumemoryData->getSkinName();
+		QString settingsPath = QString("skin/%1").arg(skin);
+		if (settings.contains(settingsPath)) {
+			QString skinDownloadUrl = settings.value(settingsPath).toString();
 			return QString("Current skin: %1 || Download: %2").arg(skin, skinDownloadUrl);
 		}
 		return QString("Current skin: %1").arg(skin);
