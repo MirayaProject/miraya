@@ -13,6 +13,7 @@
 #include <QStyleFactory>
 #include <QUrl>
 
+#include "commandswindow.h"
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
 #include "osuircclient.h"
@@ -46,6 +47,7 @@ class MainWindow : public QMainWindow
 		void on_actionAbout_triggered();
 		void on_actionPreferences_triggered();
 		void on_actionSkins_triggered();
+		void on_actionCommands_triggered();
 
 		void onThemeChanged();
 		void onTwitchClientConnected();

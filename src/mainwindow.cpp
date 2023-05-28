@@ -216,6 +216,12 @@ void MainWindow::on_actionSkins_triggered()
 }
 
 
+void MainWindow::on_actionCommands_triggered()
+{
+	CommandsWindow(this).exec();
+}
+
+
 void MainWindow::on_btnStart_clicked()
 {
 	qDebug() << "[MainWindow] init";
