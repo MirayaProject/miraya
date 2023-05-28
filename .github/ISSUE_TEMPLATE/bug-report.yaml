@@ -18,18 +18,6 @@ body:
       value: "A bug happened!"
     validations:
       required: true
-# Version
-  - type: dropdown
-    id: version
-    attributes:
-      label: Version
-      description: What version of our software are you running?
-      options:
-        - v1.0
-        - v1.1 (early access)
-        - Git
-    validations:
-      required: true
 
 # Platform
   - type: dropdown
