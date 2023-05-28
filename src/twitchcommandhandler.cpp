@@ -40,7 +40,7 @@ void TwitchCommandHandler::setTwitchData(TwitchDataWrapper *twitchData)
 QString TwitchCommandHandler::getResponse()
 {
 	QString command = twitchData->getMessage();
-	if (this->gosumemoryData == nullptr) {
+	if (gosumemoryData == nullptr) {
 		return QString("");
 	}
 	QSettings settings;
@@ -63,7 +63,7 @@ QString TwitchCommandHandler::getResponse()
 		auto diff = gosumemoryData->getMapDifficulty();
 		auto mapper = gosumemoryData->getMapMapper();
 		auto url = gosumemoryData->getMapUrl();
-		return QString("Now playing: " + artist + " - " + song + " [" + diff + "] by " + mapper + " - " + url);
+		return QString("Now playing: %1 - %2 [%3] by %4 - %5").arg(artist, song, diff, mapper, url);
 	}
 
 	else if (command.startsWith("!skin")) {
@@ -75,6 +75,5 @@ QString TwitchCommandHandler::getResponse()
 		}
 		return QString("Current skin: %1").arg(skin);
 	}
-
 	return QString("");
 }
