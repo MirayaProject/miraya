@@ -43,8 +43,19 @@ QString TwitchCommandHandler::getResponse()
 	if (this->gosumemoryData == nullptr) {
 		return QString("");
 	}
-
 	QSettings settings;
+
+	settings.beginGroup("command");
+	QStringList commands = settings.childKeys();
+	for (QString savedCommand: commands) {
+		if (command.startsWith(savedCommand)){
+			QString response = settings.value(savedCommand).toString();
+			return response;
+		}
+	}
+
+	settings.endGroup();
+
 
 	if (command.startsWith("!np")) {
 		auto song = gosumemoryData->getMapName();
