@@ -115,14 +115,15 @@
     <addaction name="actionPreferences"/>
     <addaction name="actionStart_Setup"/>
    </widget>
-   <widget class="QMenu" name="menuOsu">
+   <widget class="QMenu" name="menuResponses">
     <property name="title">
-     <string>Osu</string>
+     <string>Responses</string>
     </property>
     <addaction name="actionSkins"/>
+    <addaction name="actionCommands"/>
    </widget>
    <addaction name="menuSettings"/>
-   <addaction name="menuOsu"/>
+   <addaction name="menuResponses"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -158,6 +159,11 @@
   <action name="actionSkins">
    <property name="text">
     <string>Skins</string>
+   </property>
+  </action>
+  <action name="actionCommands">
+   <property name="text">
+    <string>Commands</string>
    </property>
   </action>
  </widget>
