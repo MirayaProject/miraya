@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
 	app.setOrganizationName("miraya");
 	app.setOrganizationDomain("github.com/MirayaProject");
 	app.setApplicationName("bot");
-	app.setApplicationVersion("1.1.0");
+	app.setApplicationVersion("1.1.1");
 	MainWindow mw;
 	mw.show();
 	return app.exec();
