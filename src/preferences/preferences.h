@@ -2,9 +2,15 @@
 #define PREFERENCES_H
 
 #include <QDialog>
-#include <QSettings>
-#include <QMessageBox>
+#include <QFile>
+#include <QFileDialog>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
 #include <QListWidgetItem>
+#include <QMessageBox>
+#include <QSettings>
+#include <QTextStream>
 
 namespace Ui {
   class Preferences;
@@ -28,7 +34,10 @@ private:
   void loadThemeSettings();
   void setupUi();
   void saveSettings();
+
   void on_saveBtnClicked();
+  void on_backupBtn_clicked();
+  void on_restoreBtn_clicked();
   void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
 signals:

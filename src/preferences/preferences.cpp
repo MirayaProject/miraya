@@ -8,6 +8,8 @@ Preferences::Preferences(QWidget *parent) :
   ui->setupUi(this);
   connect(ui->listWidget, &QListWidget::currentItemChanged, this, &Preferences::on_listWidget_currentItemChanged);
   connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &Preferences::on_saveBtnClicked);
+  connect(ui->backupBtn, &QPushButton::clicked, this, &Preferences::on_backupBtn_clicked);
+  connect(ui->restoreBtn, &QPushButton::clicked, this, &Preferences::on_restoreBtn_clicked);
   ui->listWidget->setCurrentRow(0);
   loadSettings();
   setupUi();
@@ -120,6 +122,84 @@ void Preferences::saveSettings()
   else {
     settings.setValue("theme/darkMode", ui->themesDarkRadio->isChecked());
   }
+}
+
+// TODO: move this method in a separate class
+// TODO: add option to exclude sensitive information (oauth token & irc password)
+void Preferences::on_backupBtn_clicked()
+{
+  QString filePath = QFileDialog::getSaveFileName(nullptr, "Export Settings", QString(), "JSON Files (*.json)");
+  if (filePath.isEmpty()) {
+    return;
+  }
+
+  // adding .json if needed
+  if(!filePath.endsWith(".json")) {
+    filePath.append(".json");
+  }
+
+  QFile file(filePath);
+
+  if (!(file.open(QIODevice::WriteOnly | QIODevice::Text))) {
+    qDebug() << "[Preferences] Cannot open file in write mode";
+    QMessageBox().critical(this, "Error", "Cannot open file in write mode");
+    file.close();
+    return;
+  }
+
+  qDebug() << "[Preferences] Starting backup...";
+
+  // adding all the keys in a json object and converting it into a string
+  QJsonObject jsonObject;
+  QSettings settings;
+  QStringList keys = settings.allKeys();
+  for(const QString& key: keys){
+    QString value = settings.value(key).toString();
+    jsonObject.insert(key, QJsonValue(value));
+  }
+  QString jsonString = QJsonDocument(jsonObject).toJson();
+
+  // saving the backup
+  QTextStream stream(&file);
+  stream << jsonString;
+  file.close();
+  qDebug() << "[Preferences] Backup completed";
+}
+
+// TODO: move this method in a separate class
+void Preferences::on_restoreBtn_clicked()
+{
+  QString filePath = QFileDialog::getOpenFileName(nullptr, "Import Settings", QString(), "JSON Files (*.json)");
+  if (filePath.isEmpty()) {
+    return;
+  }
+
+  QFile file(filePath);
+  if (!(file.open(QIODevice::ReadOnly | QIODevice::Text))) {
+    qDebug() << "[Preferences] Cannot open file in read mode";
+    QMessageBox().critical(this, "Error", "Cannot open file in read mode");
+    file.close();
+    return;
+  }
+
+  qDebug() << "[Preferences] Starting backup restore...";
+  QSettings settings;
+  QTextStream stream(&file);
+  QString jsonString = stream.readAll();
+  file.close();
+  QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+  if (!jsonDoc.isNull()){
+    QJsonObject jsonObject = jsonDoc.object();
+    for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+      QString key = it.key();
+      QJsonValue value = it.value();
+
+      settings.setValue(key, value.toString());
+    }
+  }
+  qDebug() << "[Preferences] Backup restored...";
+  loadSettings();
+  QMessageBox().information(this, "Backup Restored", "Backup restored successfully");
 }
 
 
