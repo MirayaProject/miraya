@@ -203,6 +203,9 @@
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://twitchapps.com/tmi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4285f4;&quot;&gt;Bot OAuth&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="4" column="0" colspan="2">
@@ -274,6 +277,9 @@
          <widget class="QLabel" name="osuIrcPasswordLabel">
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;osu.ppy.sh/p/irc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4285f4;&quot;&gt;Password&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
