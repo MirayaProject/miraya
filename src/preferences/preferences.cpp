@@ -8,6 +8,8 @@ Preferences::Preferences(QWidget *parent) :
   ui->setupUi(this);
   connect(ui->listWidget, &QListWidget::currentItemChanged, this, &Preferences::on_listWidget_currentItemChanged);
   connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &Preferences::on_saveBtnClicked);
+  connect(ui->backupBtn, &QPushButton::clicked, this, &Preferences::on_backupBtn_clicked);
+  connect(ui->restoreBtn, &QPushButton::clicked, this, &Preferences::on_restoreBtn_clicked);
   ui->listWidget->setCurrentRow(0);
   loadSettings();
   setupUi();
@@ -120,6 +122,37 @@ void Preferences::saveSettings()
   else {
     settings.setValue("theme/darkMode", ui->themesDarkRadio->isChecked());
   }
+}
+
+
+void Preferences::on_backupBtn_clicked()
+{
+  QString message = QString("%1<br>%2").arg(
+    "Would you like to include sensitive informations in your backup file?",
+    "Anyone that has this information <b>will be able to access your accounts!</b>"
+  );
+
+  auto buttonAnswer = QMessageBox().question(
+    this,
+    "Sensitive information",
+    message,
+    QMessageBox::No | QMessageBox::Yes,
+    QMessageBox::No
+  );
+  bool includeSensitiveInfo = buttonAnswer == QMessageBox::Yes;
+
+  QString filePath = QFileDialog::getSaveFileName(nullptr, "Export Settings", QString(), "JSON Files (*.json)");
+  Backup::backup(filePath, includeSensitiveInfo);
+}
+
+
+void Preferences::on_restoreBtn_clicked()
+{
+  QString filePath = QFileDialog::getOpenFileName(nullptr, "Import Settings", QString(), "JSON Files (*.json)");
+  Backup::restore(filePath);
+  // reloading
+  loadSettings();
+  QMessageBox().information(this, "Backup Restored", "Backup restored successfully");
 }
 
 
