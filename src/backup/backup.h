@@ -15,7 +15,7 @@ class Backup : public QObject
 	Q_OBJECT
 public:
 	explicit Backup(QObject *parent = nullptr);
-	static void backup(QString filePath);
+	static void backup(QString filePath, bool includeSensitiveInfo);
 	static void restore(QString filePath);
 
 };

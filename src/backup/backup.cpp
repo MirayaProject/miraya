@@ -5,7 +5,7 @@ Backup::Backup(QObject *parent)
 {
 }
 
-void Backup::backup(QString filePath)
+void Backup::backup(QString filePath, bool includeSensitiveInfo)
 {
 
 	if (filePath.isEmpty()) {
@@ -29,6 +29,14 @@ void Backup::backup(QString filePath)
 	QJsonObject jsonObject;
 	QSettings settings;
 	QStringList keys = settings.allKeys();
+
+	// sensitive info must be excluded
+	if(!includeSensitiveInfo) {
+		keys.removeIf([](const QString& key){
+			return key.startsWith("osuirc") || key.startsWith("twitch");
+		});
+	}
+
 	for(const QString& key: keys){
 		QString value = settings.value(key).toString();
 		jsonObject.insert(key, QJsonValue(value));
