@@ -4,5 +4,6 @@
     <file>resources/images/gosumemory.ico</file>
     <file>resources/images/twitch_logo.png</file>
     <file>resources/images/osu_logo.png</file>
+    <file>resources/images/backup_and_restore.png</file>
   </qresource>
 </RCC>
