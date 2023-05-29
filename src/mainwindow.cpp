@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	osuIrcClient = new OsuIrcClient(this);
 
 	twitchCommandHandler = new TwitchCommandHandler();
-	this->setupSignals();
+	updater = new Updater(this);
+	updater->checkVersion();
 
 	if(!settings.value("setup/completed").toBool()){
 		on_actionStart_Setup_triggered();
@@ -156,6 +157,7 @@ void MainWindow::setupSignals()
 	connect(twitchClient, &TwitchClient::textMessageReceived, this, &MainWindow::onTwitchClientMessageReceived);
 	connect(twitchClient, &TwitchClient::commandReceived, this, &MainWindow::onTwitchClientCommandReceived);
 	connect(gosumemoryClient, &GosumemoryClient::messageReceived, this, &MainWindow::onGosumemoryClientMessageReceived);
+	connect(updater, &Updater::newVersionAvailable, this, &MainWindow::onNewVersionReceived);
 }
 
 
@@ -262,6 +264,18 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 	item->setSizeHint(label->size()); // Set the size hint based on the label's size
 	ui->twitchChat->addItem(item);
 	ui->twitchChat->setItemWidget(item, label);
+}
+
+
+void MainWindow::onNewVersionReceived()
+{
+	qDebug() << "[MainWindow] New version available";
+	QMessageBox().information(
+		this,
+		"New Version Available",
+		"There is a new version available! Click <a href='https://github.com/MirayaProject/miraya/releases/latest'>here</a> to check it out!",
+		QMessageBox::Ok
+	);
 }
 
 
