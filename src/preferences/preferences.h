@@ -12,6 +12,8 @@
 #include <QSettings>
 #include <QTextStream>
 
+#include "backup.h"
+
 namespace Ui {
   class Preferences;
 }
