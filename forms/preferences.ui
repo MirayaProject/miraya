@@ -201,7 +201,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="twitchBotOAuthLabel">
           <property name="text">
-           <string>Bot OAuth</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://twitchapps.com/tmi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4285f4;&quot;&gt;Bot OAuth&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -273,7 +273,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="osuIrcPasswordLabel">
           <property name="text">
-           <string>Password</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;osu.ppy.sh/p/irc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4285f4;&quot;&gt;Password&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
