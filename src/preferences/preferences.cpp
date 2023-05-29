@@ -125,11 +125,24 @@ void Preferences::saveSettings()
 }
 
 
-// TODO: add option to exclude sensitive information (oauth token & irc password)
 void Preferences::on_backupBtn_clicked()
 {
+  QString message = QString("%1<br>%2").arg(
+    "Would you like to include sensitive informations in your backup file?",
+    "Anyone that has this information <b>will be able to access your accounts!</b>"
+  );
+
+  auto buttonAnswer = QMessageBox().question(
+    this,
+    "Sensitive information",
+    message,
+    QMessageBox::No | QMessageBox::Yes,
+    QMessageBox::No
+  );
+  bool includeSensitiveInfo = buttonAnswer == QMessageBox::Yes;
+
   QString filePath = QFileDialog::getSaveFileName(nullptr, "Export Settings", QString(), "JSON Files (*.json)");
-  Backup::backup(filePath);
+  Backup::backup(filePath, includeSensitiveInfo);
 }
 
 
