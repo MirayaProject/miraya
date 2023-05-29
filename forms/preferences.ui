@@ -72,6 +72,10 @@
        <property name="text">
         <string>Backup &amp; Restore</string>
        </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/images/resources/images/backup_and_restore.png</normaloff>:/images/resources/images/backup_and_restore.png</iconset>
+       </property>
       </item>
       <item>
        <property name="text">
