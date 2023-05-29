@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QDesktopServices>
-#include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QLabel>
 #include <QListWidgetItem>
 #include <QMainWindow>
@@ -19,11 +19,12 @@
 #include "osuircclient.h"
 #include "preferences.h"
 #include "setupwizard.h"
-#include "twitchClient.h"
-#include "twitchdatawrapper.h"
-#include "twitchcommandhandler.h"
-#include "utils.h"
 #include "skinsurl.h"
+#include "twitchClient.h"
+#include "twitchcommandhandler.h"
+#include "twitchdatawrapper.h"
+#include "updater.h"
+#include "utils.h"
 
 
 namespace Ui {
@@ -59,6 +60,7 @@ class MainWindow : public QMainWindow
 		void onGosumemoryClientMessageReceived(GosuMemoryDataWrapper message);
 		void onTwitchClientMessageReceived(TwitchDataWrapper message);
 		void onTwitchClientCommandReceived(TwitchDataWrapper command);
+		void onNewVersionReceived();
 
 
 	private:
@@ -79,6 +81,7 @@ class MainWindow : public QMainWindow
 		TwitchCommandHandler *twitchCommandHandler;
 		GosumemoryClient *gosumemoryClient;
 		OsuIrcClient *osuIrcClient;
+		Updater *updater;
 
 		QLabel *ircConnectionLabel;
 		QLabel *twitchConnectionLabel;
