@@ -21,6 +21,7 @@ set(SOURCE_SETUPWIZARD_DIR "${CMAKE_SOURCE_DIR}/src/setupwizard")
 set(SOURCE_PREFERENCES_DIR "${CMAKE_SOURCE_DIR}/src/preferences")
 set(SOURCE_SKINSURL_DIR "${CMAKE_SOURCE_DIR}/src/skinsurl")
 set(SOURCE_COMMANDS_DIR "${CMAKE_SOURCE_DIR}/src/commands")
+set(SOURCE_BACKUP_DIR "${CMAKE_SOURCE_DIR}/src/backup")
 
 include_directories(${FORMS_DIR})
 include_directories(${SOURCE_DIR})
@@ -32,6 +33,7 @@ include_directories(${SOURCE_SETUPWIZARD_DIR})
 include_directories(${SOURCE_PREFERENCES_DIR})
 include_directories(${SOURCE_SKINSURL_DIR})
 include_directories(${SOURCE_COMMANDS_DIR})
+include_directories(${SOURCE_BACKUP_DIR})
 
 file(GLOB_RECURSE SOURCES
 	${FORMS_DIR}/*.cpp
@@ -51,6 +53,8 @@ file(GLOB_RECURSE SOURCES
 	${SOURCE_SKINSURL_DIR}/*.cpp
 	${SOURCE_COMMANDS_DIR}/*.h
 	${SOURCE_COMMANDS_DIR}/*.cpp
+	${SOURCE_BACKUP_DIR}/*.h
+	${SOURCE_BACKUP_DIR}/*.cpp
 	${SOURCE_DIR}/*.h
 	${SOURCE_DIR}/*.cpp
 	resources.qrc
