@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	updater = new Updater(this);
 	updater->checkVersion();
 
+	this->setupSignals();
 	if(!settings.value("setup/completed").toBool()){
 		on_actionStart_Setup_triggered();
 	}
