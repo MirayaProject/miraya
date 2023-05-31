@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="25 25 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <style bx:fonts="Alegreya">@import url(https://fonts.googleapis.com/css2?family=Alegreya%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&amp;display=swap);</style>
+  </defs>
+  <style>.st1{opacity:.15}.st3{fill:#f1f1f2}.st4{fill:#231f20}.st5{fill:#808184}.st8{fill:#59595c}.st9{fill:#a7a8ab}.st10{fill:#6d6e70}.st11{fill:#221f1f}.st12{fill:#404041}.st13{fill:#58595b}.st14{fill:#bbbdbf}.st15{fill:#fff}.st16{fill:#a6a8ab}</style>
+  <circle cx="175" cy="175" r="143.7" style="paint-order: fill; fill-rule: nonzero; fill: rgb(145, 99, 201);"/>
+  <path class="st15" d="M175 25C92.2 25 25 92.2 25 175s67.2 150 150 150 150-67.2 150-150S257.8 25 175 25zm0 285c-74.6 0-135-60.4-135-135S100.4 40 175 40s135 60.4 135 135-60.4 135-135 135z"/>
+  <text style="fill: rgb(51, 51, 51); font-family: Alegreya; font-size: 64px; font-weight: 700; white-space: pre;" transform="matrix(1.270067, 0, 0, 1.270067, -47.264656, -47.205006)"><tspan x="79.004" y="196.523">みらや</tspan><tspan x="79.004" dy="1em">​</tspan><tspan x="79.004" dy="1em">​</tspan></text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12.6px;" x="149.447" y="151.509"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12.6px;" x="133.308" y="153.661"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 17.1px;" x="164.499" y="45.36"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 17.1px;" x="177.706" y="-1.598"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 17.1px;" x="480.001" y="106.504"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 17.1px;" x="41.723" y="6.717"> </text>
+</svg>
