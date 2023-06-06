@@ -68,8 +68,9 @@ void MainWindow::loadTheme()
 	else {
 		#ifdef Q_OS_WIN
 			loadDefaultThemeWindows();
+		#else
+			loadLightMode();
 		#endif
-		loadLightMode();
 	}
 }
 
