@@ -23,6 +23,7 @@ set(SOURCE_SKINSURL_DIR "${CMAKE_SOURCE_DIR}/src/skinsurl")
 set(SOURCE_COMMANDS_DIR "${CMAKE_SOURCE_DIR}/src/commands")
 set(SOURCE_BACKUP_DIR "${CMAKE_SOURCE_DIR}/src/backup")
 set(SOURCE_UPDATER_DIR "${CMAKE_SOURCE_DIR}/src/updater")
+set(SOURCE_THEME_DIR "${CMAKE_SOURCE_DIR}/src/theme")
 
 include_directories(${FORMS_DIR})
 include_directories(${SOURCE_DIR})
@@ -36,6 +37,7 @@ include_directories(${SOURCE_SKINSURL_DIR})
 include_directories(${SOURCE_COMMANDS_DIR})
 include_directories(${SOURCE_BACKUP_DIR})
 include_directories(${SOURCE_UPDATER_DIR})
+include_directories(${SOURCE_THEME_DIR})
 
 file(GLOB_RECURSE SOURCES
 	${FORMS_DIR}/*.cpp
@@ -59,6 +61,8 @@ file(GLOB_RECURSE SOURCES
 	${SOURCE_BACKUP_DIR}/*.cpp
 	${SOURCE_UPDATER_DIR}/*.h
 	${SOURCE_UPDATER_DIR}/*.cpp
+	${SOURCE_THEME_DIR}/*.h
+	${SOURCE_THEME_DIR}/*.cpp
 	${SOURCE_DIR}/*.h
 	${SOURCE_DIR}/*.cpp
 	resources.qrc
