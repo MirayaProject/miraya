@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	this->setupUi();
+	setupUi();
 
 	QSettings settings;
 	twitchClient = new TwitchClient(this);
@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	updater = new Updater(this);
 	updater->checkVersion();
 
-	this->setupSignals();
+	setupSignals();
 	if(!settings.value("setup/completed").toBool()){
 		on_actionStart_Setup_triggered();
 	}
@@ -37,8 +37,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupUi()
 {
-	this->setupStatusbar();
-	this->loadTheme();
+	setupStatusbar();
+	Theme::loadTheme();
 }
 
 
@@ -51,99 +51,6 @@ void MainWindow::setupStatusbar()
 	ui->statusbar->addPermanentWidget(twitchConnectionLabel);
 	ui->statusbar->addPermanentWidget(gosumemoryConnectionLabel);
 	ui->statusbar->addPermanentWidget(ircConnectionLabel);
-}
-
-
-void MainWindow::loadTheme()
-{
-	QSettings settings;
-	bool isDarkMode;
-	auto darkModeSetting = settings.value("theme/darkMode");
-	auto darkModeSettingExists = !darkModeSetting.isNull();
-
-	if (darkModeSettingExists) {
-		// If present, prefer local settings.
-		loadThemeFromSetting(darkModeSetting);
-	}
-	else {
-		#ifdef Q_OS_WIN
-			loadDefaultThemeWindows();
-		#else
-			loadLightMode();
-		#endif
-	}
-}
-
-
-void MainWindow::loadThemeFromSetting(QVariant darkModeSetting)
-{
-	qDebug() << "[MainWindow] loading theme from settings";
-	bool isDarkMode = darkModeSetting.toBool();
-	if (isDarkMode) {
-		loadDarkMode();
-	}
-	else {
-		loadLightMode();
-	}
-}
-
-
-void MainWindow::loadDefaultThemeWindows()
-{
-	qDebug() << "[MainWindow](Windows) loading system theme";
-
-	// In windows>=10, you can set a default behaviour for app themes in the settings menu.
-	// TODO: Check for major and minor version of windows.
-	// Perhaps this can be used in linux and macos too?
-	QSettings windowsSettings(
-		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-		QSettings::NativeFormat
-	);
-	auto isDarkMode = windowsSettings.value("AppsUseLightTheme") == 0;
-
-	if (isDarkMode) {
-		loadDarkMode();
-	}
-}
-
-
-void MainWindow::loadDarkMode()
-{
-	qDebug() << "[MainWindow] loading dark theme";
-	qApp->setStyle(QStyleFactory::create("Fusion"));
-	QPalette darkPalette;
-	QColor darkColor = QColor(45,45,45);
-	QColor disabledColor = QColor(127,127,127);
-
-	darkPalette.setColor(QPalette::Window, darkColor);
-	darkPalette.setColor(QPalette::WindowText, Qt::white);
-	darkPalette.setColor(QPalette::Base, QColor(18,18,18));
-	darkPalette.setColor(QPalette::AlternateBase, darkColor);
-	darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
-	darkPalette.setColor(QPalette::ToolTipText, Qt::white);
-	darkPalette.setColor(QPalette::Text, Qt::white);
-	darkPalette.setColor(QPalette::Disabled, QPalette::Text, disabledColor);
-	darkPalette.setColor(QPalette::Button, darkColor);
-	darkPalette.setColor(QPalette::ButtonText, Qt::white);
-	darkPalette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledColor);
-	darkPalette.setColor(QPalette::BrightText, Qt::red);
-	darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-	darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-	darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-	darkPalette.setColor(QPalette::Disabled, QPalette::HighlightedText, disabledColor);
-
-	qApp->setPalette(darkPalette);
-	qApp->setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
-}
-
-
-void MainWindow::loadLightMode()
-{
-	QPalette lightPalette;
-	qApp->setPalette(lightPalette);
-	qApp->setStyleSheet("");
-	qDebug() << "[MainWindow] loading light theme";
-	// TODO: implement? Is it actually needed?
 }
 
 
@@ -237,7 +144,7 @@ void MainWindow::on_btnStart_clicked()
 
 void MainWindow::onThemeChanged()
 {
-	loadTheme();
+	Theme::loadTheme();
 }
 
 
@@ -248,7 +155,7 @@ void MainWindow::onGosumemoryClientMessageReceived(GosuMemoryDataWrapper message
 	twitchCommandHandler->setGosumemoryData(new GosuMemoryDataWrapper(message));
 	QString title = message.getMapName();
 	QString artist = message.getMapArtist();
-	ui->nowPlayingLabel->setText(artist + " - " + title);
+	ui->nowPlayingLabel->setText(QString("%1 - %2").arg(artist, title));
 }
 
 
@@ -256,7 +163,7 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 {
 	// TODO: this should not be here
 	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())) {
-		qDebug() << "MainWindow: Osu beatmap url:" << val;
+		qDebug() << "[MainWindow] Osu beatmap url: " << val;
 		osuIrcClient->sendMap(QUrl(val), message);
 	}
 

@@ -20,6 +20,7 @@
 #include "preferences.h"
 #include "setupwizard.h"
 #include "skinsurl.h"
+#include "theme.h"
 #include "twitchClient.h"
 #include "twitchcommandhandler.h"
 #include "twitchdatawrapper.h"
@@ -67,12 +68,6 @@ class MainWindow : public QMainWindow
 		void setupSignals();
 		void setupStatusbar();
 		void setupUi();
-
-		void loadTheme();
-		void loadDarkMode();
-		void loadLightMode();
-		void loadThemeFromSetting(QVariant darkModeSettings);
-		void loadDefaultThemeWindows();
 
 		QLabel *getTwitchChatMessage(QString username, QString message);
 		QString getRichTextMessage(const QString& message);
