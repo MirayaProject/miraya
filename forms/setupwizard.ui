@@ -91,6 +91,9 @@
       <property name="wordWrap">
        <bool>true</bool>
       </property>
+      <property name="openExternalLinks">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
@@ -156,6 +159,9 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Usually, a Twitch chatbot uses a different account from the streamer.&lt;/p&gt;&lt;p&gt;1. Create a twitch account for your bot.&lt;/p&gt;&lt;p&gt;2. Log into it and go to &lt;a href=&quot;https://twitchapps.com/tmi/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://twitchapps.com/tmi/&lt;/span&gt;&lt;/a&gt; to request a oauth code. This will be needed to connect Miraya to Twitch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="openExternalLinks">
        <bool>true</bool>
       </property>
      </widget>
@@ -248,6 +254,9 @@
      <widget class="QLabel" name="osuircExplanationLabel">
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Osu! uses a communication system called IRC to supply the in-game chat. &lt;/p&gt;&lt;p&gt;Miraya can connect to it and send map requests from you Twitch chat effortlessly!&lt;/p&gt;&lt;p&gt;To do that, go to &lt;a href=&quot;osu.ppy.sh/p/irc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;osu.ppy.sh/p/irc&lt;/span&gt;&lt;/a&gt;, login and copy the nickname and password.&lt;/p&gt;&lt;p&gt;If you'd like to use Miraya in custom servers, you can change the IRC server address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="openExternalLinks">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
