@@ -1,9 +1,15 @@
 <RCC>
-  <qresource prefix="/images">
-    <file>resources/images/format_paint.png</file>
-    <file>resources/images/gosumemory.ico</file>
-    <file>resources/images/twitch_logo.png</file>
-    <file>resources/images/osu_logo.png</file>
-    <file>resources/images/backup_and_restore.png</file>
-  </qresource>
+	<qresource>
+		<!-- Logo -->
+		<file>resources/logo/logo.svg</file>
+		<file>resources/logo/logo.ico</file>
+		<file>resources/logo/logo.png</file>
+		<!-- Icons8 -->
+		<file>resources/images/icons8-backup.png</file>
+		<file>resources/images/icons8-paint-bucket.png</file>
+		<!-- Others -->
+		<file>resources/images/logo_gosumemory.ico</file>
+		<file>resources/images/logo_twitch.png</file>
+		<file>resources/images/logo_osu.png</file>
+	</qresource>
 </RCC>
