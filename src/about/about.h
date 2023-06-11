@@ -2,6 +2,7 @@
 #define ABOUT_H
 
 #include <QApplication>
+#include <QDate>
 #include <QDebug>
 #include <QMessageBox>
 #include <QObject>

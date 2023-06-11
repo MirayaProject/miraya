@@ -14,7 +14,7 @@ void About::show()
 		"<h1>Miraya</h1>"
 		"<p>A Twitch chatbot with GosuMemory and osu! IRC support.</p>"
 		"<p>Version: " + QApplication::applicationVersion() + "</p>"
-		"<p>Copyright © 2023 Miraya Project</p>"
+		"<p>Copyright © "+ QString::number(QDate::currentDate().year()) + " Miraya Project</p>"
 		"<p>This program is free software: you can redistribute it and/or modify "
 		"it under the terms of the GNU General Public License as published by "
 		"the Free Software Foundation, either version 3 of the License, or "
