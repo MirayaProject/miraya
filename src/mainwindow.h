@@ -13,6 +13,7 @@
 #include <QStyleFactory>
 #include <QUrl>
 
+#include "about.h"
 #include "commandswindow.h"
 #include "gosumemoryClient.h"
 #include "gosumemorydatawrapper.h"
