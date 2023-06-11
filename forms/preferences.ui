@@ -47,7 +47,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/images/resources/images/gosumemory.ico</normaloff>:/images/resources/images/gosumemory.ico</iconset>
+         <normaloff>:/resources/images/logo_gosumemory.ico</normaloff>:/resources/images/logo_gosumemory.ico</iconset>
        </property>
       </item>
       <item>
@@ -56,7 +56,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/images/resources/images/twitch_logo.png</normaloff>:/images/resources/images/twitch_logo.png</iconset>
+         <normaloff>:/resources/images/logo_twitch.png</normaloff>:/resources/images/logo_twitch.png</iconset>
        </property>
       </item>
       <item>
@@ -65,7 +65,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/images/resources/images/osu_logo.png</normaloff>:/images/resources/images/osu_logo.png</iconset>
+         <normaloff>:/resources/images/logo_osu.png</normaloff>:/resources/images/logo_osu.png</iconset>
        </property>
       </item>
       <item>
@@ -74,7 +74,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/images/resources/images/backup_and_restore.png</normaloff>:/images/resources/images/backup_and_restore.png</iconset>
+         <normaloff>:/resources/images/icons8-backup.png</normaloff>:/resources/images/icons8-backup.png</iconset>
        </property>
       </item>
       <item>
@@ -83,7 +83,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/images/resources/images/format_paint.png</normaloff>:/images/resources/images/format_paint.png</iconset>
+         <normaloff>:/resources/images/icons8-paint-bucket.png</normaloff>:/resources/images/icons8-paint-bucket.png</iconset>
        </property>
       </item>
      </widget>
