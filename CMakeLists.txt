@@ -80,7 +80,15 @@ set(CMAKE_AUTORCC ON)
 
 # Add the executable
 if (WIN32)
-	add_executable(miraya WIN32 ${SOURCES})
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
+		COMMAND windres icon.rc -o ${CMAKE_CURRENT_BINARY_DIR}/icon.o
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+		DEPENDS icon.rc
+	)
+	add_custom_target(icon ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
+
+	add_executable(miraya WIN32 ${SOURCES} ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
 	if (CMAKE_BUILD_TYPE STREQUAL "Release")
 		set_property(TARGET miraya PROPERTY WIN32_EXECUTABLE true)
 	endif()
