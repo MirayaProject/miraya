@@ -154,6 +154,7 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 	item->setSizeHint(label->size()); // Set the size hint based on the label's size
 	ui->twitchChat->addItem(item);
 	ui->twitchChat->setItemWidget(item, label);
+	ui->twitchChat->scrollToBottom();
 }
 
 
