@@ -40,9 +40,6 @@ void TwitchCommandHandler::setTwitchData(TwitchDataWrapper *twitchData)
 QString TwitchCommandHandler::getResponse()
 {
 	QString command = twitchData->getMessage();
-	if (gosumemoryData == nullptr) {
-		return QString("");
-	}
 	QSettings settings;
 
 	settings.beginGroup("command");
@@ -56,6 +53,10 @@ QString TwitchCommandHandler::getResponse()
 
 	settings.endGroup();
 
+	// gosumemory dependant
+	if (gosumemoryData == nullptr) {
+		return QString("");
+	}
 
 	if (command.startsWith("!np")) {
 		auto song = gosumemoryData->getMapName();
