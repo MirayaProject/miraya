@@ -23,7 +23,6 @@ signals:
 
 private slots:
 	void onReplyFinished(QNetworkReply *reply);
-
 };
 
 #endif // UPDATER_H

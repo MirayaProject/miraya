@@ -3,7 +3,6 @@
 Updater::Updater(QObject *parent)
 	: QObject{parent}
 {
-
 }
 
 void Updater::checkVersion()
