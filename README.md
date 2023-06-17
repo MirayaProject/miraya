@@ -6,7 +6,7 @@ Spiritual successor of [twitch-chatbot-for-gosumemory](https://github.com/Sclafu
 - [Click here](https://github.com/MirayaProject/miraya/releases/latest) to get the latest version of miraya
 - Scroll down to "Assets", and download the zip file that corresponds to your operating system
 - Extract the downloaded zip
-- Open the executable for miraya & enjoy! 
+- Open the executable for miraya & enjoy!
 
 # Features
 We have _a couple_
@@ -60,6 +60,9 @@ You can backup all your skins, custom commands and credentials with a single cli
 
 
 # Dev stuff
+[![CodeFactor](https://www.codefactor.io/repository/github/mirayaproject/miraya/badge/senpai)](https://www.codefactor.io/repository/github/mirayaproject/miraya/overview/senpai)
+[![CodeQL](https://github.com/MirayaProject/miraya/actions/workflows/codeql.yml/badge.svg)](https://github.com/MirayaProject/miraya/actions/workflows/codeql.yml)
+
 This application is currently being developed with Windows 10 (Qt Creator/VS Code and MinGW) and Arch Linux (VS Code with Clang).
 Builds are tested with Qt 6.3.0 on Windows and the latest Qt6 version available from the Arch repos
 
