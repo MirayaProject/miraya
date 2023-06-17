@@ -7,7 +7,6 @@ Backup::Backup(QObject *parent)
 
 void Backup::backup(QString filePath, bool includeSensitiveInfo)
 {
-
 	if (filePath.isEmpty()) {
 		return;
 	}

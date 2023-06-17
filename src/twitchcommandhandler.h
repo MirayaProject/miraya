@@ -9,7 +9,6 @@
 
 class TwitchCommandHandler
 {
-
 public:
 	TwitchCommandHandler();
 	TwitchCommandHandler(TwitchDataWrapper *twitchData, GosuMemoryDataWrapper *gosumemoryData);

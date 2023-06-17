@@ -129,7 +129,6 @@ void SkinsUrl::addRow(QString skinName, QString skinUrl)
 		1,
 		new QTableWidgetItem(skinUrl)
 	);
-
 }
 
 

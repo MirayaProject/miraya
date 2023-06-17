@@ -17,7 +17,6 @@ public:
 	explicit Backup(QObject *parent = nullptr);
 	static void backup(QString filePath, bool includeSensitiveInfo);
 	static void restore(QString filePath);
-
 };
 
 #endif // BACKUP_H
