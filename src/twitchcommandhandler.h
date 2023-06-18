@@ -1,8 +1,8 @@
 #ifndef TWITCHCOMMANDHANDLER_H
 #define TWITCHCOMMANDHANDLER_H
 
-#include <QString>
 #include <QSettings>
+#include <QString>
 
 #include "twitchdatawrapper.h"
 #include "gosumemorydatawrapper.h"
@@ -19,6 +19,11 @@ public:
 	QString getResponse();
 
 private:
+	QString getResponseStaticCommands();
+	QString getResponseAllCommands();
+	QString getResponseNowPlaying();
+	QString getResponseSkin();
+
 	TwitchDataWrapper *twitchData;
 	GosuMemoryDataWrapper *gosumemoryData;
 };
