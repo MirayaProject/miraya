@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(miraya VERSION 1.1.0 LANGUAGES CXX)
+project(miraya VERSION 1.2.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(COMPANY "MirayaOSU")
-set(IDENTIFIER "com.github.mirayaosu")
+set(COMPANY "MirayaProject")
+set(IDENTIFIER "com.github.MirayaProject")
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets WebSockets Network)
 qt_standard_project_setup()
@@ -27,20 +27,22 @@ set(SOURCE_THEME_DIR "${CMAKE_SOURCE_DIR}/src/theme")
 set(SOURCE_ABOUT_DIR "${CMAKE_SOURCE_DIR}/src/about")
 
 
-include_directories(${FORMS_DIR})
-include_directories(${SOURCE_DIR})
-include_directories(${SOURCE_TWITCH_DIR})
-include_directories(${SOURCE_GOSU_DIR})
-include_directories(${SOURCE_OSUIRC_DIR})
-include_directories(${SOURCE_UTILS_DIR})
-include_directories(${SOURCE_SETUPWIZARD_DIR})
-include_directories(${SOURCE_PREFERENCES_DIR})
-include_directories(${SOURCE_SKINSURL_DIR})
-include_directories(${SOURCE_COMMANDS_DIR})
-include_directories(${SOURCE_BACKUP_DIR})
-include_directories(${SOURCE_UPDATER_DIR})
-include_directories(${SOURCE_THEME_DIR})
-include_directories(${SOURCE_ABOUT_DIR})
+include_directories(
+	${FORMS_DIR}
+	${SOURCE_DIR}
+	${SOURCE_TWITCH_DIR}
+	${SOURCE_GOSU_DIR}
+	${SOURCE_OSUIRC_DIR}
+	${SOURCE_UTILS_DIR}
+	${SOURCE_SETUPWIZARD_DIR}
+	${SOURCE_PREFERENCES_DIR}
+	${SOURCE_SKINSURL_DIR}
+	${SOURCE_COMMANDS_DIR}
+	${SOURCE_BACKUP_DIR}
+	${SOURCE_UPDATER_DIR}
+	${SOURCE_THEME_DIR}
+	${SOURCE_ABOUT_DIR}
+)
 
 file(GLOB_RECURSE SOURCES
 	${FORMS_DIR}/*.cpp
@@ -98,16 +100,14 @@ endif()
 
 
 
-target_include_directories(miraya PRIVATE ${FORMS_DIR})
-target_include_directories(miraya PRIVATE ${SOURCE_DIR})
-target_include_directories(miraya PRIVATE ${SOURCE_TWITCH_DIR})
-target_include_directories(miraya PRIVATE ${SOURCE_GOSU_DIR})
-target_include_directories(miraya PRIVATE ${SOURCE_OSUIRC_DIR})
-target_include_directories(miraya PRIVATE ${SOURCE_UTILS_DIR})
-target_include_directories(miraya PRIVATE ${SOURCE_SETUPWIZARD_DIR})
-
+target_include_directories(miraya PRIVATE
+	${FORMS_DIR}
+	${SOURCE_DIR}
+	${SOURCE_TWITCH_DIR}
+	${SOURCE_GOSU_DIR}
+	${SOURCE_OSUIRC_DIR}
+	${SOURCE_UTILS_DIR}
+	${SOURCE_SETUPWIZARD_DIR}
+)
 # =========================== linking libraries ===========================
-target_link_libraries(miraya PRIVATE Qt6::Core)
-target_link_libraries(miraya PRIVATE Qt6::Widgets)
-target_link_libraries(miraya PRIVATE Qt6::WebSockets)
-target_link_libraries(miraya PRIVATE Qt6::Network)
+target_link_libraries(miraya PRIVATE Qt6::Core Qt6::Widgets Qt6::WebSockets Qt6::Network)
