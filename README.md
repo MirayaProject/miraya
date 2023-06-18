@@ -1,63 +1,61 @@
-![image](https://github.com/MirayaProject/miraya/assets/31241607/9992b3d7-ff3e-4479-af21-655359705bff)
+![Miraya Banner](https://github.com/MirayaProject/miraya/assets/31241607/9992b3d7-ff3e-4479-af21-655359705bff)
 
 Spiritual successor of [twitch-chatbot-for-gosumemory](https://github.com/Sclafus/twitch-chatbot-for-gosumemory), built in C++ and Qt6.
 
 # First Time?
-- [Click here](https://github.com/MirayaProject/miraya/releases/latest) to get the latest version of miraya
-- Scroll down to "Assets", and download the zip file that corresponds to your operating system
-- Extract the downloaded zip
+- [Click here](https://github.com/MirayaProject/miraya/releases/latest) to get the latest version of miraya.
+- Scroll down to "Assets", and download the zip file that corresponds to your operating system.
+- Extract the downloaded zip.
 - Open the executable for miraya & enjoy!
 
 # Features
-We have _a couple_
-## Simple static commands
+We have _a couple_.
+## Simple commands
 On Miraya             |  On Twitch
 :-------------------------:|:-------------------------:
-![image](https://github.com/MirayaProject/miraya/assets/31241607/87391eea-1108-4562-84aa-370b1393b060)  |  ![image](https://github.com/MirayaProject/miraya/assets/31241607/ced8e4f1-51a8-444e-a57d-3e0a671ca7f9)
-
+![Simple Commands on Miraya](https://github.com/MirayaProject/miraya/assets/31241607/87391eea-1108-4562-84aa-370b1393b060)  |  ![Simple Commands on Twitch](https://github.com/MirayaProject/miraya/assets/31241607/ced8e4f1-51a8-444e-a57d-3e0a671ca7f9)
 
 To add a command, just use the "Add Command" button, type the command and the response you'd like to have.
 
 ## !np
 When connected correctly with gosumemory, users can do a !np to obtain the current map with the corresponding URL.
 > **Note**
-> This feature works only when gosumemory is connected (press "Start")
+> This feature works only when gosumemory is connected.
 
-![image](https://github.com/MirayaProject/miraya/assets/31241607/5efe55a2-840a-4120-a72b-46ee00aadcbc)
+![Now Playing Command On Miraya](https://github.com/MirayaProject/miraya/assets/31241607/5efe55a2-840a-4120-a72b-46ee00aadcbc)
 
 
 ## !skin
 When connected correctly with gosumemory, users can ask for the current skin. If added via the dedicated menu "Responses>Skins", users can also receive a download URL for it.
 > **Note**
-> This feature works only when gosumemory is connected (press "Start")
+> This feature works only when gosumemory is connected (press "Start"). Adding skins via the menu requires an active connection to gosumemory.
 
 On Miraya             |  On Twitch
 :-------------------------:|:-------------------------:
-![image](https://github.com/MirayaProject/miraya/assets/31241607/66b2a944-757c-4872-922d-4ae1426d704d)  |  ![image](https://github.com/MirayaProject/miraya/assets/31241607/b39e6abf-5bc3-46de-a3dd-6b91cdc29f5b)
+![Skin Command on Miraya](https://github.com/MirayaProject/miraya/assets/31241607/66b2a944-757c-4872-922d-4ae1426d704d)  |  ![Skin Command on Twitch](https://github.com/MirayaProject/miraya/assets/31241607/b39e6abf-5bc3-46de-a3dd-6b91cdc29f5b)
 
 ## In Game Requests
 When a user sends a map in the chat, it will be automatically forwarded in the game chat.
 > **Note**
-> This feature works only when the osu! IRC is connected (press "Start")
+> This feature works only when the osu! IRC is connected.
 
 On Twitch             |  In Game
 :-------------------------:|:-------------------------:
-![image](https://github.com/MirayaProject/miraya/assets/31241607/36c4cccc-7e7a-4df9-a621-8c124b2f2f4f)   |  ![image](https://github.com/MirayaProject/miraya/assets/31241607/55391c14-c278-458e-a643-7fdcc367de4b)
+![In Game Request On Twitch](https://github.com/MirayaProject/miraya/assets/31241607/36c4cccc-7e7a-4df9-a621-8c124b2f2f4f)   |  ![In game request in Game](https://github.com/MirayaProject/miraya/assets/31241607/55391c14-c278-458e-a643-7fdcc367de4b)
 
 
 ## Dark Mode
 On Windows, the prefered system theme will be followed.
-Light Theme             |  Dark Mode
+Light Theme             |  Dark Theme
 :-------------------------:|:-------------------------:
-![image](https://github.com/MirayaProject/miraya/assets/31241607/7a82154c-2610-4f30-85e4-65ecf5b24349)  |  ![image](https://github.com/MirayaProject/miraya/assets/31241607/bc9635f4-99ff-4d55-a22b-8f9f96d37a16)
+![Miraya Light Theme](https://github.com/MirayaProject/miraya/assets/31241607/7a82154c-2610-4f30-85e4-65ecf5b24349)  |  ![Miraya Dark Theme](https://github.com/MirayaProject/miraya/assets/31241607/bc9635f4-99ff-4d55-a22b-8f9f96d37a16)
 
 ## Backup & Restore
-You can backup all your skins, custom commands and credentials with a single click
+You can backup all your skins, custom commands and credentials with a single click.
 > **Warning**
 > Credentials are stored in plain text. Please don't send your backup file to anyone if you selected to export personal data.
 
-![image](https://github.com/MirayaProject/miraya/assets/31241607/82945f0b-f4b1-4688-ac7b-a6e23845d171)
-
+![Backup and Restore](https://github.com/MirayaProject/miraya/assets/31241607/82945f0b-f4b1-4688-ac7b-a6e23845d171)
 
 # Dev stuff
 [![CodeFactor](https://www.codefactor.io/repository/github/mirayaproject/miraya/badge/senpai)](https://www.codefactor.io/repository/github/mirayaproject/miraya/overview/senpai)
@@ -73,13 +71,15 @@ but they should work with any operating system that supports Qt6.
 Feel free to build from source if you'd like.
 
 ### All platforms
-1. Clone the repository
+1. Clone the repository:
 	```bash
 	git clone https://www.github.com/MirayaProject/miraya.git
 	```
 
-2. Open the CMakeLists.txt file with Qt Creator
-	To do that, use the "Open Project" button.
+2. Open the `CMakeLists.txt` file with Qt Creator. 
+	To do that, use the "Open Project" button:
+![How to open with QtCreator](https://github.com/MirayaProject/miraya/assets/31241607/7260b237-aa19-4f1c-9e48-928e49df4592)
 
 
-3. Run the project
+
+3. Run the project.
