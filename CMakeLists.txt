@@ -13,6 +13,7 @@ qt_standard_project_setup()
 # ===========================Including Project Files===========================
 set(FORMS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/forms")
 set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
+set(SOURCE_STREAMING_SERVICES_DIR "${CMAKE_SOURCE_DIR}/src/services/streaming")
 set(SOURCE_TWITCH_DIR "${CMAKE_SOURCE_DIR}/src/services/streaming/twitch")
 set(SOURCE_GOSU_DIR "${CMAKE_SOURCE_DIR}/src/gosu")
 set(SOURCE_OSUIRC_DIR "${CMAKE_SOURCE_DIR}/src/osuirc")
@@ -30,6 +31,7 @@ set(SOURCE_ABOUT_DIR "${CMAKE_SOURCE_DIR}/src/about")
 include_directories(
 	${FORMS_DIR}
 	${SOURCE_DIR}
+	${SOURCE_STREAMING_SERVICES_DIR}
 	${SOURCE_TWITCH_DIR}
 	${SOURCE_GOSU_DIR}
 	${SOURCE_OSUIRC_DIR}
@@ -46,6 +48,8 @@ include_directories(
 
 file(GLOB_RECURSE SOURCES
 	${FORMS_DIR}/*.cpp
+	${SOURCE_STREAMING_SERVICES_DIR}/*.h
+	${SOURCE_STREAMING_SERVICES_DIR}/*.cpp
 	${SOURCE_TWITCH_DIR}/*.h
 	${SOURCE_TWITCH_DIR}/*.cpp
 	${SOURCE_GOSU_DIR}/*.h
