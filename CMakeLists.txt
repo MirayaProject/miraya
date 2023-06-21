@@ -13,7 +13,7 @@ qt_standard_project_setup()
 # ===========================Including Project Files===========================
 set(FORMS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/forms")
 set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
-set(SOURCE_TWITCH_DIR "${CMAKE_SOURCE_DIR}/src/twitch")
+set(SOURCE_TWITCH_DIR "${CMAKE_SOURCE_DIR}/src/services/streaming/twitch")
 set(SOURCE_GOSU_DIR "${CMAKE_SOURCE_DIR}/src/gosu")
 set(SOURCE_OSUIRC_DIR "${CMAKE_SOURCE_DIR}/src/osuirc")
 set(SOURCE_UTILS_DIR "${CMAKE_SOURCE_DIR}/src/utils")
