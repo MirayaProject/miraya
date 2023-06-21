@@ -2,8 +2,9 @@
 #define TWITCHDATAWRAPPER_H
 
 #include <QString>
+#include "streamingServiceDataWrapper.h"
 
-class TwitchDataWrapper
+class TwitchDataWrapper : public StreamingServiceDataWrapper
 {
 public:
 	TwitchDataWrapper(QString &data);
