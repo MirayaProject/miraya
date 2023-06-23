@@ -2,8 +2,8 @@
 
 TwitchCommandHandler::TwitchCommandHandler()
 {
-	this->twitchData = nullptr;
-	this->gosumemoryData = nullptr;
+	twitchData = nullptr;
+	gosumemoryData = nullptr;
 }
 
 
@@ -21,13 +21,13 @@ void TwitchCommandHandler::setGosumemoryData(GosuMemoryDataWrapper *gosumemoryDa
 
 GosuMemoryDataWrapper* TwitchCommandHandler::getGosumemoryData()
 {
-	return this->gosumemoryData;
+	return gosumemoryData;
 }
 
 
 TwitchDataWrapper* TwitchCommandHandler::getTwitchData()
 {
-	return this->twitchData;
+	return twitchData;
 }
 
 
@@ -37,44 +37,119 @@ void TwitchCommandHandler::setTwitchData(TwitchDataWrapper *twitchData)
 }
 
 
+/**
+ * Returns a response string based on the message received from Twitch chat.
+ *
+ * @return A string containing the response to the Twitch chat message.
+ *
+ * @throws None
+ */
 QString TwitchCommandHandler::getResponse()
 {
 	QString command = twitchData->getMessage();
 	QSettings settings;
 
+	// handling !commands
+	if (command.startsWith("!commands")) {
+		return getResponseAllCommands();
+	}
+
+	// gosumemory dependent commands
+	if (command.startsWith("!np") && gosumemoryData != nullptr) {
+		return getResponseNowPlaying();
+	}
+	else if (command.startsWith("!skin") && gosumemoryData != nullptr) {
+		return getResponseSkin();
+	}
+
+	// static user commands
+	QString response = getResponseStaticCommands();
+	if (!response.isEmpty()){
+		return response;
+	}
+	return QString();
+}
+
+/**
+ * Returns a QString response for static commands saved in QSettings.
+ *
+ * @return QString response for the given static command, or an empty QString
+ * if the command is not found.
+ *
+ * @throws None
+ */
+QString TwitchCommandHandler::getResponseStaticCommands()
+{
+	QSettings settings;
+	QString command = twitchData->getMessage();
+
 	settings.beginGroup("command");
 	QStringList commands = settings.childKeys();
-	for (QString savedCommand: commands) {
-		if (command.startsWith(savedCommand)){
-			QString response = settings.value(savedCommand).toString();
-			return response;
-		}
+	auto it = std::find_if(commands.begin(), commands.end(), [&](const QString& savedCommand){
+		return command.startsWith(savedCommand);
+	});
+	if (it != commands.end()) {
+		QString response = settings.value(*it).toString();
+		return response;
 	}
-
 	settings.endGroup();
+	return QString();
+}
 
-	// gosumemory dependant
-	if (gosumemoryData == nullptr) {
-		return QString("");
+/**
+ * Returns a QString containing a list of all available Twitch commands.
+ *
+ * @return A QString containing the available Twitch commands.
+ *
+ * @throws None
+ */
+QString TwitchCommandHandler::getResponseAllCommands()
+{
+	QSettings settings;
+	QString command = twitchData->getMessage();
+	if (!command.startsWith("!commands")) {
+		return QString();
 	}
 
-	if (command.startsWith("!np")) {
-		auto song = gosumemoryData->getMapName();
-		auto artist = gosumemoryData->getMapArtist();
-		auto diff = gosumemoryData->getMapDifficulty();
-		auto mapper = gosumemoryData->getMapMapper();
-		auto url = gosumemoryData->getMapUrl();
-		return QString("Now playing: %1 - %2 [%3] by %4 - %5").arg(artist, song, diff, mapper, url);
-	}
+	settings.beginGroup("command");
+	QStringList commands;
+	commands << "!np" << "!skin" << settings.childKeys();
+	settings.endGroup();
+	return QString("Available commands: %1").arg(commands.join(' '));
+}
 
-	else if (command.startsWith("!skin")) {
-		QString skin = gosumemoryData->getSkinName();
-		QString settingsPath = QString("skin/%1").arg(skin);
-		if (settings.contains(settingsPath)) {
-			QString skinDownloadUrl = settings.value(settingsPath).toString();
-			return QString("Current skin: %1 || Download: %2").arg(skin, skinDownloadUrl);
-		}
-		return QString("Current skin: %1").arg(skin);
+/**
+ * Returns a QString of the currently playing song's artist, title, difficulty, mapper, and map url formatted as:
+ * "Now playing: artist - title [difficulty] by mapper - map url".
+ *
+ * @return QString of the currently playing song's information
+ */
+QString TwitchCommandHandler::getResponseNowPlaying()
+{
+	QString mapName = gosumemoryData->getMapName();
+	QString mapArtist = gosumemoryData->getMapArtist();
+	QString mapDiff = gosumemoryData->getMapDifficulty();
+	QString mapMapper = gosumemoryData->getMapMapper();
+	QString mapUrl = gosumemoryData->getMapUrl();
+	return QString("Now playing: %1 - %2 [%3] by %4 - %5").arg(mapArtist, mapName, mapDiff, mapMapper, mapUrl);
+}
+
+/**
+ * Returns a QString representing the response for the current skin.
+ *
+ * @return QString containing the current skin name and, if available, a download URL for the skin.
+ *
+ * @throws None
+ */
+QString TwitchCommandHandler::getResponseSkin()
+{
+	QSettings settings;
+	QString skinName = gosumemoryData->getSkinName();
+	QString skinResponse = QString("skin/%1").arg(skinName);
+
+	if (settings.contains(skinResponse)) {
+		QString skinDownloadUrl = settings.value(skinResponse).toString();
+		return QString("Current skin: %1 || Download: %2").arg(skinName, skinDownloadUrl);
 	}
-	return QString("");
+	return QString("Current skin: %1").arg(skinName);
 }
