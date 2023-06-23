@@ -14,6 +14,7 @@ class Theme : public QObject
 	Q_OBJECT
 public:
 	static void loadTheme();
+private:
 	static void loadDarkMode();
 	static void loadLightMode();
 	static void loadThemeFromSetting(QVariant darkModeSettings);
