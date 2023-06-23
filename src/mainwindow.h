@@ -15,9 +15,9 @@
 
 #include "about.h"
 #include "commandswindow.h"
-#include "gosumemoryClient.h"
-#include "gosumemorydatawrapper.h"
-#include "osuircclient.h"
+#include "osu/data/gosu/gosumemoryclient.h"
+#include "osu/data/gosu/gosumemorydatawrapper.h"
+#include "osu/irc/osuircclient.h"
 #include "preferences.h"
 #include "setupwizard.h"
 #include "skinsurl.h"
