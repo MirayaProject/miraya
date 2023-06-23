@@ -1,8 +1,5 @@
 #include "utils.h"
 
-Utils::Utils()
-{
-}
 
 /**
  * https://regexr.com/6pct6 regex for osu beatmap urls
