@@ -1,4 +1,4 @@
-#include "osu/data/gosu/gosumemoryClient.h"
+#include "osu/data/gosu/gosumemoryclient.h"
 
 GosumemoryClient::GosumemoryClient(
 	const QUrl &url,
