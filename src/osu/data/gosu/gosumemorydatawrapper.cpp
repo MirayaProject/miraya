@@ -1,4 +1,4 @@
-#include "gosumemorydatawrapper.h"
+#include "osu/data/gosu/gosumemorydatawrapper.h"
 
 GosuMemoryDataWrapper::GosuMemoryDataWrapper()
 {
