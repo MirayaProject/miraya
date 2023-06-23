@@ -1,10 +1,5 @@
 #include "about.h"
 
-About::About(QObject *parent)
-	: QObject{parent}
-{
-}
-
 void About::show()
 {
 	qDebug() << "[About] Displaying about...";
