@@ -7,7 +7,7 @@
 #include <QUrl>
 #include <QWebSocket>
 
-#include "gosumemorydatawrapper.h"
+#include "osu/data/gosu/gosumemorydatawrapper.h"
 
 class GosumemoryClient : public QObject {
 	Q_OBJECT
