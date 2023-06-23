@@ -5,7 +5,7 @@
 #include <QString>
 
 #include "twitchdatawrapper.h"
-#include "gosumemorydatawrapper.h"
+#include "osu/data/gosu/gosumemorydatawrapper.h"
 
 class TwitchCommandHandler
 {
