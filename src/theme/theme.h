@@ -13,8 +13,6 @@ class Theme : public QObject
 {
 	Q_OBJECT
 public:
-	explicit Theme(QObject *parent = nullptr);
-
 	static void loadTheme();
 	static void loadDarkMode();
 	static void loadLightMode();
