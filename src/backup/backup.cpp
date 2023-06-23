@@ -1,9 +1,5 @@
 #include "backup.h"
 
-Backup::Backup(QObject *parent)
-	: QObject{parent}
-{
-}
 
 void Backup::backup(QString filePath, bool includeSensitiveInfo)
 {
