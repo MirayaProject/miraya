@@ -11,7 +11,6 @@ class About : public QObject
 {
 	Q_OBJECT
 public:
-	explicit About(QObject *parent = nullptr);
 	static void show();
 };
 
