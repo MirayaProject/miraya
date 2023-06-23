@@ -3,8 +3,8 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include "gosumemoryClient.h"
-#include "gosumemorydatawrapper.h"
+#include "osu/data/gosu/gosumemoryclient.h"
+#include "osu/data/gosu/gosumemorydatawrapper.h"
 
 namespace Ui {
   class SkinsUrl;
