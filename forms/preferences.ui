@@ -52,6 +52,15 @@
       </item>
       <item>
        <property name="text">
+        <string>osu! API</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources.qrc">
+         <normaloff>:/resources/images/logo_osu.png</normaloff>:/resources/images/logo_osu.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>Twitch</string>
        </property>
        <property name="icon">
@@ -61,7 +70,7 @@
       </item>
       <item>
        <property name="text">
-        <string>Osu! IRC</string>
+        <string>osu! IRC</string>
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
@@ -148,6 +157,64 @@
         </item>
         <item row="0" column="0" colspan="2">
          <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="osuapiPage">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="osuapiClientSecretLineEdit">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="osuapiClientIdLineEdit">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="osuapiClientIdLabel">
+          <property name="text">
+           <string>Client ID</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="osuapiClientSecretLabel">
+          <property name="text">
+           <string>Client Secret</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <spacer name="verticalSpacer_10">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -325,7 +392,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="backupPage">
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QPushButton" name="backupBtn">
