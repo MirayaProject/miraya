@@ -29,6 +29,7 @@ private:
 
 	QJsonObject gatherData();
 	QJsonObject getGosumemoryData();
+	QJsonObject getOsuApiData();
 	QJsonObject getTwitchData();
 	QJsonObject getOsuircData();
 	void saveData(QJsonObject data);
