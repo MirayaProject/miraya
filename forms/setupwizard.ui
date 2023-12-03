@@ -98,6 +98,64 @@
     </item>
    </layout>
   </widget>
+  <widget class="QWizardPage" name="osuapi">
+   <property name="title">
+    <string>osu! API</string>
+   </property>
+   <property name="subTitle">
+    <string>sample text</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="2" column="0" rowspan="2">
+     <layout class="QFormLayout" name="osuapiFormLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="osuClientIdLabel">
+        <property name="text">
+         <string>osu! Client ID</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="osuClientIdLineEdit">
+        <property name="inputMethodHints">
+         <set>Qt::ImhDigitsOnly</set>
+        </property>
+        <property name="maxLength">
+         <number>6</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="osuClientSecretLabel">
+        <property name="text">
+         <string>osu! Client Secret</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="osuClientSecretLineEdit">
+        <property name="inputMethodHints">
+         <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="osuapiExplanationLabel">
+      <property name="text">
+       <string>Now, let's setup the osu! API. This will help miraya to grab data from beatmaps when they are requested</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QWizardPage" name="twitch">
    <property name="title">
     <string>Twitch Setup</string>
