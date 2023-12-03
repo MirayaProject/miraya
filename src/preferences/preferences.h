@@ -32,6 +32,7 @@ private:
   void loadSettings();
   void loadTwitchSettings();
   void loadGosuMemorySettings();
+  void loadOsuApiSettings();
   void loadOsuIrcSettings();
   void loadThemeSettings();
   void setupUi();
