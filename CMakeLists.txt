@@ -103,10 +103,6 @@ endif()
 target_include_directories(miraya PRIVATE
 	${FORMS_DIR}
 	${SOURCE_DIR}
-	${SOURCE_TWITCH_DIR}
-	${SOURCE_OSU_DIR}
-	${SOURCE_UTILS_DIR}
-	${SOURCE_SETUPWIZARD_DIR}
 )
 # =========================== linking libraries ===========================
 target_link_libraries(miraya PRIVATE Qt6::Core Qt6::Widgets Qt6::WebSockets Qt6::Network)

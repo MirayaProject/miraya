@@ -109,14 +109,14 @@
     <item row="2" column="0" rowspan="2">
      <layout class="QFormLayout" name="osuapiFormLayout">
       <item row="0" column="0">
-       <widget class="QLabel" name="osuClientIdLabel">
+       <widget class="QLabel" name="osuapiClientIdLabel">
         <property name="text">
          <string>osu! Client ID</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="osuClientIdLineEdit">
+       <widget class="QLineEdit" name="osuapiClientIdLineEdit">
         <property name="inputMethodHints">
          <set>Qt::ImhDigitsOnly</set>
         </property>
@@ -126,14 +126,14 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="osuClientSecretLabel">
+       <widget class="QLabel" name="osuapiClientSecretLabel">
         <property name="text">
          <string>osu! Client Secret</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="osuClientSecretLineEdit">
+       <widget class="QLineEdit" name="osuapiClientSecretLineEdit">
         <property name="inputMethodHints">
          <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
         </property>
