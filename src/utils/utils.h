@@ -10,6 +10,7 @@ class Utils
 public:
 	static QStringList getOsuBeatmapUrls(QString message);
 	static QStringList getUrls(QString message);
+	static int getBeatmapIdFromOsuBeatmapLink(QString link);
 };
 
 #endif // UTILS_H
