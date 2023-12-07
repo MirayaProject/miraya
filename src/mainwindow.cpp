@@ -149,7 +149,7 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 		qDebug() << "[MainWindow] Osu beatmap url: " << url;
 
 		int beatmapId = Utils::getBeatmapIdFromOsuBeatmapLink(url);
-		if (beatmapId > 0) {
+		if (beatmapId > 0 && osuApi->isValid()) {
 			// TODO: also this should not be here
 			QJsonObject mapData = osuApi->getBeatmapInfo(beatmapId);
 			osuIrcClient->sendMap(mapData, message);
