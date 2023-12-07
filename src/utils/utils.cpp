@@ -29,3 +29,18 @@ QStringList Utils::getUrls(QString message)
 	}
 	return list;
 }
+
+int Utils::getBeatmapIdFromOsuBeatmapLink(QString link)
+{
+	qDebug() << "getBeatmapIdFromOsuBeatmapLink: " << link;
+
+	// https://osu.ppy.sh/beatmapsets/2055856#taiko/4295990
+	QRegularExpression rx("(b=|b/|beatmapsets/\\d+#osu/|beatmapsets/\\d+#taiko/|beatmapsets/\\d+#fruits/|beatmapsets/\\d+#mania/)(\\d+)");
+	QRegularExpressionMatch match = rx.match(link);
+	if (match.hasMatch()) {
+		int id = match.captured(2).toInt();
+		qDebug() << "found beatmap id: " << id;
+		return id;
+	}
+	return -1;
+}

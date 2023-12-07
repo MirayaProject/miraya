@@ -2,6 +2,7 @@
 #define OSUIRCCLIENT_H
 
 #include <QObject>
+#include <QJsonObject>
 #include <QSettings>
 #include <QTcpSocket>
 #include <QUrl>
@@ -29,6 +30,7 @@ class OsuIrcClient : public QObject {
 		void setPort(const int &port);
 		void sendPrivmsg(QString message);
 		void sendMap(QUrl url, TwitchDataWrapper message);
+		void sendMap(QJsonObject map, TwitchDataWrapper message);
 
 	private:
 		void handlePing(QString response);

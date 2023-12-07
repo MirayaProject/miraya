@@ -27,6 +27,7 @@
 #include "twitchdatawrapper.h"
 #include "updater.h"
 #include "utils.h"
+#include "osu/api/osuapi.h"
 
 
 namespace Ui {
@@ -40,7 +41,6 @@ class MainWindow : public QMainWindow
 	public:
 		explicit MainWindow(QWidget *parent = nullptr);
 		~MainWindow();
-
 
 	private slots:
 		void on_btnStart_clicked();
@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow
 		GosumemoryClient *gosumemoryClient;
 		OsuIrcClient *osuIrcClient;
 		Updater *updater;
+		OsuApi *osuApi;
 
 		QLabel *ircConnectionLabel;
 		QLabel *twitchConnectionLabel;

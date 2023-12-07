@@ -53,8 +53,8 @@ void SetupWizard::on_SetupWizard_finished(int result)
 QJsonObject SetupWizard::gatherData()
 {
 	QJsonObject data;
-
 	data["gosumemory"] = getGosumemoryData();
+	data["osuapi"] = getOsuApiData();
 	data["twitch"] = getTwitchData();
 	data["osuirc"] = getOsuircData();
 
@@ -75,6 +75,18 @@ QJsonObject SetupWizard::getGosumemoryData()
 	return gosumemoryData;
 }
 
+QJsonObject SetupWizard::getOsuApiData()
+{
+	int osuapiClientId = ui->osuapiClientIdLineEdit->text().toInt();
+	QString osuapiClientSecret = ui->osuapiClientSecretLineEdit->text();
+
+	QJsonObject osuapiClientData = QJsonObject{
+		{"clientId", osuapiClientId},
+		{"clientSecret", osuapiClientSecret}
+	};
+
+	return osuapiClientData;
+}
 
 QJsonObject SetupWizard::getTwitchData()
 {
@@ -117,12 +129,16 @@ QJsonObject SetupWizard::getOsuircData()
 void SetupWizard::saveData(QJsonObject data)
 {
   QSettings settings;
+	QJsonObject osuapiData = data["osuapi"].toObject();
 	QJsonObject gosumemoryData = data["gosumemory"].toObject();
 	QJsonObject twitchData = data["twitch"].toObject();
 	QJsonObject osuircData = data["osuirc"].toObject();
 
 	settings.setValue("gosumemory/ip", gosumemoryData["ip"].toString());
 	settings.setValue("gosumemory/port", gosumemoryData["port"].toInt());
+
+	settings.setValue("osuapi/clientId", osuapiData["clientId"].toInt());
+	settings.setValue("osuapi/clientSecret", osuapiData["clientSecret"].toString());
 
 	settings.setValue("twitch/botNick", twitchData["botNick"].toString());
 	settings.setValue("twitch/oauth", twitchData["oauth"].toString());

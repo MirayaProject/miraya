@@ -105,12 +105,30 @@ void OsuIrcClient::sendPrivmsg(QString message)
 
 void OsuIrcClient::sendMap(QUrl url, TwitchDataWrapper message)
 {
-	// TODO: the map embed should have the map name.
-	// Scraping is needed.
-
 	qDebug() << "[osu!IRC] Sending map-request: " << url.toString() << " by " << message.getUsername();
 
-	QString msg = " [" + url.toString() + " Map request] " + "sent by " + message.getUsername() + "\r\n";
+	QString msg = QString("[%1 Map request] sent by %2").arg(url.toString()).arg(message.getUsername());
+	sendPrivmsg(msg);
+}
+
+void OsuIrcClient::sendMap(QJsonObject map, TwitchDataWrapper message)
+{
+	QString requestor = message.getUsername();
+	QString artist = map["beatmapset"].toObject()["artist"].toString();
+	QString title = map["beatmapset"].toObject()["title"].toString();
+	QString status = map["beatmapset"].toObject()["status"].toString();
+	int mapId = map["id"].toInt();
+	QString url = QString("https://osu.ppy.sh/b/%1").arg(mapId);
+
+	qDebug() << "[osu!IRC] Sending map-request: " << url << " by " << requestor << " (" << artist << " - " << title << " - " << status << ")";
+
+	QString msg = QString("(%1) [%2 %3 - %4] sent by %5")
+		.arg(status)
+		.arg(url)
+		.arg(artist)
+		.arg(title)
+		.arg(message.getUsername());
+
 	sendPrivmsg(msg);
 }
 
