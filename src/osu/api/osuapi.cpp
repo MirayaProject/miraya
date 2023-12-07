@@ -13,6 +13,7 @@ OsuApi::OsuApi()
 QJsonObject OsuApi::getBeatmapInfo(int beatmapId)
 {
 	// TODO: A lot can be split into smaller functions
+	// TODO: also, the QEventLoop is making everything synchronous, which is suboptimal to say the least.
 	qDebug() << "[OsuApi] getBeatmapInfo";
 	QNetworkAccessManager manager;
 	QUrl url(QString("https://osu.ppy.sh/api/v2/beatmaps/%1").arg(beatmapId));
