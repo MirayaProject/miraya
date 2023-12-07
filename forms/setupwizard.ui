@@ -103,7 +103,7 @@
     <string>osu! API</string>
    </property>
    <property name="subTitle">
-    <string>sample text</string>
+    <string>This will help miraya to grab data from beatmaps when they are requested.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="2" column="0" rowspan="2">
@@ -147,7 +147,7 @@
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="osuapiExplanationLabel">
       <property name="text">
-       <string>Now, let's setup the osu! API. This will help miraya to grab data from beatmaps when they are requested</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Go to your &lt;a href=&quot;https://osu.ppy.sh/home/account/edit&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4285f4;&quot;&gt;osu! account settings&lt;/span&gt;&lt;/a&gt; and create a new OAuth application (at the bottom of the page). &lt;/p&gt;&lt;p&gt;You can chose whatever name you want, and there is no need to put any application callback URL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
