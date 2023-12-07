@@ -157,7 +157,6 @@ void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 		else {
 			osuIrcClient->sendMap(QUrl(url), message);
 		}
-
 	}
 
 	QLabel* label = getTwitchChatMessage(message.getUsername(), message.getMessage());
