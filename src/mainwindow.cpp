@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	updater = new Updater(this);
 	updater->checkVersion();
 
+	osuApi = new OsuApi();
+
 	setupSignals();
 	if(!settings.value("setup/completed").toBool()){
 		on_actionStart_Setup_triggered();
@@ -143,9 +145,19 @@ void MainWindow::onGosumemoryClientMessageReceived(GosuMemoryDataWrapper message
 void MainWindow::onTwitchClientMessageReceived(TwitchDataWrapper message)
 {
 	// TODO: this should not be here
-	for (auto val : Utils().getOsuBeatmapUrls(message.getMessage())) {
-		qDebug() << "[MainWindow] Osu beatmap url: " << val;
-		osuIrcClient->sendMap(QUrl(val), message);
+	for (QString url : Utils::getOsuBeatmapUrls(message.getMessage())) {
+		qDebug() << "[MainWindow] Osu beatmap url: " << url;
+
+		int beatmapId = Utils::getBeatmapIdFromOsuBeatmapLink(url);
+		if (beatmapId > 0) {
+			// TODO: also this should not be here
+			QJsonObject mapData = osuApi->getBeatmapInfo(beatmapId);
+			osuIrcClient->sendMap(mapData, message);
+		}
+		else {
+			osuIrcClient->sendMap(QUrl(url), message);
+		}
+
 	}
 
 	QLabel* label = getTwitchChatMessage(message.getUsername(), message.getMessage());
