@@ -19,6 +19,7 @@ class OsuApi : public QObject
 	public:
 		OsuApi();
 		QJsonObject getBeatmapInfo(int beatmapId);
+		bool isValid();
 
 	private:
 		QString clientId;

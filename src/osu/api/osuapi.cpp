@@ -7,7 +7,13 @@ OsuApi::OsuApi()
 	clientId = settings.value("osuapi/clientId").toString();
 	clientSecret = settings.value("osuapi/clientSecret").toString();
 	oAuthUrl = "https://osu.ppy.sh/oauth/token";
-	token = ClientCredentialsFlow::getToken(clientId, clientSecret, oAuthUrl);
+
+	if (!(clientId.isEmpty() || clientSecret.isEmpty())) {
+		token = ClientCredentialsFlow::getToken(clientId, clientSecret, oAuthUrl);
+	}
+	else {
+		qDebug() << "[OsuApi] Client ID or Client Secret are empty";
+	}
 }
 
 QJsonObject OsuApi::getBeatmapInfo(int beatmapId)
@@ -44,4 +50,9 @@ QJsonObject OsuApi::getBeatmapInfo(int beatmapId)
 	}
 	qDebug() << "[OsuApi] Error: " << reply->errorString();
 	return QJsonObject();
+}
+
+bool OsuApi::isValid()
+{
+	return !(clientId.isEmpty() || clientSecret.isEmpty());
 }
