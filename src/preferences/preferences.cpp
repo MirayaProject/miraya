@@ -60,11 +60,13 @@ void Preferences::loadTwitchSettings()
 	ui->twitchChannelLineEdit->setText(settings.value("twitch/channel").toString());
 }
 
+
 void Preferences::loadOsuApiSettings()
 {
 	ui->osuapiClientIdLineEdit->setText(settings.value("osuapi/clientId").toString());
 	ui->osuapiClientSecretLineEdit->setText(settings.value("osuapi/clientSecret").toString());
 }
+
 
 void Preferences::loadGosuMemorySettings()
 {
@@ -91,8 +93,8 @@ void Preferences::loadThemeSettings()
 	}
 	else {
 		bool isDarkMode = darkModeSetting.toBool();
-		ui->themesLightRadio->setChecked(!isDarkMode);
-		ui->themesDarkRadio->setChecked(isDarkMode);
+		QRadioButton *button = isDarkMode ? ui->themesDarkRadio : ui->themesLightRadio;
+		button->setChecked(true);
 	}
 }
 
@@ -125,7 +127,7 @@ void Preferences::saveSettings()
 	settings.setValue("osuirc/server", ui->osuIrcServerLineEdit->text());
 	settings.setValue("osuirc/port", ui->osuIrcPortLineEdit->text());
 
-	if (ui->themesDefaultRadio->isChecked() && settings.contains("theme/darkMode")) {
+	if (ui->themesDefaultRadio->isChecked()) {
 		settings.remove("theme/darkMode");
 	}
 	else {
