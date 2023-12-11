@@ -125,7 +125,7 @@ void Preferences::saveSettings()
 	settings.setValue("osuirc/server", ui->osuIrcServerLineEdit->text());
 	settings.setValue("osuirc/port", ui->osuIrcPortLineEdit->text());
 
-	if (ui->themesDefaultRadio->isChecked() && settings.contains("theme/darkMode")) {
+	if (ui->themesDefaultRadio->isChecked()) {
 		settings.remove("theme/darkMode");
 	}
 	else {
